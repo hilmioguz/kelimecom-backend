@@ -2,7 +2,7 @@
   <div class="card card-custom card-stretch gutter-b">
     <!--begin::Header-->
     <div class="card-header border-0">
-      <h3 class="card-title font-weight-bolder text-dark">Trends</h3>
+      <h3 class="card-title font-weight-bolder text-dark">Talepler</h3>
       <div class="card-toolbar">
         <Dropdown2><i class="ki ki-bold-more-hor"></i></Dropdown2>
       </div>
@@ -60,29 +60,29 @@ export default {
     return {
       list: [
         {
-          title: "Group lunch celebration",
-          desc: "Due in 2 Days",
+          title: "Grup öğle yemeği kutlaması",
+          desc: "2 gün içinde",
           percentage: "+28%",
           icon: "media/svg/icons/Home/Library.svg",
           class: "warning"
         },
         {
-          title: "Home navigation optimization",
-          desc: "Due in 2 Days",
+          title: "Site gezinme optimizasyonu",
+          desc: "15 gün içinde",
           percentage: "+50%",
           icon: "media/svg/icons/Communication/Write.svg",
           class: "success"
         },
         {
-          title: "Rebrand strategy planning",
-          desc: "Due in 2 Days",
+          title: "Yeniden marka stratejisi planlaması",
+          desc: "30 gün içinde'",
           percentage: "-27%",
           icon: "media/svg/icons/Communication/Group-chat.svg",
           class: "danger"
         },
         {
-          title: "Product goals strategy meet-up",
-          desc: "Due in 2 Days",
+          title: "Ürün hedefleri stratejisi buluşması",
+          desc: "7 gün içinde",
           percentage: "+8%",
           icon: "media/svg/icons/General/Attachment2.svg",
           class: "info"

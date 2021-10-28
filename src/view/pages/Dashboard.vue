@@ -15,16 +15,6 @@
       <div class="col-xxl-8">
         <AdvancedTableWidget2></AdvancedTableWidget2>
       </div>
-
-      <div class="col-xl-4">
-        <ListWidget11></ListWidget11>
-      </div>
-      <div class="col-xl-4">
-        <ListWidget12></ListWidget12>
-      </div>
-      <div class="col-xl-4">
-        <ListWidget13></ListWidget13>
-      </div>
     </div>
 
     <div class="row">
@@ -45,9 +35,6 @@ import AdvancedTableWidget2 from "@/view/content/widgets/advance-table/Widget2.v
 import MixedWidget1 from "@/view/content/widgets/mixed/Widget1.vue";
 import ListWidget1 from "@/view/content/widgets/list/Widget1.vue";
 import ListWidget9 from "@/view/content/widgets/list/Widget9.vue";
-import ListWidget11 from "@/view/content/widgets/list/Widget11.vue";
-import ListWidget12 from "@/view/content/widgets/list/Widget12.vue";
-import ListWidget13 from "@/view/content/widgets/list/Widget13.vue";
 import ListWidget14 from "@/view/content/widgets/list/Widget14.vue";
 import ListWidget15 from "@/view/content/widgets/list/Widget15.vue";
 
@@ -58,9 +45,6 @@ export default {
     MixedWidget1,
     ListWidget1,
     ListWidget9,
-    ListWidget11,
-    ListWidget12,
-    ListWidget13,
     ListWidget14,
     ListWidget15
   },

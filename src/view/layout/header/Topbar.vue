@@ -40,7 +40,7 @@
           class="btn btn-icon btn-hover-transparent-white btn-dropdown btn-lg mr-1 pulse pulse-primary"
         >
           <span class="svg-icon svg-icon-xl">
-            <inline-svg src="media/svg/icons/Code/Compiling.svg" />
+            <inline-svg src="media/svg/icons/General/Notifications1.svg" />
           </span>
           <span class="pulse-ring"></span>
         </div>
@@ -76,30 +76,6 @@
       </b-dropdown-text>
     </b-dropdown>
     <!--end: Quick Actions -->
-
-    <!--begin: My Cart -->
-    <b-dropdown
-      size="sm"
-      variant="link"
-      toggle-class="topbar-item text-decoration-none"
-      no-caret
-      right
-      no-flip
-    >
-      <template v-slot:button-content>
-        <div
-          class="btn btn-icon btn-hover-transparent-white btn-dropdown btn-lg mr-1"
-        >
-          <span class="svg-icon svg-icon-xl">
-            <inline-svg src="media/svg/icons/Shopping/Cart3.svg" />
-          </span>
-        </div>
-      </template>
-      <b-dropdown-text tag="div" class="min-w-md-350px">
-        <KTDropdownMyCart></KTDropdownMyCart>
-      </b-dropdown-text>
-    </b-dropdown>
-    <!--end: My Cart -->
 
     <!--begin: Quick panel toggle -->
     <KTQuickPanel></KTQuickPanel>
@@ -168,7 +144,6 @@
 import KTSearchDefault from "@/view/layout/extras/dropdown/SearchDefault.vue";
 import KTDropdownNotification from "@/view/layout/extras/dropdown/DropdownNotification.vue";
 import KTDropdownQuickAction from "@/view/layout/extras/dropdown/DropdownQuickAction.vue";
-import KTDropdownMyCart from "@/view/layout/extras/dropdown/DropdownMyCart.vue";
 import KTDropdownLanguage from "@/view/layout/extras/dropdown/DropdownLanguage.vue";
 import KTQuickUser from "@/view/layout/extras/offcanvas/QuickUser.vue";
 import KTQuickPanel from "@/view/layout/extras/offcanvas/QuickPanel.vue";
@@ -186,7 +161,6 @@ export default {
     KTSearchDefault,
     KTDropdownNotification,
     KTDropdownQuickAction,
-    KTDropdownMyCart,
     KTDropdownLanguage,
     KTQuickUser,
     KTQuickPanel

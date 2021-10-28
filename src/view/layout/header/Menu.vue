@@ -20,8 +20,9 @@
     </router-link>
 
     <router-link
-      to="/builder"
+      to="/maddeler"
       v-slot="{ href, navigate, isActive, isExactActive }"
+      custom
     >
       <li
         aria-haspopup="true"
@@ -33,12 +34,68 @@
         ]"
       >
         <a :href="href" class="menu-link" @click="navigate">
-          <span class="menu-text"> Builder </span>
+          <span class="menu-text"> Maddeler </span>
         </a>
       </li>
     </router-link>
-
-    <li
+    <router-link
+      to="/dictionary"
+      v-slot="{ href, navigate, isActive, isExactActive }"
+      custom
+    >
+      <li
+        aria-haspopup="true"
+        data-menu-toggle="hover"
+        class="menu-item"
+        :class="[
+          isActive && 'menu-item-active',
+          isExactActive && 'menu-item-active'
+        ]"
+      >
+        <a :href="href" class="menu-link" @click="navigate">
+          <span class="menu-text"> Sözlükler </span>
+        </a>
+      </li>
+    </router-link>
+    <router-link
+      to="/packet"
+      v-slot="{ href, navigate, isActive, isExactActive }"
+      custom
+    >
+      <li
+        aria-haspopup="true"
+        data-menu-toggle="hover"
+        class="menu-item"
+        :class="[
+          isActive && 'menu-item-active',
+          isExactActive && 'menu-item-active'
+        ]"
+      >
+        <a :href="href" class="menu-link" @click="navigate">
+          <span class="menu-text"> Üyelik Paketleri </span>
+        </a>
+      </li>
+    </router-link>
+    <router-link
+      to="/users"
+      v-slot="{ href, navigate, isActive, isExactActive }"
+      custom
+    >
+      <li
+        aria-haspopup="true"
+        data-menu-toggle="hover"
+        class="menu-item"
+        :class="[
+          isActive && 'menu-item-active',
+          isExactActive && 'menu-item-active'
+        ]"
+      >
+        <a :href="href" class="menu-link" @click="navigate">
+          <span class="menu-text"> Kullanıcılar </span>
+        </a>
+      </li>
+    </router-link>
+    <!-- <li
       aria-haspopup="true"
       data-menu-toggle="click"
       class="menu-item menu-item-submenu menu-item-open-dropdown"
@@ -1639,7 +1696,7 @@
           </li>
         </ul>
       </div>
-    </li>
+    </li> -->
   </ul>
 </template>
 

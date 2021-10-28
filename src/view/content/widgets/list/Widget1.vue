@@ -2,7 +2,7 @@
   <div class="card card-custom bg-radial-gradient-danger gutter-b card-stretch">
     <!--begin::Header-->
     <div class="card-header border-0 py-5">
-      <h3 class="card-title font-weight-bolder text-white">Sales Progress</h3>
+      <h3 class="card-title font-weight-bolder text-white">Satış İlerlemesi</h3>
       <div class="card-toolbar">
         <Dropdown2><i class="ki ki-bold-more-hor text-white"></i></Dropdown2>
       </div>
@@ -24,15 +24,15 @@
         <div class="row m-0">
           <div class="col px-8 py-6 mr-8">
             <div class="font-size-sm text-muted font-weight-bold">
-              Average Sale
+              Ortalama Satış
             </div>
-            <div class="font-size-h4 font-weight-bolder">$650</div>
+            <div class="font-size-h4 font-weight-bolder">650</div>
           </div>
           <div class="col px-8 py-6">
             <div class="font-size-sm text-muted font-weight-bold">
-              Commission
+              Aylık Abonelik
             </div>
-            <div class="font-size-h4 font-weight-bolder">$233,600</div>
+            <div class="font-size-h4 font-weight-bolder">98.600₺</div>
           </div>
         </div>
         <!--end::Row-->
@@ -40,15 +40,15 @@
         <div class="row m-0">
           <div class="col px-8 py-6 mr-8">
             <div class="font-size-sm text-muted font-weight-bold">
-              Annual Taxes
+              Yıllık Vergi
             </div>
-            <div class="font-size-h4 font-weight-bolder">$29,004</div>
+            <div class="font-size-h4 font-weight-bolder">17,250₺</div>
           </div>
           <div class="col px-8 py-6">
             <div class="font-size-sm text-muted font-weight-bold">
-              Annual Income
+              Yıllık Kazanç
             </div>
-            <div class="font-size-h4 font-weight-bolder">$1,480,00</div>
+            <div class="font-size-h4 font-weight-bolder">983.400₺</div>
           </div>
         </div>
         <!--end::Row-->
@@ -73,11 +73,11 @@ export default {
       chartOptions: {},
       series: [
         {
-          name: "Net Profit",
+          name: "Net Kar",
           data: [35, 65, 75, 55, 45, 60, 55]
         },
         {
-          name: "Revenue",
+          name: "Kazanç",
           data: [40, 70, 80, 60, 50, 65, 60]
         }
       ]
@@ -119,7 +119,7 @@ export default {
         colors: ["transparent"]
       },
       xaxis: {
-        categories: ["Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+        categories: ["Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz"],
         axisBorder: {
           show: false
         },
@@ -184,7 +184,7 @@ export default {
         },
         y: {
           formatter: function(val) {
-            return "$" + val + " thousands";
+            return val + " bin ₺";
           }
         }
       },

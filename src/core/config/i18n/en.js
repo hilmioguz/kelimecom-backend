@@ -6,7 +6,7 @@ export const locale = {
   MENU: {
     NEW: "new",
     ACTIONS: "Actions",
-    CREATE_POST: "Create New Post",
+    CREATE_POST: "Create New Item",
     PAGES: "Pages",
     FEATURES: "Features",
     APPS: "Apps",
@@ -16,16 +16,23 @@ export const locale = {
     GENERAL: {
       OR: "Or",
       SUBMIT_BUTTON: "Submit",
+      CANCEL_BUTTON: "Cancel",
       NO_ACCOUNT: "Don't have an account?",
       SIGNUP_BUTTON: "Sign Up",
+      SIGNOUT_BUTTON: "Sign Out",
       FORGOT_BUTTON: "Forgot Password",
       BACK_BUTTON: "Back",
       PRIVACY: "Privacy",
-      LEGAL: "Legal",
-      CONTACT: "Contact"
+      LEGAL: "Terms",
+      CONDITIONS: "Conditions",
+      CONTACT: "Contact",
+      IAGREE: "I Agree the",
+      TERMS: "terms and conditions"
     },
     LOGIN: {
+      WELLCOME: "Welcome to Kelime.com",
       TITLE: "Login Account",
+      NEW_HERE: "New Here?",
       BUTTON: "Sign In"
     },
     FORGOT: {
@@ -37,6 +44,9 @@ export const locale = {
       TITLE: "Sign Up",
       DESC: "Enter your details to create your account",
       SUCCESS: "Your account has been successfuly registered."
+    },
+    PROFILE: {
+      MY_PROFILE: "My Profile"
     },
     INPUT: {
       EMAIL: "Email",

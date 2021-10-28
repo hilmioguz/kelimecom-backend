@@ -1,18 +1,18 @@
 {
-  "demo": "demo2",
+  "demo": "kelimecom",
   "self": {
     "layout": "default",
     "body": {
-      "background-image": "media/bg/bg-10.jpg"
+      "background-image": "media/bg/bgdesen.png"
     },
     "logo": {
-      "default": "media/logos/logo-letter-9.png",
-      "sticky": "media/logos/logo-letter-1.png"
+      "default": "media/logos/kelimecomlogo.png",
+      "sticky": "media/logos/kelimelogo.png"
     }
   },
   "loader": {
     "type": "spinner-logo",
-    "logo": "media/logos/logo-letter-1.png",
+    "logo": "media/logos/kelimelogo.png",
     "message": "Please wait..."
   },
   "breakpoints": {
@@ -83,7 +83,7 @@
       "self": {
         "display": true,
         "layout": "default",
-        "root-arrow": false
+        "root-arrow": true
       },
       "desktop": {
         "arrow": true,
@@ -133,8 +133,11 @@
       }
     }
   },
+  "toolbar": {
+    "display": false
+  },
   "footer": {
     "width": "fixed",
-    "layout": "extended"
+    "layout": "compact"
   }
 }

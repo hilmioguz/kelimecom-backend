@@ -13,14 +13,15 @@
         <h1
           class="error-title font-weight-boldest text-info mt-10 mt-md-0 mb-12"
         >
-          Oops!
+          Hoppala!
         </h1>
         <p class="font-weight-boldest display-4">
-          Something went wrong here.
+          Burada bir şeyler ters gitti.
         </p>
         <p class="font-size-h3">
-          We're working on it and we'll get it fixed
-          <br />as soon possible. <br />You can back or use our Help Center.
+          Üzerinde çalışıyoruz ve en kısa zamanda düzelteceğiz.
+          <br />İşleminizi Geri alabilir veya Yardım Merkezimizi
+          kullanabilirsiniz.
         </p>
       </div>
       <!-- end:: Content -->

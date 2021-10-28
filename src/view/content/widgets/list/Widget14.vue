@@ -2,7 +2,7 @@
   <div class="card card-custom card-stretch gutter-b">
     <!--begin::Header-->
     <div class="card-header border-0">
-      <h3 class="card-title font-weight-bolder text-dark">Notifications</h3>
+      <h3 class="card-title font-weight-bolder text-dark">Bildirimler</h3>
       <div class="card-toolbar">
         <Dropdown2><i class="ki ki-bold-more-hor"></i></Dropdown2>
       </div>
@@ -69,33 +69,37 @@ export default {
     return {
       list: [
         {
-          title: "Daily Standup Meeting",
-          desc: "Due in 2 Days",
-          status: "Approved",
+          title:
+            "Sitenin görünürlüğü artırıcı çalışma yaparmısınız. Sizi bulmakda zorlandım.",
+          desc: "27.05.2021",
+          status: "Geri Dönüldü",
           class: "primary"
         },
         {
-          title: "Group Town Hall Meet-up with showcase",
-          desc: "Due in 2 Days",
-          status: "In Progress",
+          title: "Çok reklam çıkıyor. Kelimer aklımda kalmıyor...",
+          desc: "03.05.2021",
+          status: "Değerlendirmede",
           class: "warning"
         },
         {
-          title: "Next sprint planning and estimations",
-          desc: "Due in 2 Days",
-          status: "Success",
+          title:
+            "Üyelik paketimi değiştirimisiniz. Pro plana geçmek istiyorum.",
+          desc: "27.04.2021",
+          status: "Tamamlandı",
           class: "success"
         },
         {
-          title: "Sprint delivery and project deployment",
-          desc: "Due in 2 Days",
-          status: "Rejected",
+          title:
+            "Günlük aratama sayımı artırırmısnız..pakeyt almaya param yok..",
+          desc: "22.04.2021",
+          status: "Red edildi",
           class: "danger"
         },
         {
-          title: "Data analytics research showcase",
-          desc: "Due in 2 Days",
-          status: "In Progress",
+          title:
+            "Veri analitiği araştırması yapıyorum. Verilerinizi nasıl alabilirim?",
+          desc: "01.04.2021",
+          status: "Değerlendirmede",
           class: "warning"
         }
       ]

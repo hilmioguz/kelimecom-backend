@@ -43,7 +43,11 @@
 
                 <div class="content-wrapper flex-row-fluid">
                   <transition name="fade-in-up">
-                    <router-view />
+                    <v-app>
+                      <keep-alive>
+                        <router-view />
+                      </keep-alive>
+                    </v-app>
                   </transition>
                 </div>
               </div>
@@ -151,8 +155,8 @@ export default {
      * @returns {boolean}
      */
     toolbarDisplay() {
-      // return !!this.layoutConfig("toolbar.display");
-      return true;
+      return !!this.layoutConfig("toolbar.display");
+      // return true;
     },
 
     /**

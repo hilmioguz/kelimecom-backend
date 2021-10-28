@@ -4,10 +4,10 @@
     <div class="card-header border-0 py-5">
       <h3 class="card-title align-items-start flex-column">
         <span class="card-label font-weight-bolder text-dark">
-          Agents Stats
+          Yazar İstatistikleri
         </span>
         <span class="text-muted mt-3 font-weight-bold font-size-sm">
-          More than 400+ new members
+          Bu ay 10'dan fazla yeni yazar
         </span>
       </h3>
       <div class="card-toolbar">
@@ -16,7 +16,7 @@
             <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Add-user.svg-->
             <inline-svg src="media/svg/icons/Communication/Add-user.svg" />
             <!--end::Svg Icon--> </span
-          >Add New Member</a
+          >Yeni Yazar Ekle</a
         >
       </div>
     </div>
@@ -31,32 +31,16 @@
         >
           <thead>
             <tr class="text-left">
-              <th class="pl-0" style="width: 20px">
-                <label class="checkbox checkbox-lg checkbox-single">
-                  <input
-                    type="checkbox"
-                    @input="setCheck($event.target.checked)"
-                  />
-                  <span></span>
-                </label>
-              </th>
-              <th class="pr-0" style="width: 50px">authors</th>
+              <th class="pr-0" style="width: 50px">yazar</th>
               <th style="min-width: 200px"></th>
-              <th style="min-width: 150px">company</th>
-              <th style="min-width: 150px">progress</th>
-              <th class="pr-0 text-right" style="min-width: 150px">action</th>
+              <th style="min-width: 150px">kurum</th>
+              <th style="min-width: 150px">ilerleme</th>
             </tr>
           </thead>
           <tbody>
             <template v-for="(item, i) in list">
               <tr v-bind:key="i">
-                <td class="pl-0">
-                  <label class="checkbox checkbox-lg checkbox-single">
-                    <input type="checkbox" value="1" :checked="checked" />
-                    <span></span>
-                  </label>
-                </td>
-                <td class="pr-0">
+                <td class="pr-2">
                   <div class="symbol symbol-50 symbol-light mt-1">
                     <span class="symbol-label">
                       <img
@@ -97,7 +81,7 @@
                         >{{ item.text5 }}</span
                       >
                       <span class="text-muted font-size-sm font-weight-bold"
-                        >Progress</span
+                        >İlerleme</span
                       >
                     </div>
                     <div class="progress progress-xs w-100">
@@ -112,42 +96,6 @@
                       ></div>
                     </div>
                   </div>
-                </td>
-                <td class="pr-0 text-right">
-                  <a
-                    href="#"
-                    class="btn btn-icon btn-light btn-hover-primary btn-sm"
-                  >
-                    <span class="svg-icon svg-icon-md svg-icon-primary">
-                      <!--begin::Svg Icon | path:assets/media/svg/icons/General/Settings-1.svg-->
-                      <inline-svg
-                        src="media/svg/icons/General/Settings-1.svg"
-                      />
-                      <!--end::Svg Icon-->
-                    </span>
-                  </a>
-                  <a
-                    href="#"
-                    class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-                  >
-                    <span class="svg-icon svg-icon-md svg-icon-primary">
-                      <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Write.svg-->
-                      <inline-svg
-                        src="media/svg/icons/Communication/Write.svg"
-                      />
-                      <!--end::Svg Icon-->
-                    </span>
-                  </a>
-                  <a
-                    href="#"
-                    class="btn btn-icon btn-light btn-hover-primary btn-sm"
-                  >
-                    <span class="svg-icon svg-icon-md svg-icon-primary">
-                      <!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg-->
-                      <inline-svg src="media/svg/icons/General/Trash.svg" />
-                      <!--end::Svg Icon-->
-                    </span>
-                  </a>
                 </td>
               </tr>
             </template>
@@ -169,37 +117,37 @@ export default {
       list: [
         {
           text0: "media/svg/avatars/001-boy.svg",
-          text1: "Brad Simmons",
+          text1: "Ali Yazaroğlu",
           text2: "HTML, JS, ReactJS",
-          text3: "Intertico",
-          text4: "Web, UI/UX Design",
+          text3: "Vadi Bilişm",
+          text4: "Web, UI/UX Dizayn",
           text5: "65%",
           text6: "danger"
         },
         {
           text0: "media/svg/avatars/018-girl-9.svg",
-          text1: "Jessie Clarcson",
-          text2: "C#, ASP.NET, MS SQL",
-          text3: "Agoda",
-          text4: "Houses & Hotels",
+          text1: "Ayşe Ay",
+          text2: "İngiliz Dili Edebiyat",
+          text3: "Boğaziçi Üniversitesi",
+          text4: "Prof. Dr.",
           text5: "83%",
           text6: "success"
         },
         {
           text0: "media/svg/avatars/047-girl-25.svg",
-          text1: "Lebron Wayde",
+          text1: "Gara Oğlan",
           text2: "PHP, Laravel, VueJS",
-          text3: "RoadGee",
-          text4: "Transportation",
+          text3: "Çukurova Üniversitesi",
+          text4: "Kütüphane Müdürü",
           text5: "47%",
           text6: "primary"
         },
         {
           text0: "media/svg/avatars/014-girl-7.svg",
-          text1: "Natali Trump",
-          text2: "Python, PostgreSQL, ReactJS",
-          text3: "The Hill",
-          text4: "Insurance",
+          text1: "Beyza Çokokuyan",
+          text2: "Dil, Tarih, Edebiyat",
+          text3: "Anakara Üniversitesi",
+          text4: "Doktora Öğr.",
           text5: "71%",
           text6: "danger"
         }

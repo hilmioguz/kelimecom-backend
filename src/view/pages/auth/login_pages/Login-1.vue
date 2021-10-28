@@ -17,7 +17,7 @@
         <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
           <a href="#" class="text-center mb-10">
             <img
-              src="media/logos/logo-letter-1.png"
+              src="media/logos/kelimecomlogo.png"
               class="max-h-70px"
               alt=""
             />
@@ -26,7 +26,7 @@
             class="font-weight-bolder text-center font-size-h4 font-size-h1-lg"
             style="color: #986923;"
           >
-            Discover Amazing Metronic <br />with great build tools
+            Basılı Sözlükler Veritabanı
           </h3>
         </div>
         <div
@@ -51,22 +51,22 @@
                 <h3
                   class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg"
                 >
-                  Welcome to Metronic
+                  {{ $t("AUTH.LOGIN.WELLCOME") }}
                 </h3>
                 <span class="text-muted font-weight-bold font-size-h4"
-                  >New Here?
+                  >{{ $t("AUTH.LOGIN.NEW_HERE") }}
                   <a
                     id="kt_login_signup"
                     class="text-primary font-weight-bolder"
                     @click="showForm('signup')"
-                    >Create an Account</a
+                    >{{ $t("AUTH.REGISTER.TITLE") }}</a
                   ></span
                 >
               </div>
               <div class="form-group">
-                <label class="font-size-h6 font-weight-bolder text-dark"
-                  >Email</label
-                >
+                <label class="font-size-h6 font-weight-bolder text-dark">{{
+                  $t("AUTH.INPUT.EMAIL")
+                }}</label>
                 <div
                   id="example-input-group-1"
                   label=""
@@ -83,14 +83,15 @@
               </div>
               <div class="form-group">
                 <div class="d-flex justify-content-between mt-n5">
-                  <label class="font-size-h6 font-weight-bolder text-dark pt-5"
-                    >Password</label
+                  <label
+                    class="font-size-h6 font-weight-bolder text-dark pt-5"
+                    >{{ $t("AUTH.INPUT.PASSWORD") }}</label
                   >
                   <a
                     class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5"
                     id="kt_login_forgot"
                     @click="showForm('forgot')"
-                    >Forgot Password ?</a
+                    >{{ $t("AUTH.FORGOT.TITLE") }}</a
                   >
                 </div>
                 <div
@@ -113,17 +114,7 @@
                   ref="kt_login_signin_submit"
                   class="btn btn-primary font-weight-bolder font-size-h6 px-15 py-4 my-3 mr-3"
                 >
-                  Sign In
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-light-primary font-weight-bolder px-8 py-4 my-3 font-size-lg"
-                >
-                  <span class="svg-icon svg-icon-md">
-                    <inline-svg
-                      src="media/svg/social-icons/google.svg"
-                    /> </span
-                  >Sign in with Google
+                  {{ $t("AUTH.LOGIN.BUTTON") }}
                 </button>
               </div>
             </form>
@@ -140,17 +131,17 @@
                 <h3
                   class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg"
                 >
-                  Sign Up
+                  {{ $t("AUTH.REGISTER.TITLE") }}
                 </h3>
                 <p class="text-muted font-weight-bold font-size-h4">
-                  Enter your details to create your account
+                  {{ $t("AUTH.REGISTER.DESC") }}
                 </p>
               </div>
               <div class="form-group">
                 <input
                   class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
                   type="text"
-                  placeholder="Fullname"
+                  :placeholder="$t('AUTH.INPUT.FULLNAME')"
                   name="fullname"
                   ref="fullname"
                   autocomplete="off"
@@ -160,7 +151,7 @@
                 <input
                   class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
                   type="email"
-                  placeholder="Email"
+                  :placeholder="$t('AUTH.INPUT.EMAIL')"
                   name="email"
                   ref="remail"
                   autocomplete="off"
@@ -170,7 +161,7 @@
                 <input
                   class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
                   type="password"
-                  placeholder="Password"
+                  :placeholder="$t('AUTH.INPUT.PASSWORD')"
                   name="password"
                   ref="rpassword"
                   autocomplete="off"
@@ -180,7 +171,7 @@
                 <input
                   class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
                   type="password"
-                  placeholder="Confirm password"
+                  :placeholder="$t('AUTH.INPUT.CONFIRM_PASSWORD')"
                   name="cpassword"
                   ref="cpassword"
                   autocomplete="off"
@@ -190,8 +181,9 @@
                 <label class="checkbox mb-0">
                   <input type="checkbox" name="agree" />
                   <span class="mr-2"></span>
-                  I Agree the
-                  <a href="#" class="ml-2">terms and conditions</a>.
+                  {{ $t("AUTH.GENERAL.IAGREE") }}
+                  <a href="#" class="ml-2">{{ $t("AUTH.GENERAL.TERMS") }}</a
+                  >.
                 </label>
               </div>
               <div class="form-group d-flex flex-wrap pb-lg-0 pb-3">
@@ -200,7 +192,7 @@
                   class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4"
                   style="width:150px;"
                 >
-                  Submit
+                  {{ $t("AUTH.GENERAL.SUBMIT_BUTTON") }}
                 </button>
                 <button
                   type="button"
@@ -208,7 +200,7 @@
                   class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3"
                   @click="showForm('signin')"
                 >
-                  Cancel
+                  {{ $t("AUTH.GENERAL.CANCEL_BUTTON") }}
                 </button>
               </div>
             </form>
@@ -227,17 +219,17 @@
                 <h3
                   class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg"
                 >
-                  Forgotten Password ?
+                  {{ $t("AUTH.FORGOT.TITLE") }}
                 </h3>
                 <p class="text-muted font-weight-bold font-size-h4">
-                  Enter your email to reset your password
+                  {{ $t("AUTH.FORGOT.DESC") }}
                 </p>
               </div>
               <div class="form-group">
                 <input
                   class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
                   type="email"
-                  placeholder="Email"
+                  :placeholder="$t('AUTH.INPUT.EMAIL')"
                   name="email"
                   autocomplete="off"
                 />
@@ -248,7 +240,7 @@
                   id="kt_login_forgot_submit"
                   class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4"
                 >
-                  Submit
+                  {{ $t("AUTH.GENERAL.SUBMIT_BUTTON") }}
                 </button>
                 <button
                   type="button"
@@ -256,7 +248,7 @@
                   class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3"
                   @click="showForm('signin')"
                 >
-                  Cancel
+                  {{ $t("AUTH.GENERAL.CANCEL_BUTTON") }}
                 </button>
               </div>
             </form>
@@ -267,14 +259,18 @@
         <div
           class="d-flex justify-content-lg-start justify-content-center align-items-end py-7 py-lg-0"
         >
-          <a href="#" class="text-primary font-weight-bolder font-size-h5"
-            >Terms</a
+          <a href="#" class="text-primary font-weight-bolder font-size-h5">{{
+            $t("AUTH.GENERAL.LEGAL")
+          }}</a>
+          <a
+            href="#"
+            class="text-primary ml-10 font-weight-bolder font-size-h5"
+            >{{ $t("AUTH.GENERAL.CONDITIONS") }}</a
           >
-          <a href="#" class="text-primary ml-10 font-weight-bolder font-size-h5"
-            >Plans</a
-          >
-          <a href="#" class="text-primary ml-10 font-weight-bolder font-size-h5"
-            >Contact Us</a
+          <a
+            href="#"
+            class="text-primary ml-10 font-weight-bolder font-size-h5"
+            >{{ $t("AUTH.GENERAL.CONTACT") }}</a
           >
         </div>
         <!--end::Content footer-->
@@ -309,8 +305,8 @@ export default {
       state: "signin",
       // Remove this dummy login info
       form: {
-        email: "admin@demo.com",
-        password: "demo"
+        email: "",
+        password: ""
       }
     };
   },
@@ -322,7 +318,7 @@ export default {
 
     backgroundImage() {
       return (
-        process.env.BASE_URL + "media/svg/illustrations/login-visual-1.svg"
+        process.env.BASE_URL + "media/svg/illustrations/gummy-programming.svg"
       );
     }
   },

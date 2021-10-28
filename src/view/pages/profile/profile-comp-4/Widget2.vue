@@ -4,10 +4,10 @@
     <div class="card-header border-0 py-5">
       <h3 class="card-title align-items-start flex-column">
         <span class="card-label font-weight-bolder text-dark">
-          Agents Stats
+          Yazar İstatistikleri
         </span>
         <span class="text-muted mt-3 font-weight-bold font-size-sm">
-          More than 400+ new members
+          Bu ay 10'dan fazla yeni yazar
         </span>
       </h3>
       <div class="card-toolbar">
@@ -16,7 +16,7 @@
             <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Add-user.svg-->
             <inline-svg src="media/svg/icons/Communication/Add-user.svg" />
             <!--end::Svg Icon--> </span
-          >Add New Member</a
+          >Yeni Yazar Ekle</a
         >
       </div>
     </div>

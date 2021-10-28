@@ -5,8 +5,12 @@
     <div class="card-header border-0 pt-5">
       <div class="card-title">
         <div class="card-label">
-          <div class="font-weight-bolder">Weekly Sales Stats</div>
-          <div class="font-size-sm text-muted mt-2">890,344 Sales</div>
+          <div class="font-weight-bolder">
+            Haftalık İstatistikler
+          </div>
+          <div class="font-size-sm text-muted mt-2">
+            Toplam 890.344 Ziyaretçi
+          </div>
         </div>
       </div>
       <div class="card-toolbar">
@@ -78,28 +82,28 @@ export default {
       chartOptions: {},
       series: [
         {
-          name: "Net Profit",
-          data: [20, 22, 30, 28, 25, 26, 30, 28, 22, 24, 25, 35]
+          name: "Günlük Ziyaretçi",
+          data: [20, 25, 33, 25, 27, 34, 29]
         }
       ],
       list: [
         {
-          title: "Top Authors",
-          desc: "Ricky Hunt, Sandra Trepp",
+          title: "En İyi Yazarlar",
+          desc: "Ali Yazaroğlu, Veli Okumuş",
           svg: "media/svg/misc/006-plurk.svg",
-          profit: "+105$"
+          profit: "+50 giriş"
         },
         {
-          title: "Bestsellers",
-          desc: "Pitstop Email Marketing",
+          title: "En Çok Aranan Kelimeler",
+          desc: "kalem, mualla, musilaj",
           svg: "media/svg/misc/015-telegram.svg",
-          profit: "+60$"
+          profit: "+60"
         },
         {
-          title: "Top Engagement",
-          desc: "KT.com solution provider\n",
+          title: "En Çok Kurumsal Bağlantı",
+          desc: "Hacettepe Üni.\n",
           svg: "media/svg/misc/003-puzzle.svg",
-          profit: "+75$"
+          profit: "+75"
         }
       ]
     };
@@ -151,7 +155,15 @@ export default {
         colors: [this.strokeColor]
       },
       xaxis: {
-        categories: ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
+        categories: [
+          "Pazartesi",
+          "Salı",
+          "Çarşamba",
+          "Perşembe",
+          "Cuma",
+          "Cumartesi",
+          "Pazar"
+        ],
         axisBorder: {
           show: false
         },
@@ -226,7 +238,7 @@ export default {
         },
         y: {
           formatter: function(val) {
-            return "$" + val + " thousands";
+            return val + " bin";
           }
         },
         marker: {

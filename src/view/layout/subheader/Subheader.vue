@@ -46,15 +46,15 @@
       </div>
       <div class="d-flex align-items-center">
         <!--begin::Button-->
-        <a
+        <!-- <a
           href="#"
           class="btn btn-transparent-white font-weight-bold py-3 px-6 mr-2"
         >
           Reports
-        </a>
+        </a> -->
         <!--end::Button-->
         <!--begin::Dropdown-->
-        <b-dropdown
+        <!-- <b-dropdown
           size="sm"
           variant="link"
           toggle-class="custom-v-dropdown btn btn-white font-weight-bold py-3 px-6"
@@ -63,9 +63,9 @@
           no-flip
           text="Actions"
           v-b-tooltip.hover="'Quick actions'"
-        >
-          <!--begin::Navigation-->
-          <div class="navi navi-hover min-w-md-250px">
+        > -->
+        <!--begin::Navigation-->
+        <!-- <div class="navi navi-hover min-w-md-250px">
             <b-dropdown-text tag="div" class="navi-item">
               <a href="#" class="navi-link">
                 <span class="navi-icon">
@@ -138,9 +138,9 @@
                 </span>
               </a>
             </b-dropdown-text>
-          </div>
-          <!--end::Navigation-->
-        </b-dropdown>
+          </div> -->
+        <!--end::Navigation-->
+        <!-- </b-dropdown> -->
         <!--end::Dropdown-->
       </div>
     </div>

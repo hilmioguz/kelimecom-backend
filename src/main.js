@@ -3,12 +3,13 @@ import App from "./App.vue";
 import router from "./router";
 import store from "@/core/services/store";
 import ApiService from "@/core/services/api.service";
-import MockService from "@/core/mock/mock.service";
+// import MockService from "@/core/mock/mock.service";
 import { VERIFY_AUTH } from "@/core/services/store/auth.module";
-import { RESET_LAYOUT_CONFIG } from "@/core/services/store/config.module";
 
 Vue.config.productionTip = false;
 
+import jQuery from "jquery";
+window.jQuery = jQuery;
 // Global 3rd party plugins
 import "popper.js";
 import "tooltip.js";
@@ -29,19 +30,19 @@ import "@/core/plugins/apexcharts";
 import "@/core/plugins/treeselect";
 import "@/core/plugins/metronic";
 import "@mdi/font/css/materialdesignicons.css";
+import "bootstrap";
+import "bootstrap-select";
+import "@/assets/js/components/datatable/core.datatable.js";
 
 // API service init
 ApiService.init();
 
 // Remove this to disable mock API
-MockService.init();
+// MockService.init();
 
 router.beforeEach((to, from, next) => {
   // Ensure we checked auth before each page load.
   Promise.all([store.dispatch(VERIFY_AUTH)]).then(next);
-
-  // reset config to initial state
-  store.dispatch(RESET_LAYOUT_CONFIG);
 
   // Scroll page to top on every route change
   setTimeout(() => {

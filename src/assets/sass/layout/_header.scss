@@ -26,10 +26,12 @@
 			// Logos
 			.logo-default {
 				display: inline-block;
+				max-width: 150px;
 			}
 
 			.logo-sticky {
 				display: none;
+				max-width: 100px;
 			}
 		}
 

@@ -7,18 +7,20 @@
       <span
         class="text-white opacity-70 font-weight-bold font-size-base d-none d-md-inline mr-1"
       >
-        Hi,
+        Merhaba,
       </span>
       <span
         class="text-white opacity-90 font-weight-bolder font-size-base d-none d-md-inline mr-4"
       >
-        Sean
+        {{
+          currentUser && currentUser.name ? currentUser.name.split(" ")[0] : ""
+        }}
       </span>
       <span class="symbol symbol-35">
         <span
           class="symbol-label text-white font-size-h5 font-weight-bold bg-white-o-30"
         >
-          S
+          {{ currentUser && currentUser.name ? currentUser.name[0] : "" }}
         </span>
       </span>
     </div>
@@ -33,8 +35,8 @@
         class="offcanvas-header d-flex align-items-center justify-content-between pb-5"
       >
         <h3 class="font-weight-bold m-0">
-          User Profile
-          <small class="text-muted font-size-sm ml-2">12 messages</small>
+          Kullanıcı Profili
+          <small class="text-muted font-size-sm ml-2">5 mesaj</small>
         </h3>
         <a
           href="#"
@@ -62,9 +64,9 @@
               href="#"
               class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary"
             >
-              James Jones
+              {{ currentUser && currentUser.name ? currentUser.name : "" }}
             </a>
-            <div class="text-muted mt-1">Application Developer</div>
+            <div class="text-muted mt-1">Uygulama Geliştiricisi</div>
             <div class="navi mt-2">
               <a href="#" class="navi-item">
                 <span class="navi-link p-0 pb-2">
@@ -78,13 +80,15 @@
                     </span>
                   </span>
                   <span class="navi-text text-muted text-hover-primary">
-                    jm@softplus.com
+                    {{
+                      currentUser && currentUser.email ? currentUser.email : ""
+                    }}
                   </span>
                 </span>
               </a>
             </div>
             <button class="btn btn-light-primary btn-bold" @click="onLogout">
-              Sign out
+              {{ $t("AUTH.GENERAL.SIGNOUT_BUTTON") }}
             </button>
           </div>
         </div>
@@ -112,13 +116,15 @@
                 </div>
               </div>
               <div class="navi-text">
-                <div class="font-weight-bold">My Profile</div>
+                <div class="font-weight-bold">
+                  {{ $t("AUTH.PROFILE.MY_PROFILE") }}
+                </div>
                 <div class="text-muted">
-                  Account settings and more
+                  Hesap ayarları ve daha
                   <span
                     class="label label-light-danger label-inline font-weight-bold"
                   >
-                    update
+                    fazlası
                   </span>
                 </div>
               </div>
@@ -143,8 +149,8 @@
                 </div>
               </div>
               <div class="navi-text">
-                <div class="font-weight-bold">My Messages</div>
-                <div class="text-muted">Inbox and tasks</div>
+                <div class="font-weight-bold">Mesajlarım</div>
+                <div class="text-muted">Mesaj kutusu ve görevler</div>
               </div>
             </div>
           </router-link>
@@ -167,8 +173,8 @@
                 </div>
               </div>
               <div class="navi-text">
-                <div class="font-weight-bold">My Activities</div>
-                <div class="text-muted">Logs and notifications</div>
+                <div class="font-weight-bold">Aktivitelerim</div>
+                <div class="text-muted">Loglar ve bildirimler</div>
               </div>
             </div>
           </router-link>
@@ -193,8 +199,8 @@
                 </div>
               </div>
               <div class="navi-text">
-                <div class="font-weight-bold">My Tasks</div>
-                <div class="text-muted">latest tasks and projects</div>
+                <div class="font-weight-bold">Görevlerim</div>
+                <div class="text-muted">En son görev ve projelerim</div>
               </div>
             </div>
           </router-link>
@@ -205,7 +211,7 @@
         <!--begin::Notifications-->
         <div>
           <!--begin:Heading-->
-          <h5 class="mb-5">Recent Notifications</h5>
+          <h5 class="mb-5">Son Bildirimler</h5>
           <!--end:Heading-->
           <template v-for="(item, i) in list">
             <!--begin::Item -->
@@ -239,7 +245,6 @@
                 class="font-weight-bolder py-1 font-size-lg"
                 v-bind:class="`text-${item.type}`"
               >
-                {{ item.alt }}
               </span>
             </div>
             <!--end::Item -->
@@ -262,6 +267,7 @@
 import { LOGOUT } from "@/core/services/store/auth.module";
 import KTLayoutQuickUser from "@/assets/js/layout/extended/quick-user.js";
 import KTOffcanvas from "@/assets/js/components/offcanvas.js";
+import { mapGetters } from "vuex";
 
 export default {
   name: "KTQuickUser",
@@ -269,29 +275,29 @@ export default {
     return {
       list: [
         {
-          title: "Another purpose persuade",
-          desc: "Due in 2 Days",
+          title: "Yeni sözlük oluşturma",
+          desc: "20 gün içinde",
           alt: "+28%",
           svg: "media/svg/icons/Home/Library.svg",
           type: "warning"
         },
         {
-          title: "Would be to people",
-          desc: "Due in 2 Days",
+          title: "Boş kelime özelliklerini doldurma",
+          desc: "6 gün içinde",
           alt: "+50%",
           svg: "media/svg/icons/Communication/Write.svg",
           type: "success"
         },
         {
-          title: "Purpose would be to persuade",
-          desc: "Due in 2 Days",
+          title: "Ziyaretçi raporları hakkında sunum",
+          desc: "2 gün içinde",
           alt: "-27%",
           svg: "media/svg/icons/Communication/Group-chat.svg",
           type: "danger"
         },
         {
-          title: "The best product",
-          desc: "Due in 2 Days",
+          title: "Site optimizasyon raporları",
+          desc: "3 gün içinde",
           alt: "+8%",
           svg: "media/svg/icons/General/Attachment2.svg",
           type: "info"
@@ -314,6 +320,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(["currentUser"]),
     picture() {
       return process.env.BASE_URL + "media/users/300_21.jpg";
     }
