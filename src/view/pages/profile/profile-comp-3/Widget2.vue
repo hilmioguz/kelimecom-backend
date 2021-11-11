@@ -16,7 +16,7 @@
           <li class="nav-item">
             <a
               class="nav-link py-2 px-4"
-              :class="{ active: this.show === 'month' }"
+              :class="{ active: show === 'month' }"
               data-toggle="tab"
               href="#kt_tab_pane_3_1"
               @click="show = 'month'"
@@ -28,7 +28,7 @@
             <a
               class="nav-link py-2 px-4"
               data-toggle="tab"
-              :class="{ active: this.show === 'week' }"
+              :class="{ active: show === 'week' }"
               href="#kt_tab_pane_2_1"
               @click="show = 'week'"
             >
@@ -39,7 +39,7 @@
             <a
               class="nav-link py-2 px-4"
               data-toggle="tab"
-              :class="{ active: this.show === 'day' }"
+              :class="{ active: show === 'day' }"
               href="#kt_tab_pane_1_1"
               @click="show = 'day'"
             >
@@ -57,25 +57,45 @@
         <table class="table table-borderless table-vertical-center">
           <thead>
             <tr>
-              <th class="p-0" style="width: 50px"></th>
-              <th class="p-0" style="min-width: 200px"></th>
-              <th class="p-0" style="min-width: 100px"></th>
-              <th class="p-0" style="min-width: 125px"></th>
-              <th class="p-0" style="min-width: 110px"></th>
-              <th class="p-0" style="min-width: 150px"></th>
+              <th
+                class="p-0"
+                style="width: 50px"
+              />
+              <th
+                class="p-0"
+                style="min-width: 200px"
+              />
+              <th
+                class="p-0"
+                style="min-width: 100px"
+              />
+              <th
+                class="p-0"
+                style="min-width: 125px"
+              />
+              <th
+                class="p-0"
+                style="min-width: 110px"
+              />
+              <th
+                class="p-0"
+                style="min-width: 150px"
+              />
             </tr>
           </thead>
           <tbody>
             <template v-for="(item, i) in dataToShow">
-              <tr v-bind:key="i">
+              <tr :key="i">
                 <td class="pl-0 py-4">
-                  <div class="symbol symbol-50 symbol-light mr-1">
+                  <div
+                    class="symbol symbol-50 symbol-light mr-1"
+                  >
                     <span class="symbol-label">
                       <img
                         :src="item.text0"
                         class="h-50 align-self-center"
                         alt=""
-                      />
+                      >
                     </span>
                   </div>
                 </td>
@@ -86,8 +106,12 @@
                     {{ item.text1 }}
                   </a>
                   <div>
-                    <span class="font-weight-bolder">Email:</span>
-                    <a class="text-muted font-weight-bold text-hover-primary">
+                    <span
+                      class="font-weight-bolder"
+                    >Email:</span>
+                    <a
+                      class="text-muted font-weight-bold text-hover-primary"
+                    >
                       {{ item.text2 }}
                     </a>
                   </div>
@@ -98,7 +122,9 @@
                   >
                     {{ item.text3 }}
                   </span>
-                  <span class="text-muted font-weight-bold">Paid</span>
+                  <span
+                    class="text-muted font-weight-bold"
+                  >Paid</span>
                 </td>
                 <td class="text-right">
                   <span class="text-muted font-weight-500">
@@ -108,36 +134,46 @@
                 <td class="text-right">
                   <span
                     class="label label-lg label-inline"
-                    v-bind:class="`label-light-${item.text6}`"
+                    :class="
+                      `label-light-${item.text6}`
+                    "
                   >
                     {{ item.text5 }}
                   </span>
                 </td>
                 <td class="text-right pr-0">
                   <a class="btn btn-icon btn-light btn-sm">
-                    <span class="svg-icon svg-icon-md svg-icon-primary">
+                    <span
+                      class="svg-icon svg-icon-md svg-icon-primary"
+                    >
                       <!--begin::Svg Icon-->
                       <inline-svg
                         src="media/svg/icons/General/Settings-1.svg"
-                      ></inline-svg>
+                      />
                       <!--end::Svg Icon-->
                     </span>
                   </a>
-                  <a class="btn btn-icon btn-light btn-sm mx-3">
-                    <span class="svg-icon svg-icon-md svg-icon-primary">
+                  <a
+                    class="btn btn-icon btn-light btn-sm mx-3"
+                  >
+                    <span
+                      class="svg-icon svg-icon-md svg-icon-primary"
+                    >
                       <!--begin::Svg Icon-->
                       <inline-svg
                         src="media/svg/icons/Communication/Write.svg"
-                      ></inline-svg>
+                      />
                       <!--end::Svg Icon-->
                     </span>
                   </a>
                   <a class="btn btn-icon btn-light btn-sm">
-                    <span class="svg-icon svg-icon-md svg-icon-primary">
+                    <span
+                      class="svg-icon svg-icon-md svg-icon-primary"
+                    >
                       <!--begin::Svg Icon-->
                       <inline-svg
                         src="media/svg/icons/General/Trash.svg"
-                      ></inline-svg>
+                      />
                       <!--end::Svg Icon-->
                     </span>
                   </a>
@@ -155,167 +191,167 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 
 export default {
-  name: "widget-2",
+  name: 'Widget2',
+  components: {},
   data() {
     return {
-      show: "day",
+      show: 'day',
       month: [
         {
-          text0: "media/svg/misc/015-telegram.svg",
-          text1: "Application Development",
-          text2: "app@dev.com",
-          text3: "$4,600,000",
-          text4: "Python, MySQL",
-          text5: "In Progress",
-          text6: "warning"
+          text0: 'media/svg/misc/015-telegram.svg',
+          text1: 'Application Development',
+          text2: 'app@dev.com',
+          text3: '$4,600,000',
+          text4: 'Python, MySQL',
+          text5: 'In Progress',
+          text6: 'warning',
         },
         {
-          text0: "media/svg/misc/006-plurk.svg",
-          text1: "Sant Outstanding",
-          text2: "bprow@bnc.cc",
-          text3: "$2,000,000",
-          text4: "ReactJs, HTML",
-          text5: "Approved",
-          text6: "primary"
+          text0: 'media/svg/misc/006-plurk.svg',
+          text1: 'Sant Outstanding',
+          text2: 'bprow@bnc.cc',
+          text3: '$2,000,000',
+          text4: 'ReactJs, HTML',
+          text5: 'Approved',
+          text6: 'primary',
         },
         {
-          text0: "media/svg/misc/003-puzzle.svg",
-          text1: "Payrol Application",
-          text2: "company@dev.com",
-          text3: "$560,000",
-          text4: "Laravel, Metronic",
-          text5: "Success",
-          text6: "success"
+          text0: 'media/svg/misc/003-puzzle.svg',
+          text1: 'Payrol Application',
+          text2: 'company@dev.com',
+          text3: '$560,000',
+          text4: 'Laravel, Metronic',
+          text5: 'Success',
+          text6: 'success',
         },
         {
-          text0: "media/svg/misc/005-bebo.svg",
-          text1: "HR Management System",
-          text2: "hr@demo.com",
-          text3: "$57,000",
-          text4: "AngularJS, C#",
-          text5: "Rejected",
-          text6: "danger"
+          text0: 'media/svg/misc/005-bebo.svg',
+          text1: 'HR Management System',
+          text2: 'hr@demo.com',
+          text3: '$57,000',
+          text4: 'AngularJS, C#',
+          text5: 'Rejected',
+          text6: 'danger',
         },
         {
-          text0: "media/svg/misc/014-kickstarter.svg",
-          text1: "KTR Mobile Application",
-          text2: "ktr@demo.com",
-          text3: "$45,200,000",
-          text4: "ReactJS, Ruby",
-          text5: "In Progress",
-          text6: "warning"
-        }
+          text0: 'media/svg/misc/014-kickstarter.svg',
+          text1: 'KTR Mobile Application',
+          text2: 'ktr@demo.com',
+          text3: '$45,200,000',
+          text4: 'ReactJS, Ruby',
+          text5: 'In Progress',
+          text6: 'warning',
+        },
       ],
       week: [
         {
-          text0: "media/svg/misc/014-kickstarter.svg",
-          text1: "KTR Mobile Application",
-          text2: "ktr@demo.com",
-          text3: "$45,200,000",
-          text4: "ReactJS, Ruby",
-          text5: "In Progress",
-          text6: "warning"
+          text0: 'media/svg/misc/014-kickstarter.svg',
+          text1: 'KTR Mobile Application',
+          text2: 'ktr@demo.com',
+          text3: '$45,200,000',
+          text4: 'ReactJS, Ruby',
+          text5: 'In Progress',
+          text6: 'warning',
         },
         {
-          text0: "media/svg/misc/006-plurk.svg",
-          text1: "Sant Outstanding",
-          text2: "bprow@bnc.cc",
-          text3: "$2,000,000",
-          text4: "ReactJs, HTML",
-          text5: "Approved",
-          text6: "primary"
+          text0: 'media/svg/misc/006-plurk.svg',
+          text1: 'Sant Outstanding',
+          text2: 'bprow@bnc.cc',
+          text3: '$2,000,000',
+          text4: 'ReactJs, HTML',
+          text5: 'Approved',
+          text6: 'primary',
         },
         {
-          text0: "media/svg/misc/015-telegram.svg",
-          text1: "Application Development",
-          text2: "app@dev.com",
-          text3: "$4,600,000",
-          text4: "Python, MySQL",
-          text5: "In Progress",
-          text6: "warning"
+          text0: 'media/svg/misc/015-telegram.svg',
+          text1: 'Application Development',
+          text2: 'app@dev.com',
+          text3: '$4,600,000',
+          text4: 'Python, MySQL',
+          text5: 'In Progress',
+          text6: 'warning',
         },
         {
-          text0: "media/svg/misc/003-puzzle.svg",
-          text1: "Payrol Application",
-          text2: "company@dev.com",
-          text3: "$560,000",
-          text4: "Laravel, Metronic",
-          text5: "Success",
-          text6: "success"
+          text0: 'media/svg/misc/003-puzzle.svg',
+          text1: 'Payrol Application',
+          text2: 'company@dev.com',
+          text3: '$560,000',
+          text4: 'Laravel, Metronic',
+          text5: 'Success',
+          text6: 'success',
         },
         {
-          text0: "media/svg/misc/005-bebo.svg",
-          text1: "HR Management System",
-          text2: "hr@demo.com",
-          text3: "$57,000",
-          text4: "AngularJS, C#",
-          text5: "Rejected",
-          text6: "danger"
-        }
+          text0: 'media/svg/misc/005-bebo.svg',
+          text1: 'HR Management System',
+          text2: 'hr@demo.com',
+          text3: '$57,000',
+          text4: 'AngularJS, C#',
+          text5: 'Rejected',
+          text6: 'danger',
+        },
       ],
       day: [
         {
-          text0: "media/svg/misc/003-puzzle.svg",
-          text1: "Payrol Application",
-          text2: "company@dev.com",
-          text3: "$560,000",
-          text4: "Laravel, Metronic",
-          text5: "Success",
-          text6: "success"
+          text0: 'media/svg/misc/003-puzzle.svg',
+          text1: 'Payrol Application',
+          text2: 'company@dev.com',
+          text3: '$560,000',
+          text4: 'Laravel, Metronic',
+          text5: 'Success',
+          text6: 'success',
         },
         {
-          text0: "media/svg/misc/006-plurk.svg",
-          text1: "Sant Outstanding",
-          text2: "bprow@bnc.cc",
-          text3: "$2,000,000",
-          text4: "ReactJs, HTML",
-          text5: "Approved",
-          text6: "primary"
+          text0: 'media/svg/misc/006-plurk.svg',
+          text1: 'Sant Outstanding',
+          text2: 'bprow@bnc.cc',
+          text3: '$2,000,000',
+          text4: 'ReactJs, HTML',
+          text5: 'Approved',
+          text6: 'primary',
         },
         {
-          text0: "media/svg/misc/015-telegram.svg",
-          text1: "Application Development",
-          text2: "app@dev.com",
-          text3: "$4,600,000",
-          text4: "Python, MySQL",
-          text5: "In Progress",
-          text6: "warning"
+          text0: 'media/svg/misc/015-telegram.svg',
+          text1: 'Application Development',
+          text2: 'app@dev.com',
+          text3: '$4,600,000',
+          text4: 'Python, MySQL',
+          text5: 'In Progress',
+          text6: 'warning',
         },
         {
-          text0: "media/svg/misc/005-bebo.svg",
-          text1: "HR Management System",
-          text2: "hr@demo.com",
-          text3: "$57,000",
-          text4: "AngularJS, C#",
-          text5: "Rejected",
-          text6: "danger"
+          text0: 'media/svg/misc/005-bebo.svg',
+          text1: 'HR Management System',
+          text2: 'hr@demo.com',
+          text3: '$57,000',
+          text4: 'AngularJS, C#',
+          text5: 'Rejected',
+          text6: 'danger',
         },
         {
-          text0: "media/svg/misc/014-kickstarter.svg",
-          text1: "KTR Mobile Application",
-          text2: "ktr@demo.com",
-          text3: "$45,200,000",
-          text4: "ReactJS, Ruby",
-          text5: "In Progress",
-          text6: "warning"
-        }
-      ]
+          text0: 'media/svg/misc/014-kickstarter.svg',
+          text1: 'KTR Mobile Application',
+          text2: 'ktr@demo.com',
+          text3: '$45,200,000',
+          text4: 'ReactJS, Ruby',
+          text5: 'In Progress',
+          text6: 'warning',
+        },
+      ],
     };
   },
-  components: {},
   methods: {},
   computed: {
-    ...mapGetters(["layoutConfig"]),
+    ...mapGetters(['layoutConfig']),
 
     dataToShow() {
-      if (this.show === "month") return this.month;
-      if (this.show === "week") return this.week;
-      if (this.show === "day") return this.day;
+      if (this.show === 'month') return this.month;
+      if (this.show === 'week') return this.week;
+      if (this.show === 'day') return this.day;
       return this.day;
-    }
-  }
+    },
+  },
 };
 </script>

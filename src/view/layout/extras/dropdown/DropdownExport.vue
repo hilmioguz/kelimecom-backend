@@ -7,41 +7,56 @@
       Seçiniz:
     </li>
     <li class="navi-item">
-      <a href="#" class="navi-link">
+      <a
+        href="#"
+        class="navi-link"
+      >
         <span class="navi-icon">
-          <i class="la la-print"></i>
+          <i class="la la-print" />
         </span>
         <span class="navi-text">Yazıcı</span>
       </a>
     </li>
     <li class="navi-item">
-      <a href="#" class="navi-link">
+      <a
+        href="#"
+        class="navi-link"
+      >
         <span class="navi-icon">
-          <i class="la la-copy"></i>
+          <i class="la la-copy" />
         </span>
         <span class="navi-text">Kopyala</span>
       </a>
     </li>
     <li class="navi-item">
-      <a href="#" class="navi-link">
+      <a
+        href="#"
+        class="navi-link"
+      >
         <span class="navi-icon">
-          <i class="la la-file-excel-o"></i>
+          <i class="la la-file-excel-o" />
         </span>
         <span class="navi-text">Excel</span>
       </a>
     </li>
     <li class="navi-item">
-      <a href="#" class="navi-link">
+      <a
+        href="#"
+        class="navi-link"
+      >
         <span class="navi-icon">
-          <i class="la la-file-text-o"></i>
+          <i class="la la-file-text-o" />
         </span>
         <span class="navi-text">CSV</span>
       </a>
     </li>
     <li class="navi-item">
-      <a href="#" class="navi-link">
+      <a
+        href="#"
+        class="navi-link"
+      >
         <span class="navi-icon">
-          <i class="la la-file-pdf-o"></i>
+          <i class="la la-file-pdf-o" />
         </span>
         <span class="navi-text">PDF</span>
       </a>
@@ -52,11 +67,11 @@
 
 <script>
 export default {
-  name: "DropdownExport",
+  name: 'DropdownExport',
   data() {
     return {};
   },
+  computed: {},
   methods: {},
-  computed: {}
 };
 </script>

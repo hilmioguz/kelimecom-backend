@@ -1,10 +1,8 @@
-const ID_TOKEN_KEY = "id_tokens";
+const ID_TOKEN_KEY = 'id_tokens';
 
-export const getToken = () => {
-  return JSON.parse(window.localStorage.getItem(ID_TOKEN_KEY));
-};
+export const getToken = () => JSON.parse(window.localStorage.getItem(ID_TOKEN_KEY));
 
-export const saveToken = token => {
+export const saveToken = (token) => {
   window.localStorage.setItem(ID_TOKEN_KEY, JSON.stringify(token));
 };
 

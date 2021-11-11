@@ -4,28 +4,37 @@
     <!--begin::Header-->
     <div class="card-header py-3">
       <div class="card-title align-items-start flex-column">
-        <h3 class="card-label font-weight-bolder text-dark">Change Password</h3>
-        <span class="text-muted font-weight-bold font-size-sm mt-1"
-          >Change your account password</span
-        >
+        <h3 class="card-label font-weight-bolder text-dark">
+          Change Password
+        </h3>
+        <span
+          class="text-muted font-weight-bold font-size-sm mt-1"
+        >Change your account password</span>
       </div>
       <div class="card-toolbar">
         <button
+          ref="kt_save_changes"
           type="submit"
           class="btn btn-success mr-2"
           @click="save()"
-          ref="kt_save_changes"
         >
           Save Changes
         </button>
-        <button type="reset" class="btn btn-secondary" @click="cancel()">
+        <button
+          type="reset"
+          class="btn btn-secondary"
+          @click="cancel()"
+        >
           Cancel
         </button>
       </div>
     </div>
     <!--end::Header-->
     <!--begin::Form-->
-    <form class="form" id="kt_password_change_form">
+    <form
+      id="kt_password_change_form"
+      class="form"
+    >
       <div class="card-body">
         <!--begin::Alert-->
         <div
@@ -49,8 +58,19 @@
                   fill="none"
                   fill-rule="evenodd"
                 >
-                  <rect x="0" y="0" width="24" height="24" />
-                  <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
+                  <rect
+                    x="0"
+                    y="0"
+                    width="24"
+                    height="24"
+                  />
+                  <circle
+                    fill="#000000"
+                    opacity="0.3"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                  />
                   <rect
                     fill="#000000"
                     x="11"
@@ -73,9 +93,10 @@
             </span>
           </div>
           <div class="alert-text font-weight-bold">
-            Configure user passwords to expire periodically. Users will need
-            warning that their passwords are going to expire, <br />or they
-            might inadvertently get locked out of the system!
+            Configure user passwords to expire periodically. Users
+            will need warning that their passwords are going to
+            expire, <br>or they might inadvertently get locked out
+            of the system!
           </div>
           <div class="alert-close">
             <button
@@ -85,56 +106,59 @@
               aria-label="Close"
             >
               <span aria-hidden="true">
-                <i class="ki ki-close"></i>
+                <i class="ki ki-close" />
               </span>
             </button>
           </div>
         </div>
         <!--end::Alert-->
         <div class="form-group row">
-          <label class="col-xl-3 col-lg-3 col-form-label text-alert"
-            >Current Password</label
-          >
+          <label
+            class="col-xl-3 col-lg-3 col-form-label text-alert"
+          >Current Password</label>
           <div class="col-lg-9 col-xl-6">
             <input
+              ref="current_password"
               type="password"
               class="form-control form-control-lg form-control-solid mb-2"
               value=""
               placeholder="Current password"
               name="current_password"
-              ref="current_password"
-            />
-            <a href="#" class="text-sm font-weight-bold">Forgot password ?</a>
+            >
+            <a
+              href="#"
+              class="text-sm font-weight-bold"
+            >Forgot password ?</a>
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-xl-3 col-lg-3 col-form-label text-alert"
-            >New Password</label
-          >
+          <label
+            class="col-xl-3 col-lg-3 col-form-label text-alert"
+          >New Password</label>
           <div class="col-lg-9 col-xl-6">
             <input
+              ref="new_password"
               type="password"
               class="form-control form-control-lg form-control-solid"
               value=""
               placeholder="New password"
               name="new_password"
-              ref="new_password"
-            />
+            >
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-xl-3 col-lg-3 col-form-label text-alert"
-            >Verify Password</label
-          >
+          <label
+            class="col-xl-3 col-lg-3 col-form-label text-alert"
+          >Verify Password</label>
           <div class="col-lg-9 col-xl-6">
             <input
+              ref="verify_password"
               type="password"
               class="form-control form-control-lg form-control-solid"
               value=""
               placeholder="Verify password"
               name="verify_password"
-              ref="verify_password"
-            />
+            >
           </div>
         </div>
       </div>
@@ -144,121 +168,126 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import { UPDATE_PASSWORD } from "@/core/services/store/auth.module";
-import KTUtil from "@/assets/js/components/util";
+import { mapGetters } from 'vuex';
+import Swal from 'sweetalert2';
+import { UPDATE_PASSWORD } from '@/core/services/store/auth.module';
+import KTUtil from '@/assets/js/components/util';
 
-import formValidation from "@/assets/plugins/formvalidation/dist/es6/core/Core";
+import formValidation from '@/assets/plugins/formvalidation/dist/es6/core/Core';
 
 // FormValidation plugins
-import Trigger from "@/assets/plugins/formvalidation/dist/es6/plugins/Trigger";
-import Bootstrap from "@/assets/plugins/formvalidation/dist/es6/plugins/Bootstrap";
-import SubmitButton from "@/assets/plugins/formvalidation/dist/es6/plugins/SubmitButton";
-import Swal from "sweetalert2";
+import Trigger from '@/assets/plugins/formvalidation/dist/es6/plugins/Trigger';
+import Bootstrap from '@/assets/plugins/formvalidation/dist/es6/plugins/Bootstrap';
+import SubmitButton from '@/assets/plugins/formvalidation/dist/es6/plugins/SubmitButton';
 
 export default {
-  name: "ChangePassword",
+  name: 'ChangePassword',
   data() {
     return {
-      password: "",
-      status: "",
-      valid: true
+      password: '',
+      status: '',
+      valid: true,
     };
   },
   mounted() {
-    const password_change_form = KTUtil.getById("kt_password_change_form");
-    var curr_password = this.currentUser.password;
+    const password_change_form = KTUtil.getById('kt_password_change_form');
+    const curr_password = this.currentUser.password;
 
     this.fv = formValidation(password_change_form, {
       fields: {
         current_password: {
           validators: {
             notEmpty: {
-              message: "Current password is required"
+              message: 'Current password is required',
             },
             identical: {
-              compare: function() {
+              compare() {
                 return curr_password;
               },
-              message: "Wrong password"
-            }
-          }
+              message: 'Wrong password',
+            },
+          },
         },
         new_password: {
           validators: {
             notEmpty: {
-              message: "New password is required"
-            }
-          }
+              message: 'New password is required',
+            },
+          },
         },
         verify_password: {
           validators: {
             notEmpty: {
-              message: "Confirm password is required"
+              message: 'Confirm password is required',
             },
             identical: {
-              compare: function() {
+              compare() {
                 return password_change_form.querySelector(
-                  '[name="new_password"]'
+                  '[name="new_password"]',
                 ).value;
               },
-              message: "The password and its confirm are not the same"
-            }
-          }
-        }
+              message:
+                                'The password and its confirm are not the same',
+            },
+          },
+        },
       },
       plugins: {
         trigger: new Trigger(),
         bootstrap: new Bootstrap(),
-        submitButton: new SubmitButton()
-      }
+        submitButton: new SubmitButton(),
+      },
     });
   },
   methods: {
     save() {
       this.fv.validate();
 
-      this.fv.on("core.form.valid", () => {
-        var password = this.$refs.new_password.value;
-        const submitButton = this.$refs["kt_save_changes"];
+      this.fv.on('core.form.valid', () => {
+        const password = this.$refs.new_password.value;
+        const submitButton = this.$refs.kt_save_changes;
 
         // set spinner to submit button
-        submitButton.classList.add("spinner", "spinner-light", "spinner-right");
+        submitButton.classList.add(
+          'spinner',
+          'spinner-light',
+          'spinner-right',
+        );
 
         // dummy delay
         setTimeout(() => {
           // send update request
           this.$store
             .dispatch(UPDATE_PASSWORD, { password })
-            // go to which page after successfully update
-            .then(() => this.$router.push({ name: "dashboard" }));
+          // go to which page after successfully update
+            .then(() => this.$router.push({ name: 'dashboard' }));
 
           submitButton.classList.remove(
-            "spinner",
-            "spinner-light",
-            "spinner-right"
+            'spinner',
+            'spinner-light',
+            'spinner-right',
           );
         }, 2000);
       });
 
-      this.fv.on("core.form.invalid", () => {
+      this.fv.on('core.form.invalid', () => {
         Swal.fire({
-          title: "",
-          text: "Please, provide correct data!",
-          icon: "error",
-          confirmButtonClass: "btn btn-secondary"
+          title: '',
+          text: 'Please, provide correct data!',
+          icon: 'error',
+          confirmButtonClass: 'btn btn-secondary',
         });
       });
     },
     cancel() {
       this.fv.resetForm();
-      this.$refs.current_password.value = "";
-      this.$refs.new_password.value = "";
-      this.$refs.verify_password.value = "";
-    }
+      this.$refs.current_password.value = '';
+      this.$refs.new_password.value = '';
+      this.$refs.verify_password.value = '';
+    },
   },
   computed: {
-    ...mapGetters(["currentUser"])
-  }
+    ...mapGetters(['currentUser']),
+  },
 };
 </script>

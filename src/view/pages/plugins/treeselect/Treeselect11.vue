@@ -1,31 +1,35 @@
 <template>
-  <treeselect :options="options" :value="value" :normalizer="normalizer" />
+  <treeselect
+    :options="options"
+    :value="value"
+    :normalizer="normalizer"
+  />
 </template>
 
 <script>
 export default {
-  name: "treeselect-11",
+  name: 'Treeselect11',
   data: () => ({
     value: null,
     options: [
       {
-        key: "a",
-        name: "a",
+        key: 'a',
+        name: 'a',
         subOptions: [
           {
-            key: "aa",
-            name: "aa"
-          }
-        ]
-      }
+            key: 'aa',
+            name: 'aa',
+          },
+        ],
+      },
     ],
     normalizer(node) {
       return {
         id: node.key,
         label: node.name,
-        children: node.subOptions
+        children: node.subOptions,
       };
-    }
-  })
+    },
+  }),
 };
 </script>

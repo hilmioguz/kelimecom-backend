@@ -3,7 +3,7 @@
     <div
       class="error error-3 d-flex flex-row-fluid bgi-size-cover bgi-position-center"
       :style="{
-        backgroundImage: `url(${backgroundImage})`
+        backgroundImage: `url(${backgroundImage})`,
       }"
     >
       <!-- begin:: Content -->
@@ -21,7 +21,7 @@
         </p>
         <p class="font-size-h4 line-height-md">
           There may be a misspelling in the URL entered,
-          <br />or the page you are looking for may no longer exist.
+          <br>or the page you are looking for may no longer exist.
         </p>
       </div>
       <!-- end:: Content -->
@@ -30,17 +30,17 @@
 </template>
 
 <style lang="scss">
-@import "@/assets/sass/pages/error/error-3.scss";
+@import '@/assets/sass/pages/error/error-3.scss';
 </style>
 
 <script>
 export default {
-  name: "Error-3",
-  mounted() {},
+  name: 'Error3',
   computed: {
     backgroundImage() {
-      return process.env.BASE_URL + "media/error/bg3.jpg";
-    }
-  }
+      return `${process.env.BASE_URL}media/error/bg3.jpg`;
+    },
+  },
+  mounted() {},
 };
 </script>

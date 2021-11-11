@@ -1,12 +1,15 @@
 <template>
   <div
-    class="subheader py-2 py-lg-12 subheader-transparent"
-    v-bind:class="subheaderClasses"
     id="kt_subheader"
+    class="subheader py-2 py-lg-12 subheader-transparent"
+    :class="subheaderClasses"
   >
     <div
       class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap"
-      v-bind:class="{ 'container-fluid': widthFluid, container: !widthFluid }"
+      :class="{
+        'container-fluid': widthFluid,
+        container: !widthFluid,
+      }"
     >
       <div class="d-flex align-items-center flex-wrap mr-2">
         <!--begin::Heading-->
@@ -16,27 +19,30 @@
             {{ title }}
           </h2>
           <ul class="d-flex align-items-center font-weight-bold my-2">
-            <router-link :to="'/'" class="opacity-75 hover-opacity-100">
-              <i class="flaticon2-shelter text-white icon-1x"></i>
+            <router-link
+              :to="'/'"
+              class="opacity-75 hover-opacity-100"
+            >
+              <i class="flaticon2-shelter text-white icon-1x" />
             </router-link>
 
             <template v-for="(breadcrumb, i) in breadcrumbs">
               <span
-                class="label label-dot label-sm bg-white opacity-75 mx-3"
                 :key="i"
-              ></span>
+                class="label label-dot label-sm bg-white opacity-75 mx-3"
+              />
               <router-link
-                :key="`${i}-${breadcrumb.id}`"
                 v-if="breadcrumb.route"
+                :key="`${i}-${breadcrumb.id}`"
                 :to="breadcrumb.route"
                 class="text-white text-hover-white opacity-75 hover-opacity-100"
               >
                 {{ breadcrumb.title }}
               </router-link>
               <span
-                class="text-white text-hover-white opacity-75 hover-opacity-100"
-                :key="`${i}-${breadcrumb.id}`"
                 v-if="!breadcrumb.route"
+                :key="`${i}-${breadcrumb.id}`"
+                class="text-white text-hover-white opacity-75 hover-opacity-100"
               >
                 {{ breadcrumb.title }}
               </span>
@@ -149,63 +155,63 @@
 
 <style lang="scss">
 .custom-v-dropdown {
-  &.dropdown-toggle {
-    padding: 0;
-    &:hover {
-      text-decoration: none;
+    &.dropdown-toggle {
+        padding: 0;
+        &:hover {
+            text-decoration: none;
+        }
+
+        &.dropdown-toggle-no-caret {
+            &:after {
+                content: none;
+            }
+        }
     }
 
-    &.dropdown-toggle-no-caret {
-      &:after {
-        content: none;
-      }
+    &.dropdown-menu {
+        margin: 0;
+        .b-dropdown-text {
+            padding: 0;
+        }
     }
-  }
-
-  &.dropdown-menu {
-    margin: 0;
-    .b-dropdown-text {
-      padding: 0;
-    }
-  }
 }
 </style>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 
 export default {
-  name: "KTSubheader",
+  name: 'KTSubheader',
   props: {
     breadcrumbs: Array,
-    title: String
+    title: String,
   },
   computed: {
-    ...mapGetters(["layoutConfig"]),
+    ...mapGetters(['layoutConfig']),
 
     /**
-     * Check if subheader width is fluid
-     */
+         * Check if subheader width is fluid
+         */
     widthFluid() {
-      return this.layoutConfig("subheader.width") === "fluid";
+      return this.layoutConfig('subheader.width') === 'fluid';
     },
 
     subheaderClasses() {
       const classes = [];
-      const style = this.layoutConfig("subheader.style");
+      const style = this.layoutConfig('subheader.style');
       if (style) {
         classes.push(style);
 
-        if (style === "solid") {
-          classes.push("bg-white");
+        if (style === 'solid') {
+          classes.push('bg-white');
         }
 
-        if (this.layoutConfig("subheader.fixed")) {
-          classes.push("border-top");
+        if (this.layoutConfig('subheader.fixed')) {
+          classes.push('border-top');
         }
       }
-      return classes.join(" ");
-    }
-  }
+      return classes.join(' ');
+    },
+  },
 };
 </script>

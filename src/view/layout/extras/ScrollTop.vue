@@ -1,6 +1,10 @@
 <template>
   <!-- begin::Scrolltop -->
-  <div id="kt_scrolltop" ref="kt_scrolltop" class="scrolltop">
+  <div
+    id="kt_scrolltop"
+    ref="kt_scrolltop"
+    class="scrolltop"
+  >
     <span class="svg-icon">
       <inline-svg src="media/svg/icons/Navigation/Up-2.svg" />
     </span>
@@ -9,13 +13,13 @@
 </template>
 
 <script>
-import KTLayoutScrolltop from "@/assets/js/layout/extended/scrolltop.js";
+import KTLayoutScrolltop from '@/assets/js/layout/extended/scrolltop.js';
 
 export default {
-  name: "KTScrollTop",
+  name: 'KTScrollTop',
   mounted() {
     // Init Scrolltop
-    KTLayoutScrolltop.init(this.$refs["kt_scrolltop"]);
-  }
+    KTLayoutScrolltop.init(this.$refs.kt_scrolltop);
+  },
 };
 </script>

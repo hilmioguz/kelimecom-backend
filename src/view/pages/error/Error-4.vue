@@ -3,14 +3,16 @@
     <div
       class="error error-4 d-flex flex-row-fluid bgi-size-cover bgi-position-center"
       :style="{
-        backgroundImage: `url(${backgroundImage})`
+        backgroundImage: `url(${backgroundImage})`,
       }"
     >
       <!-- begin:: Content -->
       <div
         class="d-flex flex-column flex-row-fluid align-items-center align-items-md-start justify-content-md-center text-center text-md-left px-10 px-md-30 py-10 py-md-0 line-height-xs"
       >
-        <h1 class="error-title text-success font-weight-boldest line-height-sm">
+        <h1
+          class="error-title text-success font-weight-boldest line-height-sm"
+        >
           404
         </h1>
         <p
@@ -30,17 +32,17 @@
 </template>
 
 <style lang="scss">
-@import "@/assets/sass/pages/error/error-4.scss";
+@import '@/assets/sass/pages/error/error-4.scss';
 </style>
 
 <script>
 export default {
-  name: "Error-4",
-  mounted() {},
+  name: 'Error4',
   computed: {
     backgroundImage() {
-      return process.env.BASE_URL + "media/error/bg4.jpg";
-    }
-  }
+      return `${process.env.BASE_URL}media/error/bg4.jpg`;
+    },
+  },
+  mounted() {},
 };
 </script>

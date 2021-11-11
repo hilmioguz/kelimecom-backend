@@ -19,15 +19,23 @@
     <!--begin::Signin-->
     <div class="login-form login-signin">
       <div class="text-center mb-10 mb-lg-20">
-        <h3 class="font-size-h1">Sign In</h3>
+        <h3 class="font-size-h1">
+          Sign In
+        </h3>
         <p class="text-muted font-weight-semi-bold">
           Enter your username and password
         </p>
       </div>
 
       <!--begin::Form-->
-      <b-form class="form" @submit.stop.prevent="onSubmit">
-        <div role="alert" class="alert alert-info">
+      <b-form
+        class="form"
+        @submit.stop.prevent="onSubmit"
+      >
+        <div
+          role="alert"
+          class="alert alert-info"
+        >
           <div class="alert-text">
             Use account <strong>admin@demo.com</strong> and password
             <strong>demo</strong> to continue.
@@ -36,10 +44,14 @@
 
         <div
           role="alert"
-          v-bind:class="{ show: errors.length }"
+          :class="{ show: errors.length }"
           class="alert fade alert-danger"
         >
-          <div class="alert-text" v-for="(error, i) in errors" :key="i">
+          <div
+            v-for="(error, i) in errors"
+            :key="i"
+            class="alert-text"
+          >
             {{ error }}
           </div>
         </div>
@@ -50,13 +62,13 @@
           label-for="example-input-1"
         >
           <b-form-input
-            class="form-control form-control-solid h-auto py-5 px-6"
             id="example-input-1"
-            name="example-input-1"
             v-model="$v.form.email.$model"
+            class="form-control form-control-solid h-auto py-5 px-6"
+            name="example-input-1"
             :state="validateState('email')"
             aria-describedby="input-1-live-feedback"
-          ></b-form-input>
+          />
 
           <b-form-invalid-feedback id="input-1-live-feedback">
             Email is required and a valid email address.
@@ -69,14 +81,14 @@
           label-for="example-input-2"
         >
           <b-form-input
+            id="example-input-2"
+            v-model="$v.form.password.$model"
             class="form-control form-control-solid h-auto py-5 px-6"
             type="password"
-            id="example-input-2"
             name="example-input-2"
-            v-model="$v.form.password.$model"
             :state="validateState('password')"
             aria-describedby="input-2-live-feedback"
-          ></b-form-input>
+          />
 
           <b-form-invalid-feedback id="input-2-live-feedback">
             Password is required.
@@ -88,9 +100,9 @@
           class="form-group d-flex flex-wrap justify-content-between align-items-center"
         >
           <a
+            id="kt_login_forgot"
             href="#"
             class="text-dark-60 text-hover-primary my-3 mr-2"
-            id="kt_login_forgot"
           >
             Forgot Password ?
           </a>
@@ -111,40 +123,40 @@
 
 <style lang="scss" scoped>
 .spinner.spinner-right {
-  padding-right: 3.5rem !important;
+    padding-right: 3.5rem !important;
 }
 </style>
 
 <script>
-import { mapState } from "vuex";
-import { LOGIN, LOGOUT } from "@/core/services/store/auth.module";
+import { mapState } from 'vuex';
 
-import { validationMixin } from "vuelidate";
-import { email, minLength, required } from "vuelidate/lib/validators";
+import { validationMixin } from 'vuelidate';
+import { email, minLength, required } from 'vuelidate/lib/validators';
+import { LOGIN, LOGOUT } from '@/core/services/store/auth.module';
 
 export default {
+  name: 'Login',
   mixins: [validationMixin],
-  name: "login",
   data() {
     return {
       // Remove this dummy login info
       form: {
-        email: "admin@demo.com",
-        password: "demo"
-      }
+        email: 'admin@demo.com',
+        password: 'demo',
+      },
     };
   },
   validations: {
     form: {
       email: {
         required,
-        email
+        email,
       },
       password: {
         required,
-        minLength: minLength(3)
-      }
-    }
+        minLength: minLength(3),
+      },
+    },
   },
   methods: {
     validateState(name) {
@@ -154,7 +166,7 @@ export default {
     resetForm() {
       this.form = {
         email: null,
-        password: null
+        password: null,
       };
 
       this.$nextTick(() => {
@@ -174,29 +186,33 @@ export default {
       this.$store.dispatch(LOGOUT);
 
       // set spinner to submit button
-      const submitButton = this.$refs["kt_login_signin_submit"];
-      submitButton.classList.add("spinner", "spinner-light", "spinner-right");
+      const submitButton = this.$refs.kt_login_signin_submit;
+      submitButton.classList.add(
+        'spinner',
+        'spinner-light',
+        'spinner-right',
+      );
 
       // dummy delay
       setTimeout(() => {
         // send login request
         this.$store
           .dispatch(LOGIN, { email, password })
-          // go to which page after successfully login
-          .then(() => this.$router.push({ name: "dashboard" }));
+        // go to which page after successfully login
+          .then(() => this.$router.push({ name: 'dashboard' }));
 
         submitButton.classList.remove(
-          "spinner",
-          "spinner-light",
-          "spinner-right"
+          'spinner',
+          'spinner-light',
+          'spinner-right',
         );
       }, 2000);
-    }
+    },
   },
   computed: {
     ...mapState({
-      errors: state => state.auth.errors
-    })
-  }
+      errors: state => state.auth.errors,
+    }),
+  },
 };
 </script>

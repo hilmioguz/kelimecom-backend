@@ -2,11 +2,14 @@
   <perfect-scrollbar
     class="quick-search-wrapper scroll"
     style="max-height: 40vh; position: relative;"
-    v-bind:options="{ suppressScrollX: true }"
+    :options="{ suppressScrollX: true }"
   >
     <div class="quick-search-result">
       <!--begin::Message-->
-      <div v-if="!data" class="text-muted d-none">
+      <div
+        v-if="!data"
+        class="text-muted d-none"
+      >
         No record found
       </div>
       <!--end::Message-->
@@ -27,22 +30,41 @@
           :key="i"
           class="d-flex align-items-center flex-grow-1 mb-2"
         >
-          <div v-if="item.icon" class="symbol symbol-30 flex-shrink-0">
+          <div
+            v-if="item.icon"
+            class="symbol symbol-30 flex-shrink-0"
+          >
             <div class="symbol-label">
-              <i v-bind:class="item.icon"></i>
+              <i :class="item.icon" />
             </div>
           </div>
 
-          <div v-if="item.img" class="symbol symbol-30 flex-shrink-0">
-            <img class="symbol-label" :src="item.img" alt="" />
+          <div
+            v-if="item.img"
+            class="symbol symbol-30 flex-shrink-0"
+          >
+            <img
+              class="symbol-label"
+              :src="item.img"
+              alt=""
+            >
           </div>
 
-          <div v-if="item.svg" class="symbol symbol-30 flex-shrink-0">
-            <img :src="item.svg" alt="" />
+          <div
+            v-if="item.svg"
+            class="symbol symbol-30 flex-shrink-0"
+          >
+            <img
+              :src="item.svg"
+              alt=""
+            >
           </div>
 
           <div class="d-flex flex-column ml-3 mt-2 mb-2">
-            <a href="#" class="font-weight-bold text-dark text-hover-primary">
+            <a
+              href="#"
+              class="font-weight-bold text-dark text-hover-primary"
+            >
               {{ item.text }}
             </a>
             <div
@@ -60,9 +82,9 @@
 
 <script>
 export default {
-  name: "KTSearchResult",
+  name: 'KTSearchResult',
   props: {
-    data: Array
-  }
+    data: Array,
+  },
 };
 </script>

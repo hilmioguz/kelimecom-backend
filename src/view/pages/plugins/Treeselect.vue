@@ -12,8 +12,8 @@
         </span>
       </div>
       <div class="alert-text">
-        <b>vue-treeselect</b> provides multi-select component with nested
-        options support for Vue.js
+        <b>vue-treeselect</b> provides multi-select component with
+        nested options support for Vue.js
         <a
           class="font-weight-bold"
           href="https://vue-treeselect.js.org/#basic-features"
@@ -27,158 +27,158 @@
 
     <div class="row">
       <div class="col-md-12">
-        <KTCodePreview v-bind:title="'Basic Features'">
-          <template v-slot:preview>
-            <KTTreeSelect1></KTTreeSelect1>
+        <KTCodePreview :title="'Basic Features'">
+          <template #preview>
+            <KTTreeSelect1 />
           </template>
-          <template v-slot:html>
+          <template #html>
             {{ code1.html }}
           </template>
-          <template v-slot:js>
+          <template #js>
             {{ code1.js }}
           </template>
         </KTCodePreview>
 
-        <KTCodePreview v-bind:title="'More Features'">
-          <template v-slot:preview>
-            <KTTreeSelect2></KTTreeSelect2>
+        <KTCodePreview :title="'More Features'">
+          <template #preview>
+            <KTTreeSelect2 />
           </template>
-          <template v-slot:html>
+          <template #html>
             {{ code2.html }}
           </template>
-          <template v-slot:js>
+          <template #js>
             {{ code2.js }}
           </template>
         </KTCodePreview>
 
-        <KTCodePreview v-bind:title="'Delayed Loading'">
-          <template v-slot:preview>
-            <KTTreeSelect3></KTTreeSelect3>
+        <KTCodePreview :title="'Delayed Loading'">
+          <template #preview>
+            <KTTreeSelect3 />
           </template>
-          <template v-slot:html>
+          <template #html>
             {{ code3.html }}
           </template>
-          <template v-slot:js>
+          <template #js>
             {{ code3.js }}
           </template>
         </KTCodePreview>
 
-        <KTCodePreview v-bind:title="'Async Searching'">
-          <template v-slot:preview>
-            <KTTreeSelect4></KTTreeSelect4>
+        <KTCodePreview :title="'Async Searching'">
+          <template #preview>
+            <KTTreeSelect4 />
           </template>
-          <template v-slot:html>
+          <template #html>
             {{ code4.html }}
           </template>
-          <template v-slot:js>
+          <template #js>
             {{ code4.js }}
           </template>
         </KTCodePreview>
 
-        <KTCodePreview v-bind:title="'Flat Mode & Sort Values'">
-          <template v-slot:preview>
-            <KTTreeSelect5></KTTreeSelect5>
+        <KTCodePreview :title="'Flat Mode & Sort Values'">
+          <template #preview>
+            <KTTreeSelect5 />
           </template>
-          <template v-slot:html>
+          <template #html>
             {{ code5.html }}
           </template>
-          <template v-slot:js>
+          <template #js>
             {{ code5.js }}
           </template>
         </KTCodePreview>
 
-        <KTCodePreview v-bind:title="'Prevent Value Combining'">
-          <template v-slot:preview>
-            <KTTreeSelect6></KTTreeSelect6>
+        <KTCodePreview :title="'Prevent Value Combining'">
+          <template #preview>
+            <KTTreeSelect6 />
           </template>
-          <template v-slot:html>
+          <template #html>
             {{ code6.html }}
           </template>
-          <template v-slot:js>
+          <template #js>
             {{ code6.js }}
           </template>
         </KTCodePreview>
 
-        <KTCodePreview v-bind:title="'Disable Branch Nodes'">
-          <template v-slot:preview>
-            <KTTreeSelect7></KTTreeSelect7>
+        <KTCodePreview :title="'Disable Branch Nodes'">
+          <template #preview>
+            <KTTreeSelect7 />
           </template>
-          <template v-slot:html>
+          <template #html>
             {{ code7.html }}
           </template>
-          <template v-slot:js>
+          <template #js>
             {{ code7.js }}
           </template>
         </KTCodePreview>
 
-        <KTCodePreview v-bind:title="'Flatten Search Results'">
-          <template v-slot:preview>
-            <KTTreeSelect8></KTTreeSelect8>
+        <KTCodePreview :title="'Flatten Search Results'">
+          <template #preview>
+            <KTTreeSelect8 />
           </template>
-          <template v-slot:html>
+          <template #html>
             {{ code8.html }}
           </template>
-          <template v-slot:js>
+          <template #js>
             {{ code8.js }}
           </template>
         </KTCodePreview>
 
-        <KTCodePreview v-bind:title="'Disable Item Selection'">
-          <template v-slot:preview>
-            <KTTreeSelect9></KTTreeSelect9>
+        <KTCodePreview :title="'Disable Item Selection'">
+          <template #preview>
+            <KTTreeSelect9 />
           </template>
-          <template v-slot:html>
+          <template #html>
             {{ code9.html }}
           </template>
-          <template v-slot:js>
+          <template #js>
             {{ code9.js }}
           </template>
         </KTCodePreview>
 
-        <KTCodePreview v-bind:title="'Nested Search'">
-          <template v-slot:preview>
-            <KTTreeSelect10></KTTreeSelect10>
+        <KTCodePreview :title="'Nested Search'">
+          <template #preview>
+            <KTTreeSelect10 />
           </template>
-          <template v-slot:html>
+          <template #html>
             {{ code10.html }}
           </template>
-          <template v-slot:js>
+          <template #js>
             {{ code10.js }}
           </template>
         </KTCodePreview>
 
-        <KTCodePreview v-bind:title="'Customize Key Names'">
-          <template v-slot:preview>
-            <KTTreeSelect11></KTTreeSelect11>
+        <KTCodePreview :title="'Customize Key Names'">
+          <template #preview>
+            <KTTreeSelect11 />
           </template>
-          <template v-slot:html>
+          <template #html>
             {{ code11.html }}
           </template>
-          <template v-slot:js>
+          <template #js>
             {{ code11.js }}
           </template>
         </KTCodePreview>
 
-        <KTCodePreview v-bind:title="'Customize Option Label'">
-          <template v-slot:preview>
-            <KTTreeSelect12></KTTreeSelect12>
+        <KTCodePreview :title="'Customize Option Label'">
+          <template #preview>
+            <KTTreeSelect12 />
           </template>
-          <template v-slot:html>
+          <template #html>
             {{ code12.html }}
           </template>
-          <template v-slot:js>
+          <template #js>
             {{ code12.js }}
           </template>
         </KTCodePreview>
 
-        <KTCodePreview v-bind:title="'Customize Value Label'">
-          <template v-slot:preview>
-            <KTTreeSelect13></KTTreeSelect13>
+        <KTCodePreview :title="'Customize Value Label'">
+          <template #preview>
+            <KTTreeSelect13 />
           </template>
-          <template v-slot:html>
+          <template #html>
             {{ code13.html }}
           </template>
-          <template v-slot:js>
+          <template #js>
             {{ code13.js }}
           </template>
         </KTCodePreview>
@@ -188,23 +188,39 @@
 </template>
 
 <script>
-import KTCodePreview from "@/view/content/CodePreview.vue";
-import KTTreeSelect1 from "@/view/pages/plugins/treeselect/Treeselect1";
-import KTTreeSelect2 from "@/view/pages/plugins/treeselect/Treeselect2";
-import KTTreeSelect3 from "@/view/pages/plugins/treeselect/Treeselect3";
-import KTTreeSelect4 from "@/view/pages/plugins/treeselect/Treeselect4";
-import KTTreeSelect5 from "@/view/pages/plugins/treeselect/Treeselect5";
-import KTTreeSelect6 from "@/view/pages/plugins/treeselect/Treeselect6";
-import KTTreeSelect7 from "@/view/pages/plugins/treeselect/Treeselect7";
-import KTTreeSelect8 from "@/view/pages/plugins/treeselect/Treeselect8";
-import KTTreeSelect9 from "@/view/pages/plugins/treeselect/Treeselect9";
-import KTTreeSelect10 from "@/view/pages/plugins/treeselect/Treeselect10";
-import KTTreeSelect11 from "@/view/pages/plugins/treeselect/Treeselect11";
-import KTTreeSelect12 from "@/view/pages/plugins/treeselect/Treeselect12";
-import KTTreeSelect13 from "@/view/pages/plugins/treeselect/Treeselect13";
-import { SET_BREADCRUMB } from "@/core/services/store/breadcrumbs.module";
+import KTCodePreview from '@/view/content/CodePreview.vue';
+import KTTreeSelect1 from '@/view/pages/plugins/treeselect/Treeselect1';
+import KTTreeSelect2 from '@/view/pages/plugins/treeselect/Treeselect2';
+import KTTreeSelect3 from '@/view/pages/plugins/treeselect/Treeselect3';
+import KTTreeSelect4 from '@/view/pages/plugins/treeselect/Treeselect4';
+import KTTreeSelect5 from '@/view/pages/plugins/treeselect/Treeselect5';
+import KTTreeSelect6 from '@/view/pages/plugins/treeselect/Treeselect6';
+import KTTreeSelect7 from '@/view/pages/plugins/treeselect/Treeselect7';
+import KTTreeSelect8 from '@/view/pages/plugins/treeselect/Treeselect8';
+import KTTreeSelect9 from '@/view/pages/plugins/treeselect/Treeselect9';
+import KTTreeSelect10 from '@/view/pages/plugins/treeselect/Treeselect10';
+import KTTreeSelect11 from '@/view/pages/plugins/treeselect/Treeselect11';
+import KTTreeSelect12 from '@/view/pages/plugins/treeselect/Treeselect12';
+import KTTreeSelect13 from '@/view/pages/plugins/treeselect/Treeselect13';
+import { SET_BREADCRUMB } from '@/core/services/store/breadcrumbs.module';
 
 export default {
+  components: {
+    KTCodePreview,
+    KTTreeSelect1,
+    KTTreeSelect2,
+    KTTreeSelect3,
+    KTTreeSelect4,
+    KTTreeSelect5,
+    KTTreeSelect6,
+    KTTreeSelect7,
+    KTTreeSelect8,
+    KTTreeSelect9,
+    KTTreeSelect10,
+    KTTreeSelect11,
+    KTTreeSelect12,
+    KTTreeSelect13,
+  },
   data() {
     return {
       code1: {
@@ -269,7 +285,7 @@ export default {
                     } ],
                 })
             }
-          `
+          `,
       },
 
       code2: {
@@ -384,7 +400,7 @@ export default {
                   },
               },
             }
-          `
+          `,
       },
 
       code3: {
@@ -463,7 +479,7 @@ export default {
                     },
                 },
             }
-          `
+          `,
       },
 
       code4: {
@@ -496,7 +512,7 @@ export default {
                     },
                 },
             }
-          `
+          `,
       },
 
       code5: {
@@ -568,7 +584,7 @@ export default {
                     }
                 },
             }
-          `
+          `,
       },
 
       code6: {
@@ -627,7 +643,7 @@ export default {
                     } ],
                 }),
             }
-          `
+          `,
       },
 
       code7: {
@@ -681,7 +697,7 @@ export default {
                     } ],
                 }),
             }
-          `
+          `,
       },
 
       code8: {
@@ -735,7 +751,7 @@ export default {
                     } ],
                 }),
             }
-          `
+          `,
       },
 
       code9: {
@@ -779,7 +795,7 @@ export default {
                     value: [ 'disabled-checked' ],
                 }),
             }
-          `
+          `,
       },
 
       code10: {
@@ -862,7 +878,7 @@ export default {
                     } ],
                 }),
             }
-          `
+          `,
       },
 
       code11: {
@@ -894,7 +910,7 @@ export default {
                   },
               }),
           }
-          `
+          `,
       },
 
       code12: {
@@ -955,7 +971,7 @@ export default {
                     } ],
                 }),
             }
-          `
+          `,
       },
 
       code13: {
@@ -981,30 +997,14 @@ export default {
                     })),
                 }),
             }
-          `
-      }
+          `,
+      },
     };
-  },
-  components: {
-    KTCodePreview,
-    KTTreeSelect1,
-    KTTreeSelect2,
-    KTTreeSelect3,
-    KTTreeSelect4,
-    KTTreeSelect5,
-    KTTreeSelect6,
-    KTTreeSelect7,
-    KTTreeSelect8,
-    KTTreeSelect9,
-    KTTreeSelect10,
-    KTTreeSelect11,
-    KTTreeSelect12,
-    KTTreeSelect13
   },
   mounted() {
     this.$store.dispatch(SET_BREADCRUMB, [
-      { title: "Vue Bootstrap", route: "alert" },
-      { title: "Alert" }
+      { title: 'Vue Bootstrap', route: 'alert' },
+      { title: 'Alert' },
     ]);
   },
   methods: {
@@ -1019,7 +1019,7 @@ export default {
     },
     showAlert2() {
       this.code2.dismissCountDown = this.code2.dismissSecs;
-    }
-  }
+    },
+  },
 };
 </script>

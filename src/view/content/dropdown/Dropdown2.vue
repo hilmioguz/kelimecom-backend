@@ -7,64 +7,92 @@
     right
     no-flip
   >
-    <template v-slot:button-content>
-      <slot></slot>
+    <template #button-content>
+      <slot />
     </template>
     <!--begin::Navigation-->
     <div class="navi navi-hover min-w-md-250px">
-      <b-dropdown-text tag="div" class="navi-header font-weight-bold">
+      <b-dropdown-text
+        tag="div"
+        class="navi-header font-weight-bold"
+      >
         <span class="font-size-lg">
           Choose Label:
         </span>
         <i
-          class="flaticon2-information icon-md text-muted"
           v-b-tooltip="'Click to learn more...'"
-        ></i>
+          class="flaticon2-information icon-md text-muted"
+        />
       </b-dropdown-text>
       <b-dropdown-text
         tag="div"
         class="navi-separator mb-3 opacity-70"
-      ></b-dropdown-text>
-      <b-dropdown-text tag="div" class="navi-item">
+      />
+      <b-dropdown-text
+        tag="div"
+        class="navi-item"
+      >
         <a class="navi-link">
           <span class="navi-text">
-            <span class="label label-xl label-inline label-light-success">
+            <span
+              class="label label-xl label-inline label-light-success"
+            >
               Customer
             </span>
           </span>
         </a>
       </b-dropdown-text>
-      <b-dropdown-text tag="div" class="navi-item">
+      <b-dropdown-text
+        tag="div"
+        class="navi-item"
+      >
         <a class="navi-link">
           <span class="navi-text">
-            <span class="label label-xl label-inline label-light-danger">
+            <span
+              class="label label-xl label-inline label-light-danger"
+            >
               Partner
             </span>
           </span>
         </a>
       </b-dropdown-text>
-      <b-dropdown-text tag="div" class="navi-item">
+      <b-dropdown-text
+        tag="div"
+        class="navi-item"
+      >
         <a class="navi-link">
           <span class="navi-text">
-            <span class="label label-xl label-inline label-light-warning">
+            <span
+              class="label label-xl label-inline label-light-warning"
+            >
               Suplier
             </span>
           </span>
         </a>
       </b-dropdown-text>
-      <b-dropdown-text tag="div" class="navi-item">
+      <b-dropdown-text
+        tag="div"
+        class="navi-item"
+      >
         <a class="navi-link">
           <span class="navi-text">
-            <span class="label label-xl label-inline label-light-primary">
+            <span
+              class="label label-xl label-inline label-light-primary"
+            >
               Member
             </span>
           </span>
         </a>
       </b-dropdown-text>
-      <b-dropdown-text tag="div" class="navi-item">
+      <b-dropdown-text
+        tag="div"
+        class="navi-item"
+      >
         <a class="navi-link">
           <span class="navi-text">
-            <span class="label label-xl label-inline label-light-dark">
+            <span
+              class="label label-xl label-inline label-light-dark"
+            >
               Staff
             </span>
           </span>
@@ -73,11 +101,13 @@
       <b-dropdown-text
         tag="div"
         class="navi-separator mt-3 opacity-70"
-      ></b-dropdown-text>
-      <b-dropdown-text tag="div" class="navi-footer pt-5 pb-4">
+      />
+      <b-dropdown-text
+        tag="div"
+        class="navi-footer pt-5 pb-4"
+      >
         <a class="btn btn-clean font-weight-bold btn-sm">
-          <i class="ki ki-plus icon-sm"></i>Add new</a
-        >
+          <i class="ki ki-plus icon-sm" />Add new</a>
       </b-dropdown-text>
     </div>
     <!--end::Navigation-->
@@ -86,34 +116,34 @@
 
 <style lang="scss">
 .custom-v-dropdown {
-  &.dropdown-toggle {
-    padding: 0;
-    &:hover {
-      text-decoration: none;
+    &.dropdown-toggle {
+        padding: 0;
+        &:hover {
+            text-decoration: none;
+        }
+
+        &.dropdown-toggle-no-caret {
+            &:after {
+                content: none;
+            }
+        }
     }
 
-    &.dropdown-toggle-no-caret {
-      &:after {
-        content: none;
-      }
+    &.dropdown-menu {
+        margin: 0;
+        padding: 0;
+        outline: none;
+        .b-dropdown-text {
+            padding: 0;
+        }
     }
-  }
-
-  &.dropdown-menu {
-    margin: 0;
-    padding: 0;
-    outline: none;
-    .b-dropdown-text {
-      padding: 0;
-    }
-  }
 }
 </style>
 
 <script>
 export default {
-  name: "dropdown-2",
+  name: 'Dropdown2',
   components: {},
-  mounted() {}
+  mounted() {},
 };
 </script>

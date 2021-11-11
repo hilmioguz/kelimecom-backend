@@ -3,7 +3,7 @@
     <div
       class="error error-6 d-flex flex-row-fluid bgi-size-cover bgi-position-center"
       :style="{
-        backgroundImage: `url(${backgroundImage})`
+        backgroundImage: `url(${backgroundImage})`,
       }"
     >
       <!-- begin:: Content -->
@@ -16,8 +16,8 @@
         </h1>
         <p class="display-4 font-weight-bold text-white">
           Looks like something went wrong.
-          <br />We're working on it
-          <br />
+          <br>We're working on it
+          <br>
         </p>
       </div>
       <!-- end:: Content -->
@@ -26,17 +26,17 @@
 </template>
 
 <style lang="scss">
-@import "@/assets/sass/pages/error/error-6.scss";
+@import '@/assets/sass/pages/error/error-6.scss';
 </style>
 
 <script>
 export default {
-  name: "Error-6",
-  mounted() {},
+  name: 'Error6',
   computed: {
     backgroundImage() {
-      return process.env.BASE_URL + "media/error/bg6.jpg";
-    }
-  }
+      return `${process.env.BASE_URL}media/error/bg6.jpg`;
+    },
+  },
+  mounted() {},
 };
 </script>

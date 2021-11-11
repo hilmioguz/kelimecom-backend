@@ -3,8 +3,8 @@
   <div class="d-flex flex-row">
     <!--begin::Aside-->
     <div
-      class="flex-row-auto offcanvas-mobile w-300px w-xl-350px"
       id="kt_profile_aside"
+      class="flex-row-auto offcanvas-mobile w-300px w-xl-350px"
     >
       <!--begin::Card-->
       <div class="card card-custom gutter-b">
@@ -12,7 +12,7 @@
         <div class="card-body pt-4">
           <!--begin::Toolbar-->
           <div class="d-flex justify-content-end">
-            <Dropdown3></Dropdown3>
+            <Dropdown3 />
           </div>
           <!--end::Toolbar-->
 
@@ -24,10 +24,10 @@
               <div
                 class="symbol-label"
                 :style="{
-                  backgroundImage: `url(${currentUserPhoto})`
+                  backgroundImage: `url(${currentUserPhoto})`,
                 }"
-              ></div>
-              <i class="symbol-badge bg-success"></i>
+              />
+              <i class="symbol-badge bg-success" />
             </div>
             <div>
               <a
@@ -43,13 +43,11 @@
                 <a
                   href="#"
                   class="btn btn-sm btn-primary font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1"
-                  >Chat</a
-                >
+                >Chat</a>
                 <a
                   href="#"
                   class="btn btn-sm btn-success font-weight-bold py-2 px-3 px-xxl-5 my-1"
-                  >Follow</a
-                >
+                >Follow</a>
               </div>
             </div>
           </div>
@@ -57,17 +55,24 @@
 
           <!--begin::Contact-->
           <div class="pt-8 pb-6">
-            <div class="d-flex align-items-center justify-content-between mb-2">
+            <div
+              class="d-flex align-items-center justify-content-between mb-2"
+            >
               <span class="font-weight-bold mr-2">Email:</span>
-              <a href="#" class="text-muted text-hover-primary"
-                >matt@fifestudios.com</a
-              >
+              <a
+                href="#"
+                class="text-muted text-hover-primary"
+              >matt@fifestudios.com</a>
             </div>
-            <div class="d-flex align-items-center justify-content-between mb-2">
+            <div
+              class="d-flex align-items-center justify-content-between mb-2"
+            >
               <span class="font-weight-bold mr-2">Phone:</span>
               <span class="text-muted">44(76)34254578</span>
             </div>
-            <div class="d-flex align-items-center justify-content-between">
+            <div
+              class="d-flex align-items-center justify-content-between"
+            >
               <span class="font-weight-bold mr-2">Location:</span>
               <span class="text-muted">Melbourne</span>
             </div>
@@ -76,8 +81,8 @@
 
           <!--begin::Contact-->
           <div class="pb-6">
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical.
+            Contrary to popular belief, Lorem Ipsum is not simply
+            random text. It has roots in a piece of classical.
           </div>
           <!--end::Contact-->
 
@@ -91,7 +96,7 @@
         <!--end::Body-->
       </div>
       <!--end::Card-->
-      <Widget13></Widget13>
+      <Widget13 />
     </div>
     <!--end::Aside-->
 
@@ -100,14 +105,14 @@
       <!--begin::Row-->
       <div class="row">
         <div class="col-lg-6">
-          <Widget1></Widget1>
+          <Widget1 />
         </div>
         <div class="col-lg-6">
-          <Widget14></Widget14>
+          <Widget14 />
         </div>
       </div>
       <!--end::Row-->
-      <Widget2></Widget2>
+      <Widget2 />
     </div>
     <!--end::Content-->
   </div>
@@ -115,28 +120,28 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import { SET_BREADCRUMB } from "@/core/services/store/breadcrumbs.module";
-import Dropdown3 from "@/view/content/dropdown/Dropdown3";
-import Widget1 from "@/view/pages/profile/profile-comp-4/Widget1";
-import Widget2 from "@/view/pages/profile/profile-comp-4/Widget2";
-import Widget13 from "@/view/pages/profile/profile-comp-4/Widget13";
-import Widget14 from "@/view/pages/profile/profile-comp-4/Widget14";
+import { mapGetters } from 'vuex';
+import { SET_BREADCRUMB } from '@/core/services/store/breadcrumbs.module';
+import Dropdown3 from '@/view/content/dropdown/Dropdown3';
+import Widget1 from '@/view/pages/profile/profile-comp-4/Widget1';
+import Widget2 from '@/view/pages/profile/profile-comp-4/Widget2';
+import Widget13 from '@/view/pages/profile/profile-comp-4/Widget13';
+import Widget14 from '@/view/pages/profile/profile-comp-4/Widget14';
 
 export default {
-  name: "Profile-4.vue",
+  name: 'Profile-4.vue',
   components: {
     Dropdown3,
     Widget1,
     Widget2,
     Widget13,
-    Widget14
+    Widget14,
   },
   mounted() {
-    this.$store.dispatch(SET_BREADCRUMB, [{ title: "Profile 2" }]);
+    this.$store.dispatch(SET_BREADCRUMB, [{ title: 'Profile 2' }]);
   },
   computed: {
-    ...mapGetters(["currentUserPhoto"])
-  }
+    ...mapGetters(['currentUserPhoto']),
+  },
 };
 </script>

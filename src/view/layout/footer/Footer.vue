@@ -1,9 +1,15 @@
 <template>
-  <div id="kt_footer" class="footer bg-white py-4 d-flex flex-lg-column">
+  <div
+    id="kt_footer"
+    class="footer bg-white py-4 d-flex flex-lg-column"
+  >
     <!--begin::Container-->
     <div
       class="d-flex flex-column flex-md-row align-items-center justify-content-between"
-      v-bind:class="{ 'container-fluid': widthFluid, container: !widthFluid }"
+      :class="{
+        'container-fluid': widthFluid,
+        container: !widthFluid,
+      }"
     >
       <!--begin::Copyright-->
       <div class="text-dark order-2 order-md-1">
@@ -12,8 +18,7 @@
           href="http://kelime.com"
           target="_blank"
           class="text-dark-75 text-hover-primary"
-          >Kelime.com</a
-        >
+        >Kelime.com</a>
       </div>
       <!--end::Copyright-->
       <!--begin::Nav-->
@@ -22,14 +27,12 @@
           href="http://kelime.com/hakkimizda"
           target="_blank"
           class="nav-link pr-3 pl-0"
-          >Hakkımızda</a
-        >
+        >Hakkımızda</a>
         <a
           href="http://kelime.com/iletisim"
           target="_blank"
           class="nav-link pl-3 pr-0"
-          >İletişim</a
-        >
+        >İletişim</a>
       </div>
       <!--end::Nav-->
     </div>
@@ -38,19 +41,19 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 
 export default {
-  name: "KTFooter",
+  name: 'KTFooter',
   computed: {
-    ...mapGetters(["layoutConfig"]),
+    ...mapGetters(['layoutConfig']),
 
     /**
-     * Check if subheader width is fluid
-     */
+         * Check if subheader width is fluid
+         */
     widthFluid() {
-      return this.layoutConfig("footer.width") === "fluid";
-    }
-  }
+      return this.layoutConfig('footer.width') === 'fluid';
+    },
+  },
 };
 </script>

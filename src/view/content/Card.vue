@@ -1,94 +1,105 @@
 <template>
-  <div class="card card-custom gutter-b" v-bind:class="classes">
+  <div
+    class="card card-custom gutter-b"
+    :class="classes"
+  >
     <div
-      class="card-header"
-      v-bind:class="headClass"
       v-if="hasTitleSlot || title"
+      class="card-header"
+      :class="headClass"
     >
       <div class="card-title">
-        <slot name="title" v-if="hasTitleSlot"></slot>
-        <h3 class="card-label" v-if="!hasTitleSlot">
+        <slot
+          v-if="hasTitleSlot"
+          name="title"
+        />
+        <h3
+          v-if="!hasTitleSlot"
+          class="card-label"
+        >
           {{ title }}
         </h3>
       </div>
       <div class="card-toolbar">
-        <slot name="toolbar"></slot>
+        <slot name="toolbar" />
       </div>
     </div>
     <div
       class="card-body"
-      v-bind:class="{
+      :class="{
         bodyClass,
         'body-fit': bodyFit,
-        'body-fluid': bodyFluid
+        'body-fluid': bodyFluid,
       }"
     >
-      <slot name="body"></slot>
+      <slot name="body" />
     </div>
-    <div class="card-footer" v-if="hasFootSlot">
-      <slot name="foot"></slot>
+    <div
+      v-if="hasFootSlot"
+      class="card-footer"
+    >
+      <slot name="foot" />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "KTCard",
+  name: 'KTCard',
+  components: {},
   props: {
     /**
-     * String title
-     */
+         * String title
+         */
     title: String,
     /**
-     * Set card head size. Eg. md, lg, sm, etc.
-     */
+         * Set card head size. Eg. md, lg, sm, etc.
+         */
     headSize: String,
     /**
-     * Set card to fluid
-     */
+         * Set card to fluid
+         */
     fluidHeight: Boolean,
     /**
-     * Set card to fluid in half
-     */
+         * Set card to fluid in half
+         */
     fluidHalfHeight: Boolean,
     /**
-     * Set overlay head
-     */
+         * Set overlay head
+         */
     headOverlay: Boolean,
     /**
-     * Set extra class for main card
-     */
+         * Set extra class for main card
+         */
     cardClass: String,
     /**
-     * Set extra class for card head
-     */
+         * Set extra class for card head
+         */
     headClass: String,
     /**
-     * Set extra class for card body
-     */
+         * Set extra class for card body
+         */
     bodyClass: String,
     /**
-     * Set card body to fit
-     */
+         * Set card body to fit
+         */
     bodyFit: Boolean,
     /**
-     * Set card body to fluid
-     */
+         * Set card body to fluid
+         */
     bodyFluid: Boolean,
     /**
-     * Code examples
-     */
-    example: Boolean
+         * Code examples
+         */
+    example: Boolean,
   },
-  components: {},
-  methods: {},
   computed: {
     classes() {
       const cls = {
-        "example example-compact": this.example,
-        "height-fluid": this.fluidHeight,
-        "height-fluid-half": this.fluidHalfHeight,
-        "head-overlay": this.headOverlay
+        'example example-compact': this.example,
+        'height-fluid': this.fluidHeight,
+        'height-fluid-half': this.fluidHalfHeight,
+        'head-overlay': this.headOverlay,
       };
 
       cls[this.headSizeClass] = this.headSizeClass;
@@ -101,17 +112,18 @@ export default {
       return cls;
     },
     hasTitleSlot() {
-      return !!this.$slots["title"];
+      return !!this.$slots.title;
     },
     hasFootSlot() {
-      return !!this.$slots["foot"];
+      return !!this.$slots.foot;
     },
     headSizeClass() {
       if (this.headSize) {
         return `head-${this.headSize}`;
       }
       return false;
-    }
-  }
+    },
+  },
+  methods: {},
 };
 </script>

@@ -7,70 +7,93 @@
     right
     no-flip
   >
-    <template v-slot:button-content>
-      <i class="ki ki-bold-more-hor"></i>
+    <template #button-content>
+      <i class="ki ki-bold-more-hor" />
     </template>
     <!--begin::Navigation-->
     <div class="navi navi-hover min-w-md-250px">
-      <b-dropdown-text tag="div" class="navi-item">
+      <b-dropdown-text
+        tag="div"
+        class="navi-item"
+      >
         <a class="navi-link">
           <span class="navi-icon">
-            <i class="flaticon2-group"></i>
+            <i class="flaticon2-group" />
           </span>
           <span class="navi-text">New Group</span>
         </a>
       </b-dropdown-text>
-      <b-dropdown-text tag="div" class="navi-item">
+      <b-dropdown-text
+        tag="div"
+        class="navi-item"
+      >
         <a class="navi-link">
           <span class="navi-icon">
-            <i class="flaticon2-open-text-book"></i>
+            <i class="flaticon2-open-text-book" />
           </span>
           <span class="navi-text">Contacts</span>
         </a>
       </b-dropdown-text>
-      <b-dropdown-text tag="div" class="navi-item">
+      <b-dropdown-text
+        tag="div"
+        class="navi-item"
+      >
         <a class="navi-link">
           <span class="navi-icon">
-            <i class="flaticon2-rocket-1"></i>
+            <i class="flaticon2-rocket-1" />
           </span>
           <span class="navi-text">Groups</span>
           <span class="navi-link-badge">
             <span
               class="label label-light-primary label-inline font-weight-bold"
-              >new</span
-            >
+            >new</span>
           </span>
         </a>
       </b-dropdown-text>
-      <b-dropdown-text tag="div" class="navi-item">
+      <b-dropdown-text
+        tag="div"
+        class="navi-item"
+      >
         <a class="navi-link">
           <span class="navi-icon">
-            <i class="flaticon2-bell-2"></i>
+            <i class="flaticon2-bell-2" />
           </span>
           <span class="navi-text">Calls</span>
         </a>
       </b-dropdown-text>
-      <b-dropdown-text tag="div" class="navi-item">
+      <b-dropdown-text
+        tag="div"
+        class="navi-item"
+      >
         <a class="navi-link">
           <span class="navi-icon">
-            <i class="flaticon2-dashboard"></i>
+            <i class="flaticon2-dashboard" />
           </span>
           <span class="navi-text">Settings</span>
         </a>
       </b-dropdown-text>
-      <b-dropdown-text tag="div" class="navi-separator my-3"></b-dropdown-text>
-      <b-dropdown-text tag="div" class="navi-item">
+      <b-dropdown-text
+        tag="div"
+        class="navi-separator my-3"
+      />
+      <b-dropdown-text
+        tag="div"
+        class="navi-item"
+      >
         <a class="navi-link">
           <span class="navi-icon">
-            <i class="flaticon2-protected"></i>
+            <i class="flaticon2-protected" />
           </span>
           <span class="navi-text">Help</span>
         </a>
       </b-dropdown-text>
-      <b-dropdown-text tag="div" class="navi-item">
+      <b-dropdown-text
+        tag="div"
+        class="navi-item"
+      >
         <a class="navi-link">
           <span class="navi-icon">
-            <i class="flaticon2-bell-2"></i>
+            <i class="flaticon2-bell-2" />
           </span>
           <span class="navi-text">Privacy</span>
           <span class="navi-link-badge">
@@ -89,34 +112,34 @@
 
 <style lang="scss">
 .custom-v-dropdown {
-  &.dropdown-toggle {
-    padding: 0;
-    &:hover {
-      text-decoration: none;
+    &.dropdown-toggle {
+        padding: 0;
+        &:hover {
+            text-decoration: none;
+        }
+
+        &.dropdown-toggle-no-caret {
+            &:after {
+                content: none;
+            }
+        }
     }
 
-    &.dropdown-toggle-no-caret {
-      &:after {
-        content: none;
-      }
+    &.dropdown-menu {
+        margin: 0;
+        padding: 0;
+        outline: none;
+        .b-dropdown-text {
+            padding: 0;
+        }
     }
-  }
-
-  &.dropdown-menu {
-    margin: 0;
-    padding: 0;
-    outline: none;
-    .b-dropdown-text {
-      padding: 0;
-    }
-  }
 }
 </style>
 
 <script>
 export default {
-  name: "dropdown-3",
+  name: 'Dropdown3',
   components: {},
-  mounted() {}
+  mounted() {},
 };
 </script>

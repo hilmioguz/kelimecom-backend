@@ -6,6 +6,7 @@
         :multiple="multiple"
         :clearable="clearable"
         :searchable="searchable"
+        v-model="value"
         :disabled="disabled"
         :open-on-click="openOnClick"
         :open-on-focus="openOnFocus"
@@ -16,7 +17,6 @@
         :options="options"
         :limit="3"
         :max-height="200"
-        v-model="value"
       />
       <div class="mt-5">
         Selected: <strong>{{ value }}</strong>
@@ -24,45 +24,78 @@
     </div>
     <div class="mt-5">
       <div>
-        <b-form-checkbox class="custom-control-inline" v-model="multiple"
-          >Multi-select</b-form-checkbox
+        <b-form-checkbox
+          v-model="multiple"
+          class="custom-control-inline"
         >
-        <b-form-checkbox class="custom-control-inline" v-model="clearable"
-          >Clearable</b-form-checkbox
+          Multi-select
+        </b-form-checkbox>
+        <b-form-checkbox
+          v-model="clearable"
+          class="custom-control-inline"
         >
-        <b-form-checkbox class="custom-control-inline" v-model="searchable"
-          >Searchable</b-form-checkbox
+          Clearable
+        </b-form-checkbox>
+        <b-form-checkbox
+          v-model="searchable"
+          class="custom-control-inline"
         >
-        <b-form-checkbox class="custom-control-inline" v-model="disabled"
-          >Disabled</b-form-checkbox
+          Searchable
+        </b-form-checkbox>
+        <b-form-checkbox
+          v-model="disabled"
+          class="custom-control-inline"
         >
+          Disabled
+        </b-form-checkbox>
       </div>
       <div>
-        <b-form-checkbox class="custom-control-inline" v-model="openOnClick"
-          >Open on click</b-form-checkbox
+        <b-form-checkbox
+          v-model="openOnClick"
+          class="custom-control-inline"
         >
-        <b-form-checkbox class="custom-control-inline" v-model="openOnFocus"
-          >Open on focus</b-form-checkbox
+          Open on click
+        </b-form-checkbox>
+        <b-form-checkbox
+          v-model="openOnFocus"
+          class="custom-control-inline"
         >
+          Open on focus
+        </b-form-checkbox>
       </div>
       <div>
-        <b-form-checkbox class="custom-control-inline" v-model="clearOnSelect"
-          >Clear on select</b-form-checkbox
+        <b-form-checkbox
+          v-model="clearOnSelect"
+          class="custom-control-inline"
         >
-        <b-form-checkbox class="custom-control-inline" v-model="closeOnSelect"
-          >Close on select</b-form-checkbox
+          Clear on select
+        </b-form-checkbox>
+        <b-form-checkbox
+          v-model="closeOnSelect"
+          class="custom-control-inline"
         >
+          Close on select
+        </b-form-checkbox>
       </div>
       <div>
-        <b-form-checkbox class="custom-control-inline" v-model="alwaysOpen"
-          >Always open</b-form-checkbox
+        <b-form-checkbox
+          v-model="alwaysOpen"
+          class="custom-control-inline"
         >
-        <b-form-checkbox class="custom-control-inline" v-model="appendToBody"
-          >Append to body</b-form-checkbox
+          Always open
+        </b-form-checkbox>
+        <b-form-checkbox
+          v-model="appendToBody"
+          class="custom-control-inline"
         >
-        <b-form-checkbox class="custom-control-inline" v-model="rtl"
-          >RTL mode</b-form-checkbox
+          Append to body
+        </b-form-checkbox>
+        <b-form-checkbox
+          v-model="rtl"
+          class="custom-control-inline"
         >
+          RTL mode
+        </b-form-checkbox>
       </div>
     </div>
   </div>
@@ -70,7 +103,7 @@
 
 <script>
 export default {
-  name: "treeselect-2",
+  name: 'Treeselect2',
   data: () => ({
     multiple: true,
     clearable: true,
@@ -86,55 +119,55 @@ export default {
     value: [],
     options: [
       {
-        id: "fruits",
-        label: "Fruits",
+        id: 'fruits',
+        label: 'Fruits',
         children: [
           {
-            id: "apple",
-            label: "Apple 🍎",
-            isNew: true
+            id: 'apple',
+            label: 'Apple 🍎',
+            isNew: true,
           },
           {
-            id: "grapes",
-            label: "Grapes 🍇"
+            id: 'grapes',
+            label: 'Grapes 🍇',
           },
           {
-            id: "pear",
-            label: "Pear 🍐"
+            id: 'pear',
+            label: 'Pear 🍐',
           },
           {
-            id: "strawberry",
-            label: "Strawberry 🍓"
+            id: 'strawberry',
+            label: 'Strawberry 🍓',
           },
           {
-            id: "watermelon",
-            label: "Watermelon 🍉"
-          }
-        ]
+            id: 'watermelon',
+            label: 'Watermelon 🍉',
+          },
+        ],
       },
       {
-        id: "vegetables",
-        label: "Vegetables",
+        id: 'vegetables',
+        label: 'Vegetables',
         children: [
           {
-            id: "corn",
-            label: "Corn 🌽"
+            id: 'corn',
+            label: 'Corn 🌽',
           },
           {
-            id: "carrot",
-            label: "Carrot 🥕"
+            id: 'carrot',
+            label: 'Carrot 🥕',
           },
           {
-            id: "eggplant",
-            label: "Eggplant 🍆"
+            id: 'eggplant',
+            label: 'Eggplant 🍆',
           },
           {
-            id: "tomato",
-            label: "Tomato 🍅"
-          }
-        ]
-      }
-    ]
+            id: 'tomato',
+            label: 'Tomato 🍅',
+          },
+        ],
+      },
+    ],
   }),
 
   watch: {
@@ -144,7 +177,7 @@ export default {
       } else {
         this.value = this.value[0];
       }
-    }
-  }
+    },
+  },
 };
 </script>

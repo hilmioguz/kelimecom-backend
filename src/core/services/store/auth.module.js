@@ -1,26 +1,27 @@
-import ApiService from "@/core/services/api.service";
-import JwtService from "@/core/services/jwt.service";
-import isPast from "date-fns/isPast";
-import parseISO from "date-fns/parseISO";
+import isPast from 'date-fns/isPast';
+import parseISO from 'date-fns/parseISO';
+import ApiService from '@/core/services/api.service';
+import JwtService from '@/core/services/jwt.service';
 
 // action types
-export const VERIFY_AUTH = "verifyAuth";
-export const LOGIN = "login";
-export const LOGOUT = "logout";
-export const REGISTER = "register";
-export const UPDATE_PASSWORD = "updateUser";
+export const VERIFY_AUTH = 'verifyAuth';
+export const LOGIN = 'login';
+export const LOGOUT = 'logout';
+export const FORGOT = 'forgot';
+export const REGISTER = 'register';
+export const UPDATE_PASSWORD = 'updateUser';
 
 // mutation types
-export const PURGE_AUTH = "logOut";
-export const SET_AUTH = "setUser";
-export const SET_PASSWORD = "setPassword";
-export const SET_ERROR = "setError";
-export const SET_REFRESH_TOKEN = "setResfreshToken";
+export const PURGE_AUTH = 'logOut';
+export const SET_AUTH = 'setUser';
+export const SET_PASSWORD = 'setPassword';
+export const SET_ERROR = 'setError';
+export const SET_REFRESH_TOKEN = 'setResfreshToken';
 
 const state = {
   errors: null,
   user: {},
-  isAuthenticated: !!JwtService.getToken()
+  isAuthenticated: !!JwtService.getToken(),
 };
 
 const getters = {
@@ -29,20 +30,23 @@ const getters = {
   },
   isAuthenticated(state) {
     return state.isAuthenticated;
-  }
+  },
 };
 
 const actions = {
   [LOGIN](context, credentials) {
-    return new Promise(resolve => {
-      ApiService.post("auth/login", credentials)
+    return new Promise((resolve) => {
+      ApiService.post('auth/login', credentials)
         .then(({ data }) => {
-          console.log("Data:", data);
-          context.commit(SET_AUTH, data);
-          resolve(data);
+          if (data.user.role === 'admin' || data.user.role === 'moderater') {
+            context.commit(SET_AUTH, data);
+            resolve(data);
+          } else {
+            context.commit(SET_ERROR, 'Admin Bölümüne Girişte Yetkili Değilsiniz!');
+          }
         })
-        .catch(({ response }) => {
-          context.commit(SET_ERROR, response.data.errors);
+        .catch(({ message }) => {
+          context.commit(SET_ERROR, message);
         });
     });
   },
@@ -50,14 +54,25 @@ const actions = {
     context.commit(PURGE_AUTH);
   },
   [REGISTER](context, credentials) {
-    return new Promise(resolve => {
-      ApiService.post("auth/register", credentials)
+    return new Promise((resolve) => {
+      ApiService.post('auth/register', credentials)
         .then(({ data }) => {
           context.commit(SET_AUTH, data);
           resolve(data);
         })
-        .catch(({ response }) => {
-          context.commit(SET_ERROR, response.data.errors);
+        .catch(({ message }) => {
+          context.commit(SET_ERROR, message);
+        });
+    });
+  },
+  [FORGOT](context, credentials) {
+    return new Promise((resolve) => {
+      ApiService.post('auth/forgot-password', credentials)
+        .then(({ data }) => {
+          resolve(data);
+        })
+        .catch(({ message }) => {
+          context.commit(SET_ERROR, message);
         });
     });
   },
@@ -66,31 +81,31 @@ const actions = {
 
     if (token) {
       console.log(
-        "expired:",
+        'expired:',
         isPast(parseISO(token.access.expires)),
-        isPast(parseISO(token.refresh.expires))
+        isPast(parseISO(token.refresh.expires)),
       );
       if (
-        token.access &&
-        token.access.token &&
-        token.access.expires &&
-        isPast(parseISO(token.access.expires)) &&
-        !isPast(parseISO(token.refresh.expires))
+        token.access
+                && token.access.token
+                && token.access.expires
+                && isPast(parseISO(token.access.expires))
+                && !isPast(parseISO(token.refresh.expires))
       ) {
         ApiService.setHeader();
-        ApiService.post("/auth/refresh-tokens", {
-          refreshToken: token.refresh.token
+        ApiService.post('/auth/refresh-tokens', {
+          refreshToken: token.refresh.token,
         })
           .then(({ data }) => {
             context.commit(SET_REFRESH_TOKEN, data);
           })
-          .catch(({ response }) => {
-            context.commit(SET_ERROR, response.data.errors);
+          .catch(({ message }) => {
+            context.commit(SET_ERROR, message);
           });
       }
       if (
-        isPast(parseISO(token.access.expires)) &&
-        isPast(parseISO(token.refresh.expires))
+        isPast(parseISO(token.access.expires))
+                && isPast(parseISO(token.refresh.expires))
       ) {
         context.commit(PURGE_AUTH);
       }
@@ -101,11 +116,11 @@ const actions = {
   [UPDATE_PASSWORD](context, payload) {
     const password = payload;
 
-    return ApiService.put("password", password).then(({ data }) => {
+    return ApiService.put('password', password).then(({ data }) => {
       context.commit(SET_PASSWORD, data);
       return data;
     });
-  }
+  },
 };
 
 const mutations = {
@@ -114,7 +129,6 @@ const mutations = {
   },
   [SET_AUTH](state, payload) {
     state.isAuthenticated = true;
-    console.log("payload.user;", payload.user);
     state.user = payload.user;
     state.errors = {};
     JwtService.saveToken(payload.tokens);
@@ -132,12 +146,12 @@ const mutations = {
     state.user = {};
     state.errors = {};
     JwtService.destroyToken();
-  }
+  },
 };
 
 export default {
   state,
   actions,
   mutations,
-  getters
+  getters,
 };

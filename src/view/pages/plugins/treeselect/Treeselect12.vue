@@ -13,72 +13,75 @@
         shouldShowCount,
         count,
         labelClassName,
-        countClassName
+        countClassName,
       }"
       :class="labelClassName"
     >
-      {{ node.isBranch ? "Branch" : "Leaf" }}: {{ node.label }}
-      <span v-if="shouldShowCount" :class="countClassName">({{ count }})</span>
+      {{ node.isBranch ? 'Branch' : 'Leaf' }}: {{ node.label }}
+      <span
+        v-if="shouldShowCount"
+        :class="countClassName"
+      >({{ count }})</span>
     </label>
   </treeselect>
 </template>
 
 <script>
 export default {
-  name: "treeselect-12",
+  name: 'Treeselect12',
   data: () => ({
     value: null,
     options: [
       {
-        id: "fruits",
-        label: "Fruits",
+        id: 'fruits',
+        label: 'Fruits',
         children: [
           {
-            id: "apple",
-            label: "Apple 🍎",
-            isNew: true
+            id: 'apple',
+            label: 'Apple 🍎',
+            isNew: true,
           },
           {
-            id: "grapes",
-            label: "Grapes 🍇"
+            id: 'grapes',
+            label: 'Grapes 🍇',
           },
           {
-            id: "pear",
-            label: "Pear 🍐"
+            id: 'pear',
+            label: 'Pear 🍐',
           },
           {
-            id: "strawberry",
-            label: "Strawberry 🍓"
+            id: 'strawberry',
+            label: 'Strawberry 🍓',
           },
           {
-            id: "watermelon",
-            label: "Watermelon 🍉"
-          }
-        ]
+            id: 'watermelon',
+            label: 'Watermelon 🍉',
+          },
+        ],
       },
       {
-        id: "vegetables",
-        label: "Vegetables",
+        id: 'vegetables',
+        label: 'Vegetables',
         children: [
           {
-            id: "corn",
-            label: "Corn 🌽"
+            id: 'corn',
+            label: 'Corn 🌽',
           },
           {
-            id: "carrot",
-            label: "Carrot 🥕"
+            id: 'carrot',
+            label: 'Carrot 🥕',
           },
           {
-            id: "eggplant",
-            label: "Eggplant 🍆"
+            id: 'eggplant',
+            label: 'Eggplant 🍆',
           },
           {
-            id: "tomato",
-            label: "Tomato 🍅"
-          }
-        ]
-      }
-    ]
-  })
+            id: 'tomato',
+            label: 'Tomato 🍅',
+          },
+        ],
+      },
+    ],
+  }),
 };
 </script>

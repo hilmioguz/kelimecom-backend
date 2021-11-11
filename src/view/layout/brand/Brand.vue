@@ -1,16 +1,26 @@
 <template>
   <!-- begin:: Aside -->
-  <div class="brand flex-column-auto" id="kt_brand" ref="kt_brand">
+  <div
+    id="kt_brand"
+    ref="kt_brand"
+    class="brand flex-column-auto"
+  >
     <div class="brand-logo">
       <router-link to="/">
-        <img :src="siteLogo()" alt="Logo" />
+        <img
+          :src="siteLogo()"
+          alt="Logo"
+        >
       </router-link>
     </div>
-    <div class="brand-tools" v-if="allowMinimize">
+    <div
+      v-if="allowMinimize"
+      class="brand-tools"
+    >
       <button
-        class="brand-toggle btn btn-sm px-0"
         id="kt_aside_toggle"
         ref="kt_aside_toggle"
+        class="brand-toggle btn btn-sm px-0"
       >
         <span class="svg-icon svg-icon svg-icon-xl">
           <inline-svg
@@ -26,43 +36,43 @@
 
 <style lang="scss" scoped>
 .aside-toggle {
-  outline: none;
+    outline: none;
 }
 </style>
 
 <script>
-import { mapGetters } from "vuex";
-import objectPath from "object-path";
+import { mapGetters } from 'vuex';
+import objectPath from 'object-path';
 
 export default {
-  name: "KTBrand",
+  name: 'KTBrand',
   mounted() {},
   methods: {
     siteLogo() {
-      const menuAsideLeftSkin = this.layoutConfig("brand.self.theme");
+      const menuAsideLeftSkin = this.layoutConfig('brand.self.theme');
       // set brand logo
-      const logoObject = this.layoutConfig("self.logo");
+      const logoObject = this.layoutConfig('self.logo');
 
       let logo;
-      if (typeof logoObject === "string") {
+      if (typeof logoObject === 'string') {
         logo = logoObject;
       }
-      if (typeof logoObject === "object") {
-        logo = objectPath.get(logoObject, menuAsideLeftSkin + "");
+      if (typeof logoObject === 'object') {
+        logo = objectPath.get(logoObject, `${menuAsideLeftSkin}`);
       }
-      if (typeof logo === "undefined") {
-        const logos = this.layoutConfig("self.logo");
+      if (typeof logo === 'undefined') {
+        const logos = this.layoutConfig('self.logo');
         logo = logos[Object.keys(logos)[0]];
       }
       return process.env.BASE_URL + logo;
-    }
+    },
   },
   computed: {
-    ...mapGetters(["layoutConfig"]),
+    ...mapGetters(['layoutConfig']),
 
     allowMinimize() {
-      return !!this.layoutConfig("aside.self.minimize.toggle");
-    }
-  }
+      return !!this.layoutConfig('aside.self.minimize.toggle');
+    },
+  },
 };
 </script>

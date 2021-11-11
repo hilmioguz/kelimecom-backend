@@ -28,7 +28,7 @@
         :options="chartOptions"
         :series="series"
         type="area"
-      ></apexchart>
+      />
       <!--end::Chart-->
     </div>
     <!--end::Body-->
@@ -36,149 +36,149 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 
 export default {
-  name: "widget-7",
+  name: 'Widget7',
   data() {
     return {
       chartOptions: {},
       series: [
         {
-          name: "Net Profit",
-          data: [30, 45, 32, 70, 40]
-        }
-      ]
+          name: 'Net Profit',
+          data: [30, 45, 32, 70, 40],
+        },
+      ],
     };
   },
   computed: {
-    ...mapGetters(["layoutConfig"])
+    ...mapGetters(['layoutConfig']),
   },
   mounted() {
     // reference; kt_stats_widget_7_chart
     this.chartOptions = {
       chart: {
-        type: "area",
+        type: 'area',
         height: 150,
         toolbar: {
-          show: false
+          show: false,
         },
         zoom: {
-          enabled: false
+          enabled: false,
         },
         sparkline: {
-          enabled: true
-        }
+          enabled: true,
+        },
       },
       plotOptions: {},
       legend: {
-        show: false
+        show: false,
       },
       dataLabels: {
-        enabled: false
+        enabled: false,
       },
       fill: {
-        type: "solid",
-        opacity: 1
+        type: 'solid',
+        opacity: 1,
       },
       stroke: {
-        curve: "smooth",
+        curve: 'smooth',
         show: true,
         width: 3,
-        colors: [this.layoutConfig("colors.theme.base.success")]
+        colors: [this.layoutConfig('colors.theme.base.success')],
       },
       xaxis: {
-        categories: ["Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+        categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
         axisBorder: {
-          show: false
+          show: false,
         },
         axisTicks: {
-          show: false
+          show: false,
         },
         labels: {
           show: false,
           style: {
-            colors: this.layoutConfig("colors.gray.gray-500"),
-            fontSize: "12px",
-            fontFamily: this.layoutConfig("font-family")
-          }
+            colors: this.layoutConfig('colors.gray.gray-500'),
+            fontSize: '12px',
+            fontFamily: this.layoutConfig('font-family'),
+          },
         },
         crosshairs: {
           show: false,
-          position: "front",
+          position: 'front',
           stroke: {
-            color: this.layoutConfig("colors.gray.gray-300"),
+            color: this.layoutConfig('colors.gray.gray-300'),
             width: 1,
-            dashArray: 3
-          }
+            dashArray: 3,
+          },
         },
         tooltip: {
           enabled: true,
           formatter: undefined,
           offsetY: 0,
           style: {
-            fontSize: "12px",
-            fontFamily: this.layoutConfig("font-family")
-          }
-        }
+            fontSize: '12px',
+            fontFamily: this.layoutConfig('font-family'),
+          },
+        },
       },
       yaxis: {
         show: false,
         labels: {
           show: false,
           style: {
-            colors: this.layoutConfig("colors.gray.gray-500"),
-            fontSize: "12px",
-            fontFamily: this.layoutConfig("font-family")
-          }
-        }
+            colors: this.layoutConfig('colors.gray.gray-500'),
+            fontSize: '12px',
+            fontFamily: this.layoutConfig('font-family'),
+          },
+        },
       },
       states: {
         normal: {
           filter: {
-            type: "none",
-            value: 0
-          }
+            type: 'none',
+            value: 0,
+          },
         },
         hover: {
           filter: {
-            type: "none",
-            value: 0
-          }
+            type: 'none',
+            value: 0,
+          },
         },
         active: {
           allowMultipleDataPointsSelection: false,
           filter: {
-            type: "none",
-            value: 0
-          }
-        }
+            type: 'none',
+            value: 0,
+          },
+        },
       },
       tooltip: {
         style: {
-          fontSize: "12px",
-          fontFamily: this.layoutConfig("font-family")
+          fontSize: '12px',
+          fontFamily: this.layoutConfig('font-family'),
         },
         y: {
-          formatter: function(val) {
-            return "$" + val + " thousands";
-          }
-        }
+          formatter(val) {
+            return `$${val} thousands`;
+          },
+        },
       },
-      colors: [this.layoutConfig("colors.theme.light.success")],
+      colors: [this.layoutConfig('colors.theme.light.success')],
       markers: {
-        colors: [this.layoutConfig("colors.theme.light.success")],
-        strokeColor: [this.layoutConfig("colors.theme.base.success")],
-        strokeWidth: 3
+        colors: [this.layoutConfig('colors.theme.light.success')],
+        strokeColor: [this.layoutConfig('colors.theme.base.success')],
+        strokeWidth: 3,
       },
       grid: {
         show: false,
         padding: {
           left: 0,
-          right: 0
-        }
-      }
+          right: 0,
+        },
+      },
     };
-  }
+  },
 };
 </script>

@@ -1,0 +1,342 @@
+
+<script>
+import { mapGetters } from 'vuex';
+import Swal from 'sweetalert2';
+import { format, parseISO } from 'date-fns';
+import turkish from 'date-fns/locale/tr';
+import ApiService from '@/core/services/api.service';
+
+import {
+  dilListesi, turListesi, tipListesi, roleList, statusList, altturListesi, kokenListesi, cinsiyetListesi, bicimListesi, sinifListesi, transkripsiyonListesi, fonetikListesi, heceliyazimListesi, zitanlamListesi, esanlamListesi, telaffuzListesi,
+} from '@/core/config/defaults';
+
+export default {
+  data() {
+    return {
+      dilListesi,
+      turListesi,
+      tipListesi,
+      roleList,
+      altturListesi,
+      kokenListesi,
+      cinsiyetListesi,
+      bicimListesi,
+      sinifListesi,
+      transkripsiyonListesi,
+      fonetikListesi,
+      heceliyazimListesi,
+      zitanlamListesi,
+      esanlamListesi,
+      telaffuzListesi,
+      statusList,
+      maddeStats: [],
+      gundemStats: [],
+      kurumStats: [],
+      totalMaddeCount: [],
+      totalGundemCount: [],
+      editedIndex: -1,
+      userStats: [],
+      options: {
+        sortBy: ['createdAt'],
+        sortDesc: [true],
+      },
+      koptions: {
+        page: 1,
+        itemsPerPage: -1,
+      },
+      dictionaries: [],
+      packetsAll: [],
+      uploadOptions: {
+        url: 'http://localhost:5001/v1/fileupload',
+        acceptedFiles: 'image/*',
+        thumbnailWidth: 150,
+        addRemoveLinks: true,
+        maxFilesize: 0.9,
+      },
+    };
+  },
+  computed: {
+    ...mapGetters(['currentUser']),
+    dilsecimListesi() {
+      let liste = [];
+      if (this.dilListesi.length) {
+        liste = [...this.dilListesi];
+        liste.unshift({
+          text: 'Tümü',
+          value: '',
+        });
+      }
+      return liste;
+    },
+    totalUsersStat() {
+      return this.userStats.reduce((acc, user) => acc + user.count, 0);
+    },
+    rolesecimListesi() {
+      let liste = [];
+      if (this.roleList.length) {
+        liste = this.roleList;
+        liste.unshift({
+          text: 'Tümü',
+          value: '',
+        });
+      }
+      return liste;
+    },
+    dictList() {
+      if (this.dictionaries.length === 0) {
+        this.getDictsFromApi();
+      }
+      const a = this.dictionaries.map(
+        (dict => ({
+          text: dict.name,
+          value: dict.id,
+        })),
+      );
+      return a;
+    },
+    packetListAll() {
+      if (this.packetsAll.length === 0) {
+        this.getPacketsFromApi();
+      }
+      const a = this.packetsAll.map(
+        (packet => ({
+          text: packet.name,
+          value: packet.id,
+        })),
+      );
+      a.unshift({
+        text: 'Tümü',
+        value: '',
+      });
+      a.filter(a => !a.text.includes('ziyaret'));
+      return a;
+    },
+    formTitle() {
+      return this.editedIndex === -1 ? 'Yeni Kayıt' : 'Kayıt Düzenleme';
+    },
+    formSubTitle() {
+      return this.editedSubIndex === -1 ? 'Yeni Kayıt' : 'Kayıt Düzenleme';
+    },
+    backgroundImage() {
+      return `${process.env.BASE_URL}media/misc/bg-1.jpg`;
+    },
+  },
+  created() {
+    this.getUsersStatsFromApi();
+    this.getMaddeStatsFromApi();
+  },
+  methods: {
+    async uploadFn(payload) {
+      console.log('Payload file:', payload);
+      const formData = new FormData();
+      formData.append('file', payload);
+      const ret = await this.updloadFile(formData); // the payload has the file(File) param from pmd
+      return {
+        upload: true, // required
+        url: ret[0].url,
+      };
+    },
+    dateFormating(input) {
+      if (!input) return null;
+      return format(parseISO(input), 'dd MMMM yyyy, EEEE', { locale: turkish });
+    },
+    dateFormatShort(input) {
+      if (!input) return null;
+      return format(parseISO(input), 'dd-MM-yyyy HH:mm', { locale: turkish });
+    },
+    removeEmpty(obj) {
+      return Object.fromEntries(
+        Object.entries(obj)
+          // eslint-disable-next-line no-unused-vars
+          .filter(([_, v]) => (v != null && v !== ''))
+          .map(([k, v]) => [k, v === Object(v) ? this.removeEmpty(v) : v]),
+      );
+    },
+    // async urlToBlob(url, name = '') {
+    //   const timestamp = new Date().getTime();
+    //   const xblob = await fetch(`${url}`).then(r => r.blob());
+    //   return new File([xblob], name || `image-${timestamp}.jpg`);
+    // },
+    stringify(input) {
+      const params = new URLSearchParams();
+
+      for (const key in input) {
+        if (Array.isArray(input[key])) {
+          input[key].forEach((val) => {
+            params.append(`${key}[]`, val);
+          });
+        } else {
+          params.append(key, input[key]);
+        }
+      }
+      return `?${params.toString()}`;
+    },
+    getDictsFromApi() {
+      return new Promise((resolve, reject) => {
+        ApiService.setHeader();
+        ApiService.get('dictionary', this.stringify(this.koptions))
+          .then(({ data }) => {
+            if (data) {
+              this.dictionaries = data.data;
+            }
+            resolve(data);
+          })
+          .catch(({ message }) => {
+            console.log(message);
+            reject(message);
+          });
+      });
+    },
+    getPacketsFromApi() {
+      return new Promise((resolve, reject) => {
+        ApiService.setHeader();
+        ApiService.get('packet', this.stringify(this.koptions))
+          .then(({ data }) => {
+            if (data) {
+              this.packetsAll = data.data;
+            }
+            resolve(data);
+          })
+          .catch(({ message }) => {
+            console.log(message);
+            reject(message);
+          });
+      });
+    },
+    getUsersStatsFromApi() {
+      return new Promise((resolve, reject) => {
+        ApiService.setHeader();
+        ApiService.get('getstats/allstats')
+          .then(({ data }) => {
+            if (data) {
+              this.userStats = data.userstat;
+              this.gundemStats = data.gundemstat;
+              this.kurumStats = data.kurumstat.sort((a, b) => a.aktif - b.aktif);
+              this.totalMaddeCount = data.totalMaddestat;
+              this.totalGundemCount = data.totalGundemstat;
+            }
+            resolve(data);
+          })
+          .catch(({ message }) => {
+            console.log(message);
+            reject(message);
+          });
+      });
+    },
+    getMaddeStatsFromApi(dil = null) {
+      return new Promise((resolve, reject) => {
+        ApiService.setHeader();
+        const payload = dil ? `?lang=${dil}` : '';
+        ApiService.get('getstats', payload)
+          .then(({ data }) => {
+            if (data) {
+              this.maddeStats = data;
+            }
+            resolve(data);
+          })
+          .catch(({ message }) => {
+            console.log(message);
+            reject(message);
+          });
+      });
+    },
+    updloadFile(payload) {
+      return new Promise((resolve, reject) => {
+        ApiService.setHeader();
+        ApiService.post('fileupload', payload)
+          .then(({ data }) => {
+            resolve(data);
+          })
+          .catch(({ message }) => {
+            reject(message);
+          });
+      });
+    },
+
+    saveData(resource, payload) {
+      return new Promise((resolve, reject) => {
+        ApiService.setHeader();
+        ApiService.post(resource, payload)
+          .then(({ data }) => {
+            this.successMessage();
+            resolve(data);
+          })
+          .catch(({ message }) => {
+            this.errorMessage(message);
+            reject(message);
+          });
+      });
+    },
+
+    updateData(resource, id, payload) {
+      return new Promise((resolve, reject) => {
+        ApiService.setHeader();
+        ApiService.patch(resource, id, payload)
+          .then(({ data }) => {
+            this.successMessage();
+            resolve(data);
+          })
+          .catch(({ message }) => {
+            this.errorMessage(message);
+            reject(message);
+          });
+      });
+    },
+
+    deleteData(resource, id) {
+      return new Promise((resolve, reject) => {
+        ApiService.setHeader();
+        ApiService.delete(resource, id)
+          .then(({ data }) => {
+            this.successMessage();
+            resolve(data);
+          })
+          .catch(({ message }) => {
+            this.errorMessage(message);
+            reject(message);
+          });
+      });
+    },
+    deleteSubData(resource, maddeId, anlamId) {
+      return new Promise((resolve, reject) => {
+        ApiService.setHeader();
+        ApiService.deleteSub(resource, maddeId, anlamId)
+          .then(({ data }) => {
+            this.successMessage();
+            resolve(data);
+          })
+          .catch(({ message }) => {
+            this.errorMessage(message);
+            reject(message);
+          });
+      });
+    },
+    errorMessage(msg) {
+      Swal.fire({
+        title: 'Hoppalaa!',
+        text: msg,
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 4000,
+      });
+    },
+    successMessage() {
+      Swal.fire({
+        text: 'Ok! İşlem başarılı.',
+        icon: 'success',
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+      });
+    },
+    warningMessage(msg) {
+      Swal.fire({
+        title: 'Uyarı!',
+        text: msg,
+        icon: 'warning',
+      });
+    },
+  },
+};
+</script>

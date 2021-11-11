@@ -1,8 +1,8 @@
 <template>
   <!-- begin:: Footer -->
   <div
-    class="footer kt-grid__item bgi-position-center-center bgi-size-cover bgi-no-cover"
     id="kt_footer"
+    class="footer kt-grid__item bgi-position-center-center bgi-size-cover bgi-no-cover"
     style="background-image: url('media/bg/bg-2.jpg');"
   >
     <!--begin::Container-->
@@ -11,38 +11,61 @@
       <div class="row">
         <!--begin::Col-->
         <div class="col-lg-4 my-lg-0 my-5">
-          <h4 class="text-white pb-3">About</h4>
+          <h4 class="text-white pb-3">
+            About
+          </h4>
           <p class="m-0 text-white opacity-45">
             Lorem Ipsum is simply dummy text of the printing
-            <br />and typesetting and typesetting industry has been the
-            <br />industry's standard dummy text ever since the 1500s,
-            <br />when an unknown printer took a galley of type.
+            <br>and typesetting and typesetting industry has been
+            the <br>industry's standard dummy text ever since the
+            1500s, <br>when an unknown printer took a galley of
+            type.
           </p>
         </div>
         <!--end::Col-->
         <!--begin::Col-->
         <div class="col-lg-4 my-lg-0 my-5">
-          <h4 class="text-white pb-3">Quick Links</h4>
+          <h4 class="text-white pb-3">
+            Quick Links
+          </h4>
           <div class="d-flex align-items-center">
             <div class="d-flex flex-column mr-18">
-              <a href="#" class="text-white opacity-55 text-hover-primary">
+              <a
+                href="#"
+                class="text-white opacity-55 text-hover-primary"
+              >
                 General Reports
               </a>
-              <a href="#" class="py-2 text-white opacity-55 text-hover-primary">
+              <a
+                href="#"
+                class="py-2 text-white opacity-55 text-hover-primary"
+              >
                 Dashboart Widgets
               </a>
-              <a href="#" class="text-white opacity-50 text-hover-primary">
+              <a
+                href="#"
+                class="text-white opacity-50 text-hover-primary"
+              >
                 Custom Pages
               </a>
             </div>
             <div class="d-flex flex-column">
-              <a href="#" class="text-white opacity-55 text-hover-primary">
+              <a
+                href="#"
+                class="text-white opacity-55 text-hover-primary"
+              >
                 User Setting
               </a>
-              <a href="#" class="py-2 text-white opacity-55 text-hover-primary">
+              <a
+                href="#"
+                class="py-2 text-white opacity-55 text-hover-primary"
+              >
                 Custom Pages
               </a>
-              <a href="#" class="text-white opacity-55 text-hover-primary">
+              <a
+                href="#"
+                class="text-white opacity-55 text-hover-primary"
+              >
                 Intranet Settings
               </a>
             </div>
@@ -51,14 +74,19 @@
         <!--end::Col-->
         <!--begin::Col-->
         <div class="col-lg-4 my-lg-0 my-5">
-          <h4 class="text-white pb-3">Get In Touch</h4>
-          <form class="rounded" style="background-color: rgba(0,0,0,.2);">
+          <h4 class="text-white pb-3">
+            Get In Touch
+          </h4>
+          <form
+            class="rounded"
+            style="background-color: rgba(0,0,0,.2);"
+          >
             <div class="input-group p-2 align-items-center">
               <input
                 type="text"
                 class="form-control rounded-right border-0 bg-transparent text-white opacity-80"
                 placeholder="Enter Your Email"
-              />
+              >
               <div class="input-group-append p-0 mr-1">
                 <button
                   class="btn btn-fh btn-sm btn-primary px-6 rounded-left"
@@ -76,7 +104,7 @@
     </div>
     <!--end::Container-->
     <!--begin::Container-->
-    <div class="separator separator-solid opacity-7"></div>
+    <div class="separator separator-solid opacity-7" />
     <!--end::Container-->
     <!--begin::Container-->
     <div class="container py-8">
@@ -89,7 +117,7 @@
             alt="Logo"
             src="media/logos/logo-letter-1.png"
             class="logo-sticky max-h-35px"
-          />
+          >
           <span class="text-muted font-weight-bold mx-2">2020©</span>
           <a
             href="http://keenthemes.com/metronic"
@@ -101,7 +129,9 @@
         </div>
         <!--end::Copyright-->
         <!--begin::Nav-->
-        <div class="d-flex align-items-center order-lg-2 order-1 mb-lg-0 mb-5">
+        <div
+          class="d-flex align-items-center order-lg-2 order-1 mb-lg-0 mb-5"
+        >
           <a
             href="http://keenthemes.com/metronic"
             target="_blank"
@@ -133,19 +163,19 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 
 export default {
-  name: "KTFooter",
+  name: 'KTFooter',
   computed: {
-    ...mapGetters(["layoutConfig"]),
+    ...mapGetters(['layoutConfig']),
 
     /**
-     * Check if footer container is fluid
-     */
+         * Check if footer container is fluid
+         */
     widthFluid() {
-      return this.layoutConfig("footer.width") === "fluid";
-    }
-  }
+      return this.layoutConfig('footer.width') === 'fluid';
+    },
+  },
 };
 </script>

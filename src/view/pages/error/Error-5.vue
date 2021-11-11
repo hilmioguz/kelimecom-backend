@@ -3,7 +3,7 @@
     <div
       class="error error-5 d-flex flex-row-fluid bgi-size-cover bgi-position-center"
       :style="{
-        backgroundImage: `url(${backgroundImage})`
+        backgroundImage: `url(${backgroundImage})`,
       }"
     >
       <!-- begin:: Content -->
@@ -20,7 +20,7 @@
         </p>
         <p class="font-size-h3">
           Üzerinde çalışıyoruz ve en kısa zamanda düzelteceğiz.
-          <br />İşleminizi Geri alabilir veya Yardım Merkezimizi
+          <br>İşleminizi Geri alabilir veya Yardım Merkezimizi
           kullanabilirsiniz.
         </p>
       </div>
@@ -30,17 +30,17 @@
 </template>
 
 <style lang="scss">
-@import "@/assets/sass/pages/error/error-5.scss";
+@import '@/assets/sass/pages/error/error-5.scss';
 </style>
 
 <script>
 export default {
-  name: "Error-5",
-  mounted() {},
+  name: 'Error5',
   computed: {
     backgroundImage() {
-      return process.env.BASE_URL + "media/error/bg5.jpg";
-    }
-  }
+      return `${process.env.BASE_URL}media/error/bg5.jpg`;
+    },
+  },
+  mounted() {},
 };
 </script>

@@ -1,4 +1,4 @@
-export const APIEND_BASE_URL = `http://localhost:3000/v1`;
+export const APIEND_BASE_URL = 'http://localhost:5001/v1/admin';
 
 // Auth
 export const APIEND_REGISTER = `${APIEND_BASE_URL}/auth/register`;
@@ -13,14 +13,14 @@ export const APIEND_VERIFY_EMAIL = `${APIEND_BASE_URL}/auth/verify-email`;
 // Users
 export const APIEND_USERS = `${APIEND_BASE_URL}/users`;
 
-//Madde
+// Madde
 export const APIEND_MADDE = `${APIEND_BASE_URL}/madde`;
 
-//Dictionaries
+// Dictionaries
 export const APIEND_DICTIONARY = `${APIEND_BASE_URL}/dictionary`;
 
-//Packets
+// Packets
 export const APIEND_PACKETS = `${APIEND_BASE_URL}/packet`;
 
-//Packet Option
+// Packet Option
 export const APIEND_PACKET_OPTION = `${APIEND_BASE_URL}/packet-option`;

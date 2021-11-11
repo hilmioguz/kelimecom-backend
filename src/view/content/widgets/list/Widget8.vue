@@ -2,9 +2,11 @@
   <div class="card card-custom card-stretch gutter-b">
     <!--begin::Header-->
     <div class="card-header border-0">
-      <h3 class="card-title font-weight-bolder text-dark">Trends</h3>
+      <h3 class="card-title font-weight-bolder text-dark">
+        Trends
+      </h3>
       <div class="card-toolbar">
-        <Dropdown2><i class="ki ki-bold-more-hor"></i></Dropdown2>
+        <Dropdown2><i class="ki ki-bold-more-hor" /></Dropdown2>
       </div>
     </div>
     <!--end::Header-->
@@ -12,7 +14,10 @@
     <div class="card-body pt-0">
       <template v-for="(item, i) in list">
         <!--begin::Item-->
-        <div class="mb-10" v-bind:key="i">
+        <div
+          :key="i"
+          class="mb-10"
+        >
           <!--begin::Section-->
           <div class="d-flex align-items-center">
             <!--begin::Symbol-->
@@ -21,7 +26,7 @@
                 <inline-svg
                   :src="item.svg"
                   class="h-50 align-self-center"
-                ></inline-svg>
+                />
               </span>
             </div>
             <!--end::Symbol-->
@@ -54,43 +59,43 @@
 </template>
 
 <script>
-import Dropdown2 from "@/view/content/dropdown/Dropdown2.vue";
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
+import Dropdown2 from '@/view/content/dropdown/Dropdown2.vue';
 
 export default {
-  name: "widget-8",
+  name: 'Widget8',
+  components: {
+    Dropdown2,
+  },
   data() {
     return {
       list: [
         {
-          title: "Top Authors",
+          title: 'Top Authors',
           desc:
-            "A brief write up about the top Authors that fits within this section",
-          alt: "5 day ago",
-          svg: "media/svg/misc/006-plurk.svg"
+                        'A brief write up about the top Authors that fits within this section',
+          alt: '5 day ago',
+          svg: 'media/svg/misc/006-plurk.svg',
         },
         {
-          title: "Popular Authors",
+          title: 'Popular Authors',
           desc:
-            "A brief write up about the Popular Authors that fits within this section",
-          alt: "5 day ago",
-          svg: "media/svg/misc/015-telegram.svg"
+                        'A brief write up about the Popular Authors that fits within this section',
+          alt: '5 day ago',
+          svg: 'media/svg/misc/015-telegram.svg',
         },
         {
-          title: "New Users",
+          title: 'New Users',
           desc:
-            "A brief write up about the New Users that fits within this section",
-          alt: "5 day ago",
-          svg: "media/svg/misc/014-kickstarter.svg"
-        }
-      ]
+                        'A brief write up about the New Users that fits within this section',
+          alt: '5 day ago',
+          svg: 'media/svg/misc/014-kickstarter.svg',
+        },
+      ],
     };
   },
-  components: {
-    Dropdown2
-  },
   computed: {
-    ...mapGetters(["layoutConfig"])
-  }
+    ...mapGetters(['layoutConfig']),
+  },
 };
 </script>

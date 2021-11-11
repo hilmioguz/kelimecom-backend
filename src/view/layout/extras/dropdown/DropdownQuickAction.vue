@@ -8,7 +8,9 @@
       <h4 class="text-white font-weight-bold">
         Quick Actions
       </h4>
-      <span class="btn btn-success btn-sm font-weight-bold font-size-sm mt-2">
+      <span
+        class="btn btn-success btn-sm font-weight-bold font-size-sm mt-2"
+      >
         23 tasks pending
       </span>
     </div>
@@ -18,7 +20,10 @@
     <div class="row row-paddingless">
       <!--begin:Item-->
       <template v-for="(item, i) in list">
-        <div class="col-6" v-bind:key="i">
+        <div
+          :key="i"
+          class="col-6"
+        >
           <router-link
             to="builder"
             class="d-block py-10 px-5 text-center bg-hover-light border-right border-bottom"
@@ -47,39 +52,45 @@
 
 <script>
 export default {
-  name: "KTDropdownQuickAction",
+  name: 'KTDropdownQuickAction',
   data() {
     return {
       list: [
         {
-          title: "Accounting",
-          desc: "eCommerce",
-          svg: process.env.BASE_URL + "media/svg/icons/Shopping/Euro.svg"
-        },
-        {
-          title: "Administration",
-          desc: "Console",
+          title: 'Accounting',
+          desc: 'eCommerce',
           svg:
-            process.env.BASE_URL +
-            "media/svg/icons/Communication/Mail-attachment.svg"
+                        `${process.env.BASE_URL
+                        }media/svg/icons/Shopping/Euro.svg`,
         },
         {
-          title: "Projects",
-          desc: "Pending Tasks",
-          svg: process.env.BASE_URL + "media/svg/icons/Shopping/Box2.svg"
+          title: 'Administration',
+          desc: 'Console',
+          svg:
+                        `${process.env.BASE_URL
+                        }media/svg/icons/Communication/Mail-attachment.svg`,
         },
         {
-          title: "Customers",
-          desc: "Latest Cases",
-          svg: process.env.BASE_URL + "media/svg/icons/Communication/Group.svg"
-        }
-      ]
+          title: 'Projects',
+          desc: 'Pending Tasks',
+          svg:
+                        `${process.env.BASE_URL
+                        }media/svg/icons/Shopping/Box2.svg`,
+        },
+        {
+          title: 'Customers',
+          desc: 'Latest Cases',
+          svg:
+                        `${process.env.BASE_URL
+                        }media/svg/icons/Communication/Group.svg`,
+        },
+      ],
     };
   },
   computed: {
     backgroundImage() {
-      return process.env.BASE_URL + "media/misc/bg-1.jpg";
-    }
-  }
+      return `${process.env.BASE_URL}media/misc/bg-1.jpg`;
+    },
+  },
 };
 </script>
