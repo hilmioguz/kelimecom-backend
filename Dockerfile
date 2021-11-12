@@ -3,9 +3,7 @@ FROM node:lts-alpine as build-stage
 WORKDIR /usr/src/kelime-backend
 COPY package*.json ./
 # install git
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y git
+RUN apk update and apk add git
 RUN yarn install
 COPY . .
 RUN yarn build
