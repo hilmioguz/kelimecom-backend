@@ -57,6 +57,7 @@
           :expanded.sync="expanded"
           :page="page"
           show-expand
+          @click:row="(item, slot) => slot.expand(!slot.isExpanded)"
           class="elevation-0"
         >
           <!-- eslint-disable vue/valid-v-slot -->
@@ -491,7 +492,7 @@ export default {
 
     deleteItemConfirm() {
       this.blogs.splice(this.editedIndex, 1);
-      this.deleteData('blog', this.editedItem.id);
+      this.deleteData('blog', this.editedItem.slug);
       this.closeDelete();
     },
 
@@ -526,7 +527,7 @@ export default {
           this.blogs[this.editedIndex],
           this.editedItem,
         );
-        this.updateData('blog', this.editedItem.id, payload).then(() => this.getDataFromApi());
+        this.updateData('blog', this.editedItem.slug, payload).then(() => this.getDataFromApi());
       } else {
         this.blogs.push(this.editedItem);
         this.saveData('blog', payload).then(() => this.getDataFromApi());

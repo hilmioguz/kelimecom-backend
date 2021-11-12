@@ -57,6 +57,7 @@
           :expanded.sync="expanded"
           :page="page"
           show-expand
+          @click:row="(item, slot) => slot.expand(!slot.isExpanded)"
           class="elevation-0"
         >
           <!-- eslint-disable vue/valid-v-slot -->
