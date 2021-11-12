@@ -8,6 +8,8 @@ import store from '@/core/services/store';
 import ApiService from '@/core/services/api.service';
 // import MockService from "@/core/mock/mock.service";
 import { VERIFY_AUTH } from '@/core/services/store/auth.module';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 
 // Global 3rd party plugins
 import 'popper.js';
