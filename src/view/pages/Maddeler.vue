@@ -31,10 +31,7 @@
               class="min-w-md-175px"
             >
               <DropdownExport
-                @veri="
-                  {
-                  }
-                "
+                :json-data="flattenMaddeData(maddeler)"
               />
             </b-dropdown-text>
           </b-dropdown>
@@ -595,18 +592,30 @@
                           >
                             &check;
                           </div>
-                          <v-icon
-                            small
-                            @click="editSubItem(data)"
-                          >
-                            mdi-pencil
-                          </v-icon>
-                          <v-icon
-                            small
-                            @click="deleteSubItem(data)"
-                          >
-                            mdi-delete
-                          </v-icon>
+                          <v-tooltip right>
+                            <template #activator="{ on }">
+                              <v-icon
+                                color="primary"
+                                v-on="on"
+                                @click="editSubItem(data)"
+                              >
+                                mdi-pencil
+                              </v-icon>
+                            </template>
+                            <span>Güncelleme</span>
+                          </v-tooltip>
+                          <v-tooltip right>
+                            <template #activator="{ on }">
+                              <v-icon
+                                v-on="on"
+                                color="primary"
+                                @click="deleteSubItem(data)"
+                              >
+                                mdi-delete
+                              </v-icon>
+                            </template>
+                            <span>Silme</span>
+                          </v-tooltip>
                         </div>
                       </template>
                       <template v-else>
@@ -651,6 +660,9 @@
           </template>
           <template #item.madde="{ item }">
             <span v-html="`<strong>${item.madde}</strong>`" />
+          </template>
+          <template #item.whichDict="{ item }">
+            <span v-html="`<strong>${totalDictCount(item.whichDict)}</strong>`" />
           </template>
           <template #item.actions="{ item }">
             <v-icon
@@ -735,6 +747,12 @@ export default {
           align: 'center',
           sortable: false,
           value: 'whichDict.length',
+        },
+        {
+          text: 'TOPLAM FARKLI SÖZLÜK',
+          align: 'center',
+          sortable: false,
+          value: 'whichDict',
         },
         { text: 'İŞLEMLER', value: 'actions', sortable: false },
       ],
@@ -909,7 +927,9 @@ export default {
       this.editedIndex = this.maddeler.indexOf(item);
       this.editedItem = Object.assign({}, item);
     },
-
+    totalDictCount(value) {
+      return [...new Set(value.map(o => o.dictId.id))].length;
+    },
     async uploadFn(payload) {
       console.log('PAyload file:', payload);
       const formData = new FormData();

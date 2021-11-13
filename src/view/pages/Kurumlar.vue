@@ -31,10 +31,7 @@
               class="min-w-md-175px"
             >
               <DropdownExport
-                @veri="
-                  {
-                  }
-                "
+                :json-data="kurumlar"
               />
             </b-dropdown-text>
           </b-dropdown>

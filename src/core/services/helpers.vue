@@ -267,7 +267,33 @@ export default {
           });
       });
     },
-
+    flattenMaddeData(hamarray) {
+      const newa = [];
+      hamarray.forEach((h) => {
+        h.whichDict.forEach((w) => {
+          const a = {};
+          a.madde = h.madde;
+          a.anlam = w.anlam;
+          a.sozluk = w.dictId.name;
+          a.tip = w.tip;
+          a.tur = w.tur;
+          a.alttur = w.alttur;
+          a.koken = w.koken;
+          a.cinsiyet = w.cinsiyet;
+          a.bicim = w.bicim;
+          a.sinif = w.sinif;
+          a.transkripsiyon = w.transkripsiyon;
+          a.fonetik = w.fonetik;
+          a.heceliyazim = w.heceliyazim;
+          a.zitanlam = w.zitanlam;
+          a.esanlam = w.esanlam;
+          a.telaffuz = w.telaffuz;
+          if (w.userSubmitted) a.userSubmitted = w.userSubmitted.name;
+          newa.push(a);
+        });
+      });
+      return newa;
+    },
     updateData(resource, id, payload) {
       return new Promise((resolve, reject) => {
         ApiService.setHeader();

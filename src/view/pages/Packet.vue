@@ -31,10 +31,7 @@
               class="min-w-md-175px"
             >
               <DropdownExport
-                @veri="
-                  {
-                  }
-                "
+                :json-data="packets"
               />
             </b-dropdown-text>
           </b-dropdown>

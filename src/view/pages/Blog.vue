@@ -31,10 +31,7 @@
               class="min-w-md-175px"
             >
               <DropdownExport
-                @veri="
-                  {
-                  }
-                "
+                :json-data="blogs"
               />
             </b-dropdown-text>
           </b-dropdown>

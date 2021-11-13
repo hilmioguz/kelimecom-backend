@@ -31,10 +31,7 @@
               class="min-w-md-175px"
             >
               <DropdownExport
-                @veri="
-                  {
-                  }
-                "
+                :json-data="flattenMaddeData(gundemler)"
               />
             </b-dropdown-text>
           </b-dropdown>
@@ -616,18 +613,43 @@
                           >
                             &check;
                           </div>
-                          <v-icon
-                            small
-                            @click="editSubItem(data)"
-                          >
-                            mdi-pencil
-                          </v-icon>
-                          <v-icon
-                            small
-                            @click="deleteSubItem(data)"
-                          >
-                            mdi-delete
-                          </v-icon>
+                          <v-tooltip right>
+                            <template #activator="{ on }">
+                              <v-icon
+                                color="primary"
+                                v-on="on"
+                                @click="editSubItem(data)"
+                              >
+                                mdi-pencil
+                              </v-icon>
+                            </template>
+                            <span>Güncelleme</span>
+                          </v-tooltip>
+                          <v-tooltip right>
+                            <template #activator="{ on }">
+                              <v-icon
+                                color="primary"
+                                v-on="on"
+                                :disabled="data && data.item ? data.item.isCheckedOutToMadde:false"
+                                @click="mergeSubItem(data)"
+                              >
+                                mdi-merge
+                              </v-icon>
+                            </template>
+                            <span>Birleştirme</span>
+                          </v-tooltip>
+                          <v-tooltip right>
+                            <template #activator="{ on }">
+                              <v-icon
+                                v-on="on"
+                                color="primary"
+                                @click="deleteSubItem(data)"
+                              >
+                                mdi-delete
+                              </v-icon>
+                            </template>
+                            <span>Silme</span>
+                          </v-tooltip>
                         </div>
                       </template>
                       <template v-else>
@@ -811,6 +833,7 @@ export default {
         },
         { text: 'İŞLEMLER', value: 'actions', sortable: false },
       ],
+      exportColumn: ['madde', 'whichtDict.anlam', 'whichtDict.dictId.name', 'whichtDict.karsiMaddeId.madde', 'whichtDict.digerMaddeId.madde', 'whichtDict.tur', 'whichtDict.alttur'],
       editedIndex: -1,
       editedItem: {
         id: '', madde: '',
@@ -840,6 +863,7 @@ export default {
         telaffuz: [],
         userSubmitted: '',
         userConfirmed: '',
+        isCheckedOutToMadde: false,
         isActive: false,
       },
       defaultSubItem: {
@@ -1107,7 +1131,15 @@ export default {
 
       this.subDialog = true;
     },
-
+    mergeSubItem(item) {
+      console.log('item:', item);
+      const payload = {};
+      payload.id = item.item.id;
+      this.saveData(`gundem/submadde-merge/${this.editedItem.id}`, payload);
+      setTimeout(() => {
+        this.getDataFromApi();
+      }, 500);
+    },
     deleteSubItem(item) {
       this.editedSubIndex = this.gundemler[this.editedIndex].whichDict.indexOf(item.item);
       this.editedSubItem = Object.assign({}, item.item);
@@ -1164,6 +1196,7 @@ export default {
         delete this.editedItem.id;
         payload = this.editedItem;
         delete this.editedSubItem.id;
+        delete this.editedSubItem.isCheckedOutToMadde;
         if (!this.editedSubItem.digerMaddeId) {
           delete this.editedSubItem.digerMaddeId;
         }
