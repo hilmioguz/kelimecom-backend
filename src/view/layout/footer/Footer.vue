@@ -15,7 +15,7 @@
       <div class="text-dark order-2 order-md-1">
         <span class="text-muted font-weight-bold mr-2">2021©</span>
         <a
-          href="http://kelime.com"
+          href="https://kelime.com"
           target="_blank"
           class="text-dark-75 text-hover-primary"
         >Kelime.com</a>
@@ -24,12 +24,12 @@
       <!--begin::Nav-->
       <div class="nav nav-dark order-1 order-md-2">
         <a
-          href="http://kelime.com/hakkimizda"
+          href="https://kelime.com/hakkimizda"
           target="_blank"
           class="nav-link pr-3 pl-0"
         >Hakkımızda</a>
         <a
-          href="http://kelime.com/iletisim"
+          href="https://kelime.com/iletisim"
           target="_blank"
           class="nav-link pl-3 pr-0"
         >İletişim</a>
