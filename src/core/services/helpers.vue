@@ -47,7 +47,7 @@ export default {
       dictionaries: [],
       packetsAll: [],
       uploadOptions: {
-        url: 'http://testadmin.kelime.com:5001/v1/fileupload',
+        url: 'https://testapiend.kelime.com/v1/fileupload',
         acceptedFiles: 'image/*',
         thumbnailWidth: 150,
         addRemoveLinks: true,

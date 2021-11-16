@@ -1,4 +1,4 @@
-export const APIEND_BASE_URL = 'http://testadmin.kelime.com:5001/v1/admin';
+export const APIEND_BASE_URL = 'https://testapiend.kelime.com/v1/admin';
 
 // Auth
 export const APIEND_REGISTER = `${APIEND_BASE_URL}/auth/register`;
