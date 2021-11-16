@@ -47,7 +47,7 @@ export default {
       dictionaries: [],
       packetsAll: [],
       uploadOptions: {
-        url: 'https://kelime-apiend:5001/v1/fileupload',
+        url: 'http://localhost:5001/v1/fileupload',
         acceptedFiles: 'image/*',
         thumbnailWidth: 150,
         addRemoveLinks: true,
