@@ -9,7 +9,7 @@ import JwtService from '@/core/services/jwt.service';
 const ApiService = {
   init() {
     Vue.use(VueAxios, axios);
-    Vue.axios.defaults.baseURL = 'https://testapiend.kelime.com/v1/admin';
+    Vue.axios.defaults.baseURL = process.env.VUE_APP_APIEND_BASE_URL;
   },
 
   /**

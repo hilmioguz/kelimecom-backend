@@ -59,7 +59,7 @@
         >
           <!-- eslint-disable vue/valid-v-slot -->
           <template #top>
-            <v-toolbar flat>
+            <v-toolbar flat height="auto">
               <div class="w-100">
                 <div class="row align-items-center">
                   <div class="col-lg-9 col-xl-8">
@@ -202,6 +202,34 @@
                             </div>
                           </vue-dropzone>
                         </v-col>
+                        <v-col cols="6">
+                          <vue-dropzone
+                            ref="profilePic"
+                            id="dropzone"
+                            :options="uploadOptions"
+                            :use-custom-slot="true"
+                            @vdropzone-removed-file="innerFileDeleted"
+                            @vdropzone-success="innerFileUploaded"
+                          >
+                            <div class="dropzone-custom-content">
+                              <div
+                                class="dz-image"
+                                v-if="editedItem.innerImage"
+                              >
+                                <img
+                                  data-dz-thumbnail=""
+                                  alt="Blog kapak"
+                                  width="100"
+                                  height="auto"
+                                  :src="editedItem.innerImage"
+                                >
+                              </div>
+                              <h5 class="ma-2 dropzone-custom-title">
+                                İçerik Resmi - Sürükle Bırak ya da tıklayın
+                              </h5>
+                            </div>
+                          </vue-dropzone>
+                        </v-col>
                       </v-row>
                     </v-container>
                   </v-card-text>
@@ -281,6 +309,11 @@
                   name="Kapak Resmi"
                   max-height="150"
                   max-width="250"
+                />
+                <v-img
+                  :src="item.innerImage"
+                  name="İçerik Resmi"
+                  max-height="150"
                 />
                 <span
                   class="bodyBLock"
@@ -447,6 +480,15 @@ export default {
         this.editedItem.image = response[0].url;
       }
     },
+    innerFileUploaded(file, response) {
+      console.log('FILE UPLOAD SONUC:', file, response);
+      if (response && response.length && response[0].url) {
+        this.editedItem.innerImage = response[0].url;
+      }
+    },
+    innerFileDeleted() {
+      this.editedItem.innerImage = '';
+    },
     fileDeleted() {
       this.editedItem.image = '';
     },
@@ -513,6 +555,7 @@ export default {
       let payload = {
         title: this.editedItem.title,
         image: this.editedItem.image,
+        innerImage: this.editedItem.innerImage,
         body: this.editedItem.body,
         slug: this.editedItem.slug,
         author: this.editedItem.author,

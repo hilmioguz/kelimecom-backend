@@ -43,6 +43,7 @@ const actions = {
             resolve(data);
           } else {
             context.commit(SET_ERROR, 'Admin Bölümüne Girişte Yetkili Değilsiniz!');
+            resolve('Admin Bölümüne Girişte Yetkili Değilsiniz!');
           }
         })
         .catch(({ message }) => {

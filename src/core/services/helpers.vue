@@ -46,8 +46,9 @@ export default {
       },
       dictionaries: [],
       packetsAll: [],
+      kurumlarAll: [],
       uploadOptions: {
-        url: 'https://testapiend.kelime.com/v1/fileupload',
+        url: `${process.env.VUE_APP_APIEND_BASE_URL}/fileupload`,
         acceptedFiles: 'image/*',
         thumbnailWidth: 150,
         addRemoveLinks: true,
@@ -109,6 +110,22 @@ export default {
         value: '',
       });
       a.filter(a => !a.text.includes('ziyaret'));
+      return a;
+    },
+    kurumlarListAll() {
+      if (this.kurumlarAll.length === 0) {
+        this.getKurumlarFromApi();
+      }
+      const a = this.kurumlarAll.map(
+        (kurum => ({
+          text: kurum.institution_name,
+          value: kurum.id,
+        })),
+      );
+      a.unshift({
+        text: 'Tümü',
+        value: '',
+      });
       return a;
     },
     formTitle() {
@@ -194,6 +211,22 @@ export default {
           .then(({ data }) => {
             if (data) {
               this.packetsAll = data.data;
+            }
+            resolve(data);
+          })
+          .catch(({ message }) => {
+            console.log(message);
+            reject(message);
+          });
+      });
+    },
+    getKurumlarFromApi() {
+      return new Promise((resolve, reject) => {
+        ApiService.setHeader();
+        ApiService.get('kurumlar', this.stringify(this.koptions))
+          .then(({ data }) => {
+            if (data) {
+              this.kurumlarAll = data.data;
             }
             resolve(data);
           })

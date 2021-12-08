@@ -245,6 +245,7 @@
               <div class="form-group">
                 <input
                   ref="remail"
+                  v-model="rform.email"
                   class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
                   type="email"
                   :placeholder="$t('AUTH.INPUT.EMAIL')"
@@ -325,6 +326,9 @@ export default {
         email: '',
         password: '',
       },
+      rform: {
+        email: '',
+      },
     };
   },
   computed: {
@@ -368,26 +372,6 @@ export default {
       },
     });
 
-    this.fv2 = formValidation(forgot_form, {
-      fields: {
-        email: {
-          validators: {
-            notEmpty: {
-              message: 'Email is required',
-            },
-            emailAddress: {
-              message: 'The value is not a valid email address',
-            },
-          },
-        },
-      },
-      plugins: {
-        trigger: new Trigger(),
-        submitButton: new SubmitButton(),
-        bootstrap: new Bootstrap(),
-      },
-    });
-
     this.fv.on('core.form.valid', () => {
       const { email, password } = this.form;
 
@@ -409,14 +393,23 @@ export default {
           .dispatch(LOGIN, { email, password })
         // go to which page after successfully login
           .then(() => this.$router.push({ name: 'dashboard' }))
-          .catch(() => {});
+          .catch((error) => {
+            console.log('error: ', error);
+            Swal.fire({
+              title: 'Hata',
+              text: error.message,
+              icon: 'error',
+              confirmButtonClass: 'btn btn-secondary',
+              heightAuto: false,
+            });
+          });
 
         submitButton.classList.remove(
           'spinner',
           'spinner-light',
           'spinner-right',
         );
-      }, 2000);
+      }, 1000);
     });
 
     this.fv.on('core.form.invalid', () => {
@@ -429,14 +422,31 @@ export default {
       });
     });
 
-    this.fv2.on('core.form.valid', () => {
-      const email = this.$refs.remail.value;
+    this.fv2 = formValidation(forgot_form, {
+      fields: {
+        email: {
+          validators: {
+            notEmpty: {
+              message: 'Email is required',
+            },
+            emailAddress: {
+              message: 'The value is not a valid email address',
+            },
+          },
+        },
+      },
+      plugins: {
+        trigger: new Trigger(),
+        submitButton: new SubmitButton(),
+        bootstrap: new Bootstrap(),
+      },
+    });
 
-      // clear existing errors
-      this.$store.dispatch(LOGOUT);
+    this.fv2.on('core.form.valid', () => {
+      const email = this.rform.email;
 
       // set spinner to submit button
-      const submitButton = this.$refs.kt_login_signup_submit;
+      const submitButton = this.$refs.kt_login_forgot_form;
       submitButton.classList.add(
         'spinner',
         'spinner-light',
@@ -465,7 +475,7 @@ export default {
           'spinner-light',
           'spinner-right',
         );
-      }, 2000);
+      }, 1000);
     });
 
     this.fv2.on('core.form.invalid', () => {

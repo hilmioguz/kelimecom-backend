@@ -60,12 +60,12 @@
         >
           <!-- eslint-disable vue/valid-v-slot -->
           <template #top>
-            <v-toolbar flat>
+            <v-toolbar flat height="auto">
               <div class="w-100">
                 <div class="row align-items-center">
-                  <div class="col-lg-9 col-xl-8">
+                  <div class="col-auto">
                     <div class="row align-items-start">
-                      <div class="col-md-3 my-2 my-md-0">
+                      <div class="col-auto my-2 my-md-0">
                         <v-text-field
                           v-model="filter.name"
                           append-icon="mdi-magnify"
@@ -74,7 +74,23 @@
                           hide-details
                         />
                       </div>
-                      <div class="col-md-3 my-2 my-md-0">
+                      <div class="col-auto my-2 my-md-0">
+                      <v-radio-group
+                        v-model="aramaYeri"
+                      >
+                        <v-radio
+                          label="İsim"
+                          color="primary"
+                          value="name"
+                        ></v-radio>
+                        <v-radio
+                          label="E-posta"
+                          color="primary"
+                          value="email"
+                        ></v-radio>
+                      </v-radio-group>
+                      </div>
+                      <div class="col-auto my-2 my-md-0">
                         <v-select
                           v-model="filter.role"
                           :return-object="false"
@@ -82,12 +98,20 @@
                           label="Rol"
                         />
                       </div>
-                      <div class="col-md-3 my-2 my-md-0">
+                      <div class="col-auto my-2 my-md-0">
                         <v-select
                           v-model="filter.packetId"
                           :return-object="false"
                           :items="packetListAll"
                           label="Paket Tipi"
+                        />
+                      </div>
+                      <div class="col-auto my-2 my-md-0">
+                        <v-select
+                          v-model="filter.kurumId"
+                          :return-object="false"
+                          :items="kurumlarListAll"
+                          label="Kurum Adı"
                         />
                       </div>
                     </div>
@@ -444,6 +468,7 @@ export default {
       packetList: [],
       kurumList: [],
       users: [],
+      aramaYeri: 'name',
       roleList,
       editedIndex: -1,
       koptions: {
@@ -542,7 +567,7 @@ export default {
           if (newval.name) {
             this.options = {
               searchTerm: newval.name,
-              searchField: 'name',
+              searchField: this.aramaYeri,
             };
           } else if (newval.role != null) {
             this.options = {
@@ -553,6 +578,11 @@ export default {
             this.options = {
               searchTerm: newval.packetId,
               searchField: 'packetId',
+            };
+          } else if (newval.kurumId != null) {
+            this.options = {
+              searchTerm: newval.kurumId,
+              searchField: 'kurumId',
             };
           }
         }

@@ -1,6 +1,6 @@
 # build stage
 FROM node:lts-alpine as build-stage
-WORKDIR /usr/src/kelime-backend
+WORKDIR /usr/src/backend
 COPY package*.json ./
 # install git
 RUN apk update && apk add --no-cache git
@@ -10,7 +10,7 @@ RUN yarn build
 
 # production stage
 FROM nginx:stable-alpine as production-stage
-COPY --from=build-stage /usr/src/kelime-backend/dist /usr/share/nginx/html
+COPY --from=build-stage /usr/src/backend/dist /usr/share/nginx/html
 RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/conf.d
 EXPOSE 5002

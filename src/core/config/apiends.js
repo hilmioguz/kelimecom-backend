@@ -1,4 +1,4 @@
-export const APIEND_BASE_URL = 'https://testapiend.kelime.com/v1/admin';
+export const APIEND_BASE_URL = process.env.VUE_APP_APIEND_BASE_URL;
 
 // Auth
 export const APIEND_REGISTER = `${APIEND_BASE_URL}/auth/register`;
