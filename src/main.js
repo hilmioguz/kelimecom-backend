@@ -2,8 +2,6 @@ import Vue from 'vue';
 import jQuery from 'jquery';
 import ClipboardJS from 'clipboard';
 import PerfectScrollbar from 'perfect-scrollbar';
-import App from './App.vue';
-import router from './router';
 import store from '@/core/services/store';
 import ApiService from '@/core/services/api.service';
 // import MockService from "@/core/mock/mock.service";
@@ -30,6 +28,8 @@ import '@mdi/font/css/materialdesignicons.css';
 import 'bootstrap';
 import 'bootstrap-select';
 import '@/assets/js/components/datatable/core.datatable.js';
+import App from './App.vue';
+import router from './router';
 
 Vue.config.productionTip = false;
 window.jQuery = jQuery;
