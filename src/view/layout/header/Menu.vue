@@ -200,6 +200,29 @@
               </a>
             </li>
           </router-link>
+          <router-link
+            v-slot="{ href, navigate, isActive, isExactActive }"
+            to="/toplukullanici"
+            custom
+          >
+            <li
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+              class="menu-item menu-item-submenu"
+              :class="[
+                isActive && 'menu-item-active',
+                isExactActive && 'menu-item-active',
+              ]"
+            >
+              <a
+                :href="href"
+                class="menu-link"
+                @click="navigate"
+              >
+                <span class="menu-text"> Toplu Kullanıcı Oluşturma </span>
+              </a>
+            </li>
+          </router-link>
         </ul>
       </div>
     </li>

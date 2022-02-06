@@ -35,6 +35,7 @@
         "perfect-markdown": "https://github.com/drcodemonster/perfect-markdown.git",
         "perfect-scrollbar": "^1.5.3",
         "portal-vue": "^2.1.7",
+        "read-excel-file": "^5.2.26",
         "roboto-fontface": "*",
         "slug": "^5.1.0",
         "socicon": "^3.0.5",

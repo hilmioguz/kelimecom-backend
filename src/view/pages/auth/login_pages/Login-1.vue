@@ -56,14 +56,6 @@
                 >
                   {{ $t('AUTH.LOGIN.WELLCOME') }}
                 </h3>
-                <!-- <span
-                  class="text-muted font-weight-bold font-size-h4"
-                >{{ $t('AUTH.LOGIN.NEW_HERE') }}
-                  <a
-                    id="kt_login_signup"
-                    class="text-primary font-weight-bolder"
-                    @click="showForm('signup')"
-                  >{{ $t('AUTH.REGISTER.TITLE') }}</a></span> -->
               </div>
               <div class="form-group">
                 <label
@@ -121,106 +113,6 @@
               </div>
             </form>
           </div>
-          <!--end::Signin-->
-          <!--begin::Signup-->
-          <!-- <div class="login-form login-signup">
-            <form
-              id="kt_login_signup_form"
-              class="form"
-              novalidate="novalidate"
-            >
-              <div class="pb-13 pt-lg-0 pt-5">
-                <h3
-                  class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg"
-                >
-                  {{ $t('AUTH.REGISTER.TITLE') }}
-                </h3>
-                <p
-                  class="text-muted font-weight-bold font-size-h4"
-                >
-                  {{ $t('AUTH.REGISTER.DESC') }}
-                </p>
-              </div>
-              <div class="form-group">
-                <input
-                  ref="fullname"
-                  class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
-                  type="text"
-                  :placeholder="$t('AUTH.INPUT.FULLNAME')"
-                  name="fullname"
-                  autocomplete="off"
-                >
-              </div>
-              <div class="form-group">
-                <input
-                  ref="remail"
-                  class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
-                  type="email"
-                  :placeholder="$t('AUTH.INPUT.EMAIL')"
-                  name="email"
-                  autocomplete="off"
-                >
-              </div>
-              <div class="form-group">
-                <input
-                  ref="rpassword"
-                  class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
-                  type="password"
-                  :placeholder="$t('AUTH.INPUT.PASSWORD')"
-                  name="password"
-                  autocomplete="off"
-                >
-              </div>
-              <div class="form-group">
-                <input
-                  ref="cpassword"
-                  class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
-                  type="password"
-                  :placeholder="
-                    $t('AUTH.INPUT.CONFIRM_PASSWORD')
-                  "
-                  name="cpassword"
-                  autocomplete="off"
-                >
-              </div>
-              <div class="form-group">
-                <label class="checkbox mb-0">
-                  <input
-                    type="checkbox"
-                    name="agree"
-                  >
-                  <span class="mr-2" />
-                  {{ $t('AUTH.GENERAL.IAGREE') }}
-                  <a
-                    href="#"
-                    class="ml-2"
-                  >{{
-                    $t('AUTH.GENERAL.TERMS')
-                  }}</a>.
-                </label>
-              </div>
-              <div
-                class="form-group d-flex flex-wrap pb-lg-0 pb-3"
-              >
-                <button
-                  ref="kt_login_signup_submit"
-                  class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4"
-                  style="width:150px;"
-                >
-                  {{ $t('AUTH.GENERAL.SUBMIT_BUTTON') }}
-                </button>
-                <button
-                  id="kt_login_signup_cancel"
-                  type="button"
-                  class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3"
-                  @click="showForm('signin')"
-                >
-                  {{ $t('AUTH.GENERAL.CANCEL_BUTTON') }}
-                </button>
-              </div>
-            </form>
-          </div> -->
-          <!--end::Signup-->
           <!--begin::Forgot-->
           <div class="login-form login-forgot">
             <!--begin::Form-->
@@ -274,34 +166,12 @@
           </div>
           <!--end::Forgot-->
         </div>
-        <!--begin::Content footer-->
-        <!-- <div
-          class="d-flex justify-content-lg-start justify-content-center align-items-end py-7 py-lg-0"
-        >
-          <a
-            href="#"
-            class="text-primary font-weight-bolder font-size-h5"
-          >{{ $t('AUTH.GENERAL.LEGAL') }}</a>
-          <a
-            href="#"
-            class="text-primary ml-10 font-weight-bolder font-size-h5"
-          >{{ $t('AUTH.GENERAL.CONDITIONS') }}</a>
-          <a
-            href="#"
-            class="text-primary ml-10 font-weight-bolder font-size-h5"
-          >{{ $t('AUTH.GENERAL.CONTACT') }}</a>
-        </div> -->
-        <!--end::Content footer-->
       </div>
       <!--end::Content-->
     </div>
   </div>
 </template>
 
-<!-- Load login custom page styles -->
-<style lang="scss">
-@import '@/assets/sass/pages/login/login-1.scss';
-</style>
 
 <script>
 import { mapGetters, mapState } from 'vuex';
@@ -344,6 +214,7 @@ export default {
       );
     },
   },
+
   mounted() {
     const signin_form = KTUtil.getById('kt_login_signin_form');
     const forgot_form = KTUtil.getById('kt_login_forgot_form');
@@ -388,11 +259,14 @@ export default {
 
       // dummy delay
       setTimeout(() => {
-        // send login request
+      // send login request
         this.$store
           .dispatch(LOGIN, { email, password })
-        // go to which page after successfully login
-          .then(() => this.$router.push({ name: 'dashboard' }))
+          // go to which page after successfully login
+          .then((response) => {
+            console.log('Response:', response);
+            this.$router.push('/dashboard');
+          })
           .catch((error) => {
             console.log('error: ', error);
             Swal.fire({
@@ -500,3 +374,7 @@ export default {
   },
 };
 </script>
+<!-- Load login custom page styles -->
+<style lang="scss">
+@import '@/assets/sass/pages/login/login-1.scss';
+</style>

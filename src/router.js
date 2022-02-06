@@ -27,6 +27,11 @@ export default new Router({
           component: () => import('@/view/pages/Gundem.vue'),
         },
         {
+          path: '/toplukullanici',
+          name: 'toplukullanici',
+          component: () => import('@/view/pages/MassUserCreate.vue'),
+        },
+        {
           path: '/dictionary',
           name: 'dictionary',
           component: () => import('@/view/pages/Dictionary.vue'),

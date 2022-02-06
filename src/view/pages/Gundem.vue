@@ -59,7 +59,10 @@
         >
           <!-- eslint-disable vue/valid-v-slot -->
           <template #top>
-            <v-toolbar flat height="auto">
+            <v-toolbar
+              flat
+              height="auto"
+            >
               <div class="w-100">
                 <div class="row align-items-center">
                   <div class="col-lg-9 col-xl-8">
