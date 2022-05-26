@@ -1,7 +1,7 @@
 <template>
-  <div class="card card-custom card-stretch">
+  <div class="card card-custom card-stretch-half pa-0">
     <!--begin::Header-->
-    <div class="card-header border-0 pt-5">
+    <div class="card-header border-0 pt-2">
       <h3 class="card-title align-items-start flex-column">
         <span
           class="card-label font-weight-bolder text-dark"

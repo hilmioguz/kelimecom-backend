@@ -49,7 +49,8 @@ const HtmlClass = {
       'self.body.background-image',
     );
     if (typeof bgImage !== 'undefined') {
-      document.body.style.backgroundImage = `url(${bgImage})`;
+      // document.body.style.backgroundImage = `url(${bgImage})`;
+      document.body.style.background = 'unset!important';
     }
 
     // Offcanvas directions

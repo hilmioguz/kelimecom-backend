@@ -37,6 +37,21 @@ export default new Router({
           component: () => import('@/view/pages/Dictionary.vue'),
         },
         {
+          path: '/kuluckasozluk',
+          name: 'kuluckasozluk',
+          component: () => import('@/view/pages/Kuluckasozluk.vue'),
+        },
+        {
+          path: '/kuluckasozluk/:setId',
+          name: 'Setler',
+          component: () => import('@/view/pages/Kuluckasetler.vue'),
+        },
+        {
+          path: '/kuluckamaddeler',
+          name: 'kuluckamaddeler',
+          component: () => import('@/view/pages/Kuluckamadde.vue'),
+        },
+        {
           path: '/blog',
           name: 'blog',
           component: () => import('@/view/pages/Blog.vue'),

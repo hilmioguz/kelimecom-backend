@@ -1,5 +1,4 @@
 <!-- eslint-disable max-len -->
-<!-- eslint-disable max-len -->
 <template>
   <div>
     <!--begin::Card-->
@@ -37,6 +36,286 @@
             </b-dropdown-text>
           </b-dropdown>
           <!--end::Dropdown-->
+          <v-dialog
+            v-model="dialog"
+            transition="dialog-bottom-transition"
+            scrollable
+            max-width="900px"
+            width="80vw"
+            min-width="600px"
+          >
+            <template #activator="{ on, attrs }">
+              <v-btn
+                color="primary"
+                dark
+                class="mx-2"
+                v-bind="attrs"
+                v-on="on"
+              >
+                <v-icon
+                  small
+                  class="mr-2"
+                  @click="editItem(item)"
+                >
+                  mdi-plus
+                </v-icon>
+                Yeni Kayıt
+              </v-btn>
+            </template>
+            <v-card
+              rounded="20"
+            >
+              <v-card-title
+                class=" bgi-size-cover bgi-no-repeat"
+                :style="{ backgroundImage: `url(${backgroundImage})` }"
+              >
+                <span class="white--text text-h5">{{
+                  formTitle
+                }}</span>
+              </v-card-title>
+
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <v-col cols="6">
+                      <v-text-field
+                        v-model="
+                          editedItem.name
+                        "
+                        label="Adı Soyadı"
+                      />
+                    </v-col>
+                    <v-col cols="6">
+                      <v-text-field
+                        v-model="
+                          editedItem.password
+                        "
+                        label="Yeni Şifre"
+                      />
+                    </v-col>
+                    <v-col cols="6">
+                      <v-text-field
+                        v-model="
+                          editedItem.email
+                        "
+                        label="E-Posta"
+                      />
+                    </v-col>
+                    <v-col cols="6">
+                      <v-select
+                        v-model="
+                          editedItem.role
+                        "
+                        :return-object="false"
+                        :items="roleList"
+                        label="Kullanıcı Tipi"
+                      />
+                    </v-col>
+                    <v-col cols="6">
+                      <v-select
+                        v-model="editedItem.packetId.id"
+                        :return-object="false"
+                        :items="packetList"
+                        label="Paket Tipi"
+                      />
+                    </v-col>
+                    <v-col cols="6">
+                      <v-select
+                        v-model="editedItem.kurumId.id"
+                        :return-object="false"
+                        :items="kurumList"
+                        label="Kurumu"
+                      />
+                    </v-col>
+                    <v-col cols="6">
+                      <v-menu
+                        v-model="menu1"
+                        :close-on-content-click="true"
+                        transition="scale-transition"
+                        offset-y
+                        max-width="290px"
+                        min-width="auto"
+                      >
+                        <template #activator="{ on, attrs }">
+                          <v-text-field
+                            v-model="computedBeginDate"
+                            label="Paket Başlangıç"
+                            persistent-hint
+                            prepend-icon="mdi-calendar"
+                            readonly
+                            v-bind="attrs"
+                            v-on="on"
+                          />
+                        </template>
+                        <v-date-picker
+                          v-model="editedItem.paketBegin"
+                          no-title
+                          locale="tr-TR"
+                          @input="menu1 = false"
+                        />
+                      </v-menu>
+                    </v-col>
+                    <v-col cols="6">
+                      <v-menu
+                        v-model="menu2"
+                        :close-on-content-click="true"
+                        transition="scale-transition"
+                        offset-y
+                        max-width="290px"
+                        min-width="auto"
+                      >
+                        <template #activator="{ on, attrs }">
+                          <v-text-field
+                            v-model="computedEndDate"
+                            label="Paket Bitiş"
+                            persistent-hint
+                            prepend-icon="mdi-calendar"
+                            readonly
+                            v-bind="attrs"
+                            v-on="on"
+                          />
+                        </template>
+                        <v-date-picker
+                          v-model="editedItem.paketEnd"
+                          no-title
+                          locale="tr-TR"
+                          @input="menu2 = false"
+                        />
+                      </v-menu>
+                    </v-col>
+                    <v-col cols="3">
+                      <v-switch
+                        v-model="
+                          editedItem.isActive
+                        "
+                        :label="
+                          editedItem.isActive
+                            ? 'Aktif'
+                            : 'Pasif'
+                        "
+                      />
+                    </v-col>
+                    <v-col cols="3">
+                      <v-switch
+                        v-model="
+                          editedItem.isEmailVerified
+                        "
+                        :label="
+                          editedItem.isEmailVerified
+                            ? 'Eposta Onaylı'
+                            : 'Eposta Onay bekliyor'
+                        "
+                      />
+                    </v-col>
+                    <v-col cols="3">
+                      <v-switch
+                        v-model="
+                          editedItem.canDoKulucka
+                        "
+                        :label="
+                          editedItem.canDoKulucka
+                            ? 'Kulucka Aktif'
+                            : 'Kulucka Pasif'
+                        "
+                      />
+                    </v-col>
+                    <v-col cols="3">
+                      <v-switch
+                        v-model="
+                          editedItem.canDoKuluckaModerate
+                        "
+                        :label="
+                          editedItem.canDoKuluckaModerate
+                            ? 'Kulucka Moderatör Aktif'
+                            : 'Kulucka Moderatör Pasif'
+                        "
+                      />
+                    </v-col>
+                    <v-col cols="3">
+                      <vue-dropzone
+                        ref="profilePic"
+                        id="dropzone"
+                        :options="uploadOptions"
+                        :use-custom-slot="true"
+                        @vdropzone-removed-file="fileDeleted"
+                        @vdropzone-success="fileUploaded"
+                      >
+                        <div class="dropzone-custom-content">
+                          <div
+                            class="dz-image"
+                            v-if="editedItem.picture"
+                          >
+                            <img
+                              data-dz-thumbnail=""
+                              alt="profile picture"
+                              width="100"
+                              height="auto"
+                              :src="editedItem.picture"
+                            >
+                          </div>
+                          <h5 class="ma-2 dropzone-custom-title">
+                            Profil Resmi - Sürükle Bırak ya da tıklayın
+                          </h5>
+                        </div>
+                      </vue-dropzone>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+
+              <v-card-actions>
+                <v-spacer />
+                <v-btn
+                  color="secondary blue--text"
+                  class="mb-2"
+                  @click="close"
+                >
+                  İptal
+                </v-btn>
+                <v-btn
+                  color="primary"
+                  dark
+                  class="mb-2"
+                  @click="save"
+                >
+                  Kaydet
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <v-dialog
+            transition="dialog-bottom-transition"
+            scrollable
+            v-model="dialogDelete"
+            max-width="500px"
+          >
+            <v-card>
+              <v-card-title
+                class="text-h5"
+              >
+                Silmek istediğinizden emin
+                misiniz?
+              </v-card-title>
+              <v-card-actions>
+                <v-spacer />
+                <v-btn
+                  color="blue darken-1"
+                  text
+                  @click="closeDelete"
+                >
+                  İptal
+                </v-btn>
+                <v-btn
+                  color="blue darken-1"
+                  text
+                  @click="deleteItemConfirm"
+                >
+                  Tamam
+                </v-btn>
+                <v-spacer />
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </div>
       </div>
       <div class="card-body">
@@ -64,326 +343,61 @@
               flat
               height="auto"
             >
-              <div class="w-100">
-                <div class="row align-items-center">
-                  <div class="col-auto">
-                    <div class="row align-items-start">
-                      <div class="col-auto my-2 my-md-0">
-                        <v-text-field
-                          v-model="filter.name"
-                          append-icon="mdi-magnify"
-                          label="Arama"
-                          single-line
-                          hide-details
-                        />
-                      </div>
-                      <div class="col-auto my-2 my-md-0">
-                        <v-radio-group
-                          v-model="aramaYeri"
-                        >
-                          <v-radio
-                            label="İsim"
-                            color="primary"
-                            value="name"
-                          />
-                          <v-radio
-                            label="E-posta"
-                            color="primary"
-                            value="email"
-                          />
-                        </v-radio-group>
-                      </div>
-                      <div class="col-auto my-2 my-md-0">
-                        <v-select
-                          v-model="filter.role"
-                          :return-object="false"
-                          :items="rolesecimListesi"
-                          label="Rol"
-                        />
-                      </div>
-                      <div class="col-auto my-2 my-md-0">
-                        <v-select
-                          v-model="filter.packetId"
-                          :return-object="false"
-                          :items="packetListAll"
-                          label="Paket Tipi"
-                        />
-                      </div>
-                      <div class="col-auto my-2 my-md-0">
-                        <v-select
-                          v-model="filter.kurumId"
-                          :return-object="false"
-                          :items="kurumlarListAll"
-                          label="Kurum Adı"
-                        />
-                      </div>
-                    </div>
-                  </div>
+              <div class="row align-items-start">
+                <div class="col-auto my-2 my-md-0">
+                  <v-text-field
+                    v-model="filter.name"
+                    append-icon="mdi-magnify"
+                    label="Arama"
+                    single-line
+                    hide-details
+                  />
+                </div>
+                <div class="col-auto my-2 my-md-0">
+                  <v-radio-group
+                    v-model="aramaYeri"
+                  >
+                    <v-radio
+                      label="İsim"
+                      color="primary"
+                      value="name"
+                    />
+                    <v-radio
+                      label="E-posta"
+                      color="primary"
+                      value="email"
+                    />
+                  </v-radio-group>
+                </div>
+                <div class="col-auto my-2 my-md-0">
+                  <v-select
+                    v-model="filter.role"
+                    :return-object="false"
+                    :items="rolesecimListesi"
+                    label="Rol"
+                  />
+                </div>
+                <div class="col-auto my-2 my-md-0">
+                  <v-select
+                    v-model="filter.packetId"
+                    :return-object="false"
+                    :items="packetListAll"
+                    label="Paket Tipi"
+                  />
+                </div>
+                <div class="col-auto my-2 my-md-0">
+                  <v-select
+                    v-model="filter.kurumId"
+                    :return-object="false"
+                    :items="kurumlarListAll"
+                    label="Kurum Adı"
+                  />
                 </div>
               </div>
-              <v-divider
-                class="mx-4"
-                inset
-                vertical
-              />
-              <v-spacer />
-              <v-dialog
-                v-model="dialog"
-                transition="dialog-bottom-transition"
-                scrollable
-                max-width="900px"
-                width="80vw"
-                min-width="600px"
-              >
-                <template #activator="{ on, attrs }">
-                  <v-btn
-                    color="primary"
-                    dark
-                    class="mb-2"
-                    v-bind="attrs"
-                    v-on="on"
-                  >
-                    <v-icon
-                      small
-                      class="mr-2"
-                      @click="editItem(item)"
-                    >
-                      mdi-plus
-                    </v-icon>
-                    Yeni Kayıt
-                  </v-btn>
-                </template>
-                <v-card
-                  rounded="20"
-                >
-                  <v-card-title
-                    class=" bgi-size-cover bgi-no-repeat"
-                    :style="{ backgroundImage: `url(${backgroundImage})` }"
-                  >
-                    <span class="white--text text-h5">{{
-                      formTitle
-                    }}</span>
-                  </v-card-title>
-
-                  <v-card-text>
-                    <v-container>
-                      <v-row>
-                        <v-col cols="6">
-                          <v-text-field
-                            v-model="
-                              editedItem.name
-                            "
-                            label="Adı Soyadı"
-                          />
-                        </v-col>
-                        <v-col cols="6">
-                          <v-text-field
-                            v-model="
-                              editedItem.password
-                            "
-                            label="Yeni Şifre"
-                          />
-                        </v-col>
-                        <v-col cols="6">
-                          <v-text-field
-                            v-model="
-                              editedItem.email
-                            "
-                            label="E-Posta"
-                          />
-                        </v-col>
-                        <v-col cols="6">
-                          <v-select
-                            v-model="
-                              editedItem.role
-                            "
-                            :return-object="false"
-                            :items="roleList"
-                            label="Kullanıcı Tipi"
-                          />
-                        </v-col>
-                        <v-col cols="6">
-                          <v-select
-                            v-model="editedItem.packetId.id"
-                            :return-object="false"
-                            :items="packetList"
-                            label="Paket Tipi"
-                          />
-                        </v-col>
-                        <v-col cols="6">
-                          <v-select
-                            v-model="editedItem.kurumId.id"
-                            :return-object="false"
-                            :items="kurumList"
-                            label="Kurumu"
-                          />
-                        </v-col>
-                        <v-col cols="6">
-                          <v-menu
-                            v-model="menu1"
-                            :close-on-content-click="true"
-                            transition="scale-transition"
-                            offset-y
-                            max-width="290px"
-                            min-width="auto"
-                          >
-                            <template #activator="{ on, attrs }">
-                              <v-text-field
-                                v-model="computedBeginDate"
-                                label="Paket Başlangıç"
-                                persistent-hint
-                                prepend-icon="mdi-calendar"
-                                readonly
-                                v-bind="attrs"
-                                v-on="on"
-                              />
-                            </template>
-                            <v-date-picker
-                              v-model="editedItem.paketBegin"
-                              no-title
-                              locale="tr-TR"
-                              @input="menu1 = false"
-                            />
-                          </v-menu>
-                        </v-col>
-                        <v-col cols="6">
-                          <v-menu
-                            v-model="menu2"
-                            :close-on-content-click="true"
-                            transition="scale-transition"
-                            offset-y
-                            max-width="290px"
-                            min-width="auto"
-                          >
-                            <template #activator="{ on, attrs }">
-                              <v-text-field
-                                v-model="computedEndDate"
-                                label="Paket Bitiş"
-                                persistent-hint
-                                prepend-icon="mdi-calendar"
-                                readonly
-                                v-bind="attrs"
-                                v-on="on"
-                              />
-                            </template>
-                            <v-date-picker
-                              v-model="editedItem.paketEnd"
-                              no-title
-                              locale="tr-TR"
-                              @input="menu2 = false"
-                            />
-                          </v-menu>
-                        </v-col>
-                        <v-col cols="4">
-                          <v-switch
-                            v-model="
-                              editedItem.isActive
-                            "
-                            :label="
-                              editedItem.isActive
-                                ? 'Aktif'
-                                : 'Pasif'
-                            "
-                          />
-                        </v-col>
-                        <v-col cols="4">
-                          <v-switch
-                            v-model="
-                              editedItem.isEmailVerified
-                            "
-                            :label="
-                              editedItem.isEmailVerified
-                                ? 'Onaylı'
-                                : 'Onay bekliyor'
-                            "
-                          />
-                        </v-col>
-                        <v-col cols="4">
-                          <vue-dropzone
-                            ref="profilePic"
-                            id="dropzone"
-                            :options="uploadOptions"
-                            :use-custom-slot="true"
-                            @vdropzone-removed-file="fileDeleted"
-                            @vdropzone-success="fileUploaded"
-                          >
-                            <div class="dropzone-custom-content">
-                              <div
-                                class="dz-image"
-                                v-if="editedItem.picture"
-                              >
-                                <img
-                                  data-dz-thumbnail=""
-                                  alt="profile picture"
-                                  width="100"
-                                  height="auto"
-                                  :src="editedItem.picture"
-                                >
-                              </div>
-                              <h5 class="ma-2 dropzone-custom-title">
-                                Profil Resmi - Sürükle Bırak ya da tıklayın
-                              </h5>
-                            </div>
-                          </vue-dropzone>
-                        </v-col>
-                      </v-row>
-                    </v-container>
-                  </v-card-text>
-
-                  <v-card-actions>
-                    <v-spacer />
-                    <v-btn
-                      color="secondary blue--text"
-                      class="mb-2"
-                      @click="close"
-                    >
-                      İptal
-                    </v-btn>
-                    <v-btn
-                      color="primary"
-                      dark
-                      class="mb-2"
-                      @click="save"
-                    >
-                      Kaydet
-                    </v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
-              <v-dialog
-                transition="dialog-bottom-transition"
-                scrollable
-                v-model="dialogDelete"
-                max-width="500px"
-              >
-                <v-card>
-                  <v-card-title
-                    class="text-h5"
-                  >
-                    Silmek istediğinizden emin
-                    misiniz?
-                  </v-card-title>
-                  <v-card-actions>
-                    <v-spacer />
-                    <v-btn
-                      color="blue darken-1"
-                      text
-                      @click="closeDelete"
-                    >
-                      İptal
-                    </v-btn>
-                    <v-btn
-                      color="blue darken-1"
-                      text
-                      @click="deleteItemConfirm"
-                    >
-                      Tamam
-                    </v-btn>
-                    <v-spacer />
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
             </v-toolbar>
+            <v-divider
+              class="w-100 my-4"
+            />
           </template>
           <!-- eslint-disable-next-line vue/no-template-shadow -->
           <template #expanded-item="{ headers, item }">
@@ -494,7 +508,7 @@ export default {
         { text: 'EPOSTA', value: 'email', align: 'center' },
         { text: 'ROL', value: 'role', align: 'center' },
         { text: 'PAKET', value: 'packetId', align: 'center' },
-        { text: 'ONAYLI', value: 'isEmailVerified', align: 'center' },
+        { text: 'EPOSTA ONAYLI', value: 'isEmailVerified', align: 'center' },
         { text: 'AKTİF', value: 'isActive', align: 'center' },
         { text: 'İŞLEMLER', value: 'actions', sortable: false },
       ],
@@ -510,6 +524,8 @@ export default {
         paketBegin: '',
         paketEnd: '',
         isActive: false,
+        canDoKulucka: false,
+        canDoKuluckaModerate: false,
         password: null,
       },
       defaultItem: {
@@ -524,6 +540,8 @@ export default {
         paketBegin: '',
         paketEnd: '',
         password: null,
+        canDoKulucka: false,
+        canDoKuluckaModerate: false,
         isActive: false,
       },
       detayFields: [
@@ -806,6 +824,8 @@ export default {
         paketBegin: this.editedItem.paketBegin,
         paketEnd: this.editedItem.paketEnd,
         isActive: this.editedItem.isActive,
+        canDoKulucka: this.editedItem.canDoKulucka,
+        canDoKuluckaModerate: this.editedItem.canDoKuluckaModerate,
       };
       if (this.editedItem.password) {
         payload.password = this.editedItem.password;

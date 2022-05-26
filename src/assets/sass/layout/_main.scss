@@ -4,10 +4,8 @@
 
 // Body
 body {
-	background: $page-bg;
-    background-repeat: no-repeat;
-    background-position: center top;
-    background-size: 100% $page-bg-height;
+	vertical-align: middle!important;
+	background: $page-bg url("~@/assets/media/bg/bgdesen.png") no-repeat center top / 100% $page-bg-height!important;
 }
 
 // Desktop Mode
@@ -26,5 +24,10 @@ body {
 	.container-fluid {
 		max-width: none;
 		padding: 0 get($page-padding, tablet-and-mobile);
+	}
+}
+::v-deep .v-data-table__wrapper {
+	div {
+		vertical-align: middle!important;
 	}
 }

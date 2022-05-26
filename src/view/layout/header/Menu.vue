@@ -93,6 +93,92 @@
       </li>
     </router-link>
 
+    <li
+      aria-haspopup="true"
+      data-menu-toggle="click"
+      class="menu-item menu-item-submenu menu-item-open"
+      :class="{ 'menu-item-active': hasActiveChildren() }"
+    >
+      <a
+        href="#"
+        class="menu-link menu-toggle"
+      >
+        <span class="menu-text"> Kuluçka </span>
+      </a>
+      <div class="menu-submenu menu-submenu-classic">
+        <ul class="menu-subnav">
+          <router-link
+            v-slot="{ href, navigate, isActive, isExactActive }"
+            to="/kuluckasozluk"
+            custom
+          >
+            <li
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+              class="menu-item menu-item-submenu"
+              :class="[
+                isActive && 'menu-item-active',
+                isExactActive && 'menu-item-active',
+              ]"
+            >
+              <a
+                :href="href"
+                class="menu-link"
+                @click="navigate"
+              >
+                <span class="menu-text"> Kuluçka Sözlüklükleri </span>
+              </a>
+            </li>
+          </router-link>
+          <router-link
+            v-slot="{ href, navigate, isActive, isExactActive }"
+            to="/kuluckamaddeler"
+            custom
+          >
+            <li
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+              class="menu-item menu-item-submenu"
+              :class="[
+                isActive && 'menu-item-active',
+                isExactActive && 'menu-item-active',
+              ]"
+            >
+              <a
+                :href="href"
+                class="menu-link"
+                @click="navigate"
+              >
+                <span class="menu-text"> Kuluçka Maddeleri </span>
+              </a>
+            </li>
+          </router-link>
+          <router-link
+            v-slot="{ href, navigate, isActive, isExactActive }"
+            to="/kuluckasection"
+            custom
+          >
+            <li
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+              class="menu-item menu-item-submenu"
+              :class="[
+                isActive && 'menu-item-active',
+                isExactActive && 'menu-item-active',
+              ]"
+            >
+              <a
+                :href="href"
+                class="menu-link"
+                @click="navigate"
+              >
+                <span class="menu-text"> Kulucka Setleri </span>
+              </a>
+            </li>
+          </router-link>
+        </ul>
+      </div>
+    </li>
 
     <li
       aria-haspopup="true"

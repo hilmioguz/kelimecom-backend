@@ -3,7 +3,8 @@
   "self": {
     "layout": "default",
     "body": {
-      "background-image": "media/bg/bgdesen.png"
+      "background-image": "media/bg/bgdesen.png",
+      "background": "initial"
     },
     "logo": {
       "default": "media/logos/kelimecomlogo.png",
@@ -13,7 +14,7 @@
   "loader": {
     "type": "spinner-logo",
     "logo": "media/logos/kelimelogo.png",
-    "message": "Please wait..."
+    "message": "Lütfen Bekleyiniz..."
   },
   "breakpoints": {
     "sm": 576,
@@ -104,7 +105,7 @@
   "subheader": {
     "display": true,
     "displayDesc": false,
-    "displayDaterangepicker": true,
+    "displayDaterangepicker": false,
     "breadcrumb": {
       "display": true
     },

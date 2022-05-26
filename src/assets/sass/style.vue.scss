@@ -123,7 +123,13 @@
 .v-application ul, .v-application ol {
     padding-left: 0!important;
 }
-
+.theme--light.v-application {
+    background: transparent!important;
+}
+.v-application--wrap {
+    background: transparent;
+    min-height: unset!important;
+}
 ::v-deep .v-data-table > .v-data-table__wrapper > table > thead > tr > th {
     vertical-align: middle !important;
   }

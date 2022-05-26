@@ -45,6 +45,7 @@ export default {
         itemsPerPage: -1,
       },
       dictionaries: [],
+      kuluckadictionaries: [],
       packetsAll: [],
       kurumlarAll: [],
       uploadOptions: {
@@ -88,6 +89,18 @@ export default {
         this.getDictsFromApi();
       }
       const a = this.dictionaries.map(
+        (dict => ({
+          text: dict.name,
+          value: dict.id,
+        })),
+      );
+      return a;
+    },
+    kuluckaDictList() {
+      if (this.kuluckadictionaries.length === 0) {
+        this.getKuluckaDictsFromApi();
+      }
+      const a = this.kuluckadictionaries.map(
         (dict => ({
           text: dict.name,
           value: dict.id,
@@ -195,6 +208,22 @@ export default {
           .then(({ data }) => {
             if (data) {
               this.dictionaries = data.data;
+            }
+            resolve(data);
+          })
+          .catch(({ message }) => {
+            console.log(message);
+            reject(message);
+          });
+      });
+    },
+    getKuluckaDictsFromApi() {
+      return new Promise((resolve, reject) => {
+        ApiService.setHeader();
+        ApiService.get('kuluckadictionary', this.stringify(this.koptions))
+          .then(({ data }) => {
+            if (data) {
+              this.kuluckadictionaries = data.data;
             }
             resolve(data);
           })
@@ -330,7 +359,7 @@ export default {
     updateData(resource, id, payload) {
       return new Promise((resolve, reject) => {
         ApiService.setHeader();
-        ApiService.patch(resource, id, payload)
+        ApiService.patch(resource, id, payload, { headers: { 'Content-Type': 'application/json' } })
           .then(({ data }) => {
             this.successMessage();
             resolve(data);
