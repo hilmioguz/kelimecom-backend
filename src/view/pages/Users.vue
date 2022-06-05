@@ -717,7 +717,7 @@ export default {
           guest: { class: 'label-light-warning' },
           user: { class: 'label-light-primary' },
           admin: { class: ' label-light-danger' },
-          modarater: { class: ' label-light-info' },
+          moderater: { class: ' label-light-info' },
           '': { class: ' label-light-info' },
         };
 
