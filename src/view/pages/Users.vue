@@ -711,8 +711,10 @@ export default {
       });
     },
     getRole(role) {
-      if (typeof role !== 'undefined') {
+      console.log('ROLE is ', role);
+      if (role && typeof role !== 'undefined') {
         const roletemplate = {
+          guest: { class: 'label-light-warning' },
           user: { class: 'label-light-primary' },
           admin: { class: ' label-light-danger' },
           modarater: { class: ' label-light-info' },
