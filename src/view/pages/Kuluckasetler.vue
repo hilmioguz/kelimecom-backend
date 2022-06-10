@@ -594,7 +594,7 @@ export default {
         totalPages: this.editedItem.pages.length,
         pages: JSON.stringify(this.editedItem.pages),
         isCompleted: this.editedItem.isCompleted,
-        userAssigned: this.editedItem.userAssigned.id,
+        // userAssigned: this.editedItem.userAssigned.id,
         isActive: this.editedItem.isActive,
         isDelivered: this.editedItem.isDelivered,
         dictId: this.$route.params.setId,
