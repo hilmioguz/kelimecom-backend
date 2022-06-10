@@ -594,9 +594,10 @@ export default {
         totalPages: this.editedItem.pages.length,
         pages: JSON.stringify(this.editedItem.pages),
         isCompleted: this.editedItem.isCompleted,
-        userAssigned: this.editedItem.userAssigned,
+        userAssigned: this.editedItem.userAssigned.id,
         isActive: this.editedItem.isActive,
         isDelivered: this.editedItem.isDelivered,
+        dictId: this.$route.params.setId,
       };
       payload = this.removeEmpty(payload);
       if (this.editedIndex > -1) {
