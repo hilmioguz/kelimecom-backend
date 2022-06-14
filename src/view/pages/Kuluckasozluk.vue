@@ -149,7 +149,7 @@
                             label="Kodu"
                           />
                         </v-col>
-                        <v-col cols="6">
+                        <v-col cols="4">
                           <v-select
                             v-model="
                               editedItem.lang
@@ -159,7 +159,7 @@
                             label="Dil"
                           />
                         </v-col>
-                        <v-col cols="6">
+                        <v-col cols="4">
                           <v-select
                             v-model="
                               editedItem.anlamLang
@@ -167,6 +167,16 @@
                             :return-object="false"
                             :items="dilListesi"
                             label="Anlam Dili"
+                          />
+                        </v-col>
+                        <v-col cols="4">
+                          <v-select
+                            v-model="
+                              editedItem.karsiLang
+                            "
+                            :return-object="false"
+                            :items="dilListesi"
+                            label="Karşı Anlam Dili"
                           />
                         </v-col>
                         <v-col cols="12">
@@ -292,6 +302,15 @@
                             label="Hakkında Blog url"
                           />
                         </v-col>
+                        <v-col cols="4">
+                          <v-text-field
+                            v-model="
+                              editedItem.kisaltmalarUrl
+                            "
+                            label="Hakkında Blog url"
+                          />
+                        </v-col>
+
                         <v-col cols="4">
                           <v-switch
                             v-model="
@@ -596,6 +615,7 @@ export default {
         code: '',
         lang: '',
         anlamLang: '',
+        karsiLang: '',
         apa_cevirmen: '',
         apa_sozluk_ismi: '',
         apa_yazar_tarih: '',
@@ -620,6 +640,7 @@ export default {
         hangiAsama: 1,
         isSectionCreated: false,
         hakkindaBlogUrl: '',
+        kisaltmalarUrl: '',
       },
       defaultItem: {
         name: '',
@@ -627,6 +648,7 @@ export default {
         code: '',
         lang: '',
         anlamLang: '',
+        karsiLang: '',
         apa_cevirmen: '',
         apa_sozluk_ismi: '',
         apa_yazar_tarih: '',
@@ -651,6 +673,7 @@ export default {
         hangiAsama: 1,
         isSectionCreated: false,
         hakkindaBlogUrl: '',
+        kisaltmalarUrl: '',
       },
     };
   },
@@ -814,6 +837,8 @@ export default {
         yazar: this.editedItem.yazar,
         hangiAsama: this.editedItem.hangiAsama,
         hakkindaBlogUrl: this.editedItem.hakkindaBlogUrl,
+        karsiLang: this.editedItem.karsiLang,
+        kisaltmalarUrl: this.editedItem.kisaltmalarUrl,
         isSectionCreated: this.editedItem.isSectionCreated,
       };
       if (this.editedItem.coverImage !== '' && this.editedItem.coverImage != null) {
