@@ -153,29 +153,6 @@
               </a>
             </li>
           </router-link>
-          <router-link
-            v-slot="{ href, navigate, isActive, isExactActive }"
-            to="/kuluckasection"
-            custom
-          >
-            <li
-              aria-haspopup="true"
-              data-menu-toggle="hover"
-              class="menu-item menu-item-submenu"
-              :class="[
-                isActive && 'menu-item-active',
-                isExactActive && 'menu-item-active',
-              ]"
-            >
-              <a
-                :href="href"
-                class="menu-link"
-                @click="navigate"
-              >
-                <span class="menu-text"> Kulucka Setleri </span>
-              </a>
-            </li>
-          </router-link>
         </ul>
       </div>
     </li>
@@ -214,6 +191,29 @@
                 @click="navigate"
               >
                 <span class="menu-text"> Blog </span>
+              </a>
+            </li>
+          </router-link>
+          <router-link
+            v-slot="{ href, navigate, isActive, isExactActive }"
+            to="/diller"
+            custom
+          >
+            <li
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+              class="menu-item menu-item-submenu"
+              :class="[
+                isActive && 'menu-item-active',
+                isExactActive && 'menu-item-active',
+              ]"
+            >
+              <a
+                :href="href"
+                class="menu-link"
+                @click="navigate"
+              >
+                <span class="menu-text"> Diller </span>
               </a>
             </li>
           </router-link>

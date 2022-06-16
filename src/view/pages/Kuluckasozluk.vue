@@ -299,7 +299,7 @@
                             v-model="
                               editedItem.hakkindaBlogUrl
                             "
-                            label="Hakkında Blog url"
+                            label="Hakkında blog url"
                           />
                         </v-col>
                         <v-col cols="4">
@@ -307,7 +307,7 @@
                             v-model="
                               editedItem.kisaltmalarUrl
                             "
-                            label="Hakkında Blog url"
+                            label="Sözlük kısaltmalar url"
                           />
                         </v-col>
 

@@ -67,6 +67,11 @@ export default new Router({
           component: () => import('@/view/pages/Kurumlar.vue'),
         },
         {
+          path: '/diller',
+          name: 'diller',
+          component: () => import('@/view/pages/Diller.vue'),
+        },
+        {
           path: '/users',
           name: 'users',
           component: () => import('@/view/pages/Users.vue'),

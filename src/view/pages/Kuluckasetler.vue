@@ -67,14 +67,28 @@
                 <div class="row align-items-center">
                   <div class="col-lg-9 col-xl-8">
                     <div class="row align-items-start">
-                      <div class="col-md-4 my-2 my-md-0">
+                      <div class="col-md-3 my-2 my-md-0">
                         <v-select
                           v-model="filter.isActive"
                           :items="isActivesearchTerm"
                           label="Aktif"
                         />
                       </div>
-                      <div class="col-md-4 my-2 my-md-0">
+                      <div class="col-md-3 my-2 my-md-0">
+                        <v-select
+                          v-model="filter.isDelivered"
+                          :items="isDeliveredsearchTerm"
+                          label="Teslim Edilme"
+                        />
+                      </div>
+                      <div class="col-md-3 my-2 my-md-0">
+                        <v-select
+                          v-model="filter.isControlled"
+                          :items="isControlledsearchTerm"
+                          label="Kontrol Edilme"
+                        />
+                      </div>
+                      <div class="col-md-3 my-2 my-md-0">
                         <v-select
                           v-model="filter.isCompleted"
                           :items="isCompletedsearchTerm"
@@ -324,6 +338,12 @@
           <template #item.userAssigned="{ item }">
             <span v-html="`${item.userAssigned ? item.userAssigned.name : '-'}`" />
           </template>
+          <template #item.isControlled="{ item }">
+            <span v-html="`${item.isControlled ? getDeliver(item.isControlled): '-'}`" />
+          </template>
+          <template #item.controlAssigned="{ item }">
+            <span v-html="`${item.controlAssigned ? item.controlAssigned.name : '-'}`" />
+          </template>
           <template #item.isCompleted="{ item }">
             <span v-html="`${getCompleted(item.isCompleted)}`" />
           </template>
@@ -364,7 +384,9 @@ export default {
   data() {
     return {
       expanded: [],
-      filter: { isActive: null, isCompleted: null },
+      filter: {
+        isActive: null, isCompleted: null, isDelivered: null, isControlled: null,
+      },
       timerId: null,
       dialog: false,
       show: false,
@@ -378,6 +400,8 @@ export default {
       },
       isActivesearchTerm: [{ text: 'Tümü', value: 'tum' }, { text: 'Aktif', value: true }, { text: 'Pasif', value: false }],
       isCompletedsearchTerm: [{ text: 'Tümü', value: 'tum' }, { text: 'Tamamlanmış', value: true }, { text: 'Tamamlanmamış', value: false }],
+      isControlledsearchTerm: [{ text: 'Tümü', value: 'tum' }, { text: 'Kontrol Edilenler', value: true }, { text: 'Kontrol Edilmeyenler', value: false }],
+      isDeliveredsearchTerm: [{ text: 'Tümü', value: 'tum' }, { text: 'Teslim Edilenler', value: true }, { text: 'Teslim Edilmeyenler', value: false }],
       page: 1,
       headers: [
         { text: '', value: 'data-table-expand' },
@@ -391,6 +415,8 @@ export default {
         { text: 'AKTİF', value: 'isActive', align: 'center' },
         { text: 'TESLİM EDİLME', value: 'isDelivered', align: 'center' },
         { text: 'ATANAN KULLANICI', value: 'userAssigned', align: 'center' },
+        { text: 'KONTROL EDİLME', value: 'isControlled', align: 'center' },
+        { text: 'KONTROL EDEN', value: 'controlAssigned', align: 'center' },
         { text: 'TAMAMLANMIŞ', value: 'isCompleted', align: 'center' },
         { text: 'İŞLEMLER', value: 'actions', sortable: false },
       ],
@@ -402,6 +428,8 @@ export default {
         isActive: false,
         isCompleted: false,
         isDelivered: false,
+        isControlled: false,
+        controlAssigned: '',
         userAssigned: '',
       },
       defaultItem: {
@@ -411,6 +439,8 @@ export default {
         isActive: false,
         isCompleted: false,
         isDelivered: false,
+        isControlled: false,
+        controlAssigned: '',
         userAssigned: '',
       },
     };
@@ -418,8 +448,6 @@ export default {
   watch: {
     filter: {
       handler(newval) {
-        console.log('newval.isActive:', newval.isActive);
-        console.log('newval.isCompleted:', newval.isCompleted);
         if (newval) {
           if (newval.isActive != null && newval.isActive !== 'undefined') {
             if (newval.isActive === 'tum') {
@@ -436,6 +464,22 @@ export default {
             } else {
               console.log('filter isActive', newval.isCompleted);
               this.$set(this.options, 'isCompleted', newval.isCompleted);
+            }
+          }
+          if (newval.isDelivered != null && newval.isDelivered !== 'undefined') {
+            if (newval.isDelivered === 'tum') {
+              this.$delete(this.options, 'isDelivered');
+            } else {
+              console.log('filter isActive', newval.isDelivered);
+              this.$set(this.options, 'isDelivered', newval.isDelivered);
+            }
+          }
+          if (newval.isControlled != null && newval.isControlled !== 'undefined') {
+            if (newval.isControlled === 'tum') {
+              this.$delete(this.options, 'isControlled');
+            } else {
+              console.log('filter isActive', newval.isControlled);
+              this.$set(this.options, 'isControlled', newval.isControlled);
             }
           }
         }
