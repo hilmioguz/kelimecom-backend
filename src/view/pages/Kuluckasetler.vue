@@ -311,8 +311,9 @@
           <!-- eslint-disable-next-line vue/no-template-shadow -->
           <template #expanded-item="{ headers, item }">
             <td :colspan="headers.length">
-              <v-list>
+              <v-list dense>
                 <v-list-item
+                  dense
                   v-for="(ipage, ind) in item.pages"
                   :key="ind"
                 >
@@ -321,6 +322,32 @@
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
+              <v-btn
+                v-if="item.userAssigned"
+                width="40%"
+                color="red"
+                dark
+                @click="deleteAssignment(item)"
+              >
+                <v-icon
+                  small
+                >
+                  mdi-delete
+                </v-icon> {{ item.userAssigned.email }} atanan kuluckacıyı kaldır
+              </v-btn>
+              <v-btn
+                v-if="item.controlAssigned"
+                width="40%"
+                color="brown"
+                dark
+                @click="deleteController(item)"
+              >
+                <v-icon
+                  small
+                >
+                  mdi-delete
+                </v-icon> {{ item.controlAssigned.email }} atanan Kontrolcuyu kaldır
+              </v-btn>
             </td>
           </template>
           <template #item.name="{ item }">
@@ -336,13 +363,13 @@
             <span v-html="`${item.isDelivered ? getDeliver(item.isDelivered): '-'}`" />
           </template>
           <template #item.userAssigned="{ item }">
-            <span v-html="`${item.userAssigned ? item.userAssigned.name : '-'}`" />
+            <span v-html="`${item.userAssigned ? item.userAssigned.email : '-'}`" />
           </template>
           <template #item.isControlled="{ item }">
             <span v-html="`${item.isControlled ? getDeliver(item.isControlled): '-'}`" />
           </template>
           <template #item.controlAssigned="{ item }">
-            <span v-html="`${item.controlAssigned ? item.controlAssigned.name : '-'}`" />
+            <span v-html="`${item.controlAssigned ? item.controlAssigned.email : '-'}`" />
           </template>
           <template #item.isCompleted="{ item }">
             <span v-html="`${getCompleted(item.isCompleted)}`" />
@@ -631,7 +658,18 @@ export default {
         this.editedIndex = -1;
       });
     },
-
+    deleteAssignment(item) {
+      this.confirmMessage('Sadece setten atanan kuluçkaci kullanıcı id\'si kaydı kaldırılacak.', async () => {
+        await this.deleteData('kuluckasection/kuluckacikaldir', item.id);
+        window.location.reload();
+      });
+    },
+    deleteController(item) {
+      this.confirmMessage('Sadece setten denetleyici moderatörün id\'si kaydı kaldırılacak.', async () => {
+        await this.deleteData('kuluckasection/denetimciyikaldir', item.id);
+        window.location.reload();
+      });
+    },
     save() {
       let payload = {
         name: this.editedItem.name,

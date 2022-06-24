@@ -665,6 +665,12 @@
                         v-html="data.value"
                       />
                     </template>
+                    <template #cell(isControlled)="data">
+                      <span
+                        class="checkoutBLock"
+                        v-html="data.value"
+                      />
+                    </template>
                     <template #cell(isCheckedOutToMadde)="data">
                       <span
                         class="checkoutBLock"
@@ -809,7 +815,7 @@ export default {
       headers: [
         { text: '', value: 'data-table-expand' },
         {
-          text: 'GÜNDEMBAŞI',
+          text: 'MADDEBAŞI',
           align: 'start',
           sortable: true,
           value: 'madde',
@@ -819,13 +825,6 @@ export default {
           align: 'center',
           sortable: false,
           value: 'whichDict.length',
-        },
-        {
-          text: 'OLUŞTURMA',
-          align: 'center',
-          sortable: false,
-          value: 'createdAt',
-          // formatter: value => (value ? format(parseISO(value), 'dd MMMM yyyy', { locale: turkish }) : ''),
         },
         {
           text: 'SON GUNCELLEME',
@@ -864,6 +863,9 @@ export default {
         zitanlam: [],
         esanlam: [],
         telaffuz: [],
+        kuluckaSectionId: '',
+        isControlled: false,
+        isDelivered: false,
         userSubmitted: '',
         userConfirmed: '',
         isCheckedOutToMadde: false,
@@ -888,6 +890,9 @@ export default {
         zitanlam: [],
         esanlam: [],
         telaffuz: [],
+        kuluckaSectionId: '',
+        isControlled: false,
+        isDelivered: false,
         userSubmitted: '',
         userConfirmed: '',
         isActive: false,
@@ -897,7 +902,10 @@ export default {
         'indeks',
         { key: 'anlam', label: 'Anlam:', formatter: value => (value ? pmd.markdownIt.render(value) : '') },
         { key: 'dictId', label: 'Sözlük:', formatter: value => ((value && value.name) ? value.name : '') },
-        { key: 'userSubmitted', label: 'Ekleyen:', formatter: value => ((value && value.name) ? value.name : '') },
+        { key: 'kuluckaSectionId', label: 'Set:', formatter: value => ((value && value.name) ? value.name : '') },
+        { key: 'userSubmitted', label: 'Ekleyen:', formatter: value => ((value && value.email) ? value.email : '') },
+        { key: 'userConfirmed', label: 'Kontrolör:', formatter: value => ((value && value.email) ? value.email : '') },
+        { key: 'isControlled', label: 'Kontrol edilme:', formatter: value => this.getChecked(value) },
         { key: 'isCheckedOutToMadde', label: 'Birleştirme:', formatter: value => this.getChecked(value) },
         { key: 'isActive', label: 'Durumu:', formatter: value => (value != null ? this.getActive(value) : '') },
       ],

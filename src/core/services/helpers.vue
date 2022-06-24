@@ -425,6 +425,21 @@ export default {
         icon: 'warning',
       });
     },
+    confirmMessage(msg, callback) {
+      Swal.fire({
+        title: 'Emin misiniz?',
+        text: `${msg}. Yaptiğınız işlem geri alınamaz!`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Eminim işleme devam et!',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          callback();
+        }
+      });
+    },
   },
 };
 </script>

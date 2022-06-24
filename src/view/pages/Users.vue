@@ -413,6 +413,19 @@
                 :items="getPacketDetails(item)"
                 :fields="detayFields"
               />
+              <v-btn
+                v-if="item.assignedSet"
+                block
+                color="red"
+                dark
+                @click="deleteAssignment(item)"
+              >
+                <v-icon
+                  small
+                >
+                  mdi-delete
+                </v-icon> {{ item.email }} Kullanıcısına atanan seti kaldır
+              </v-btn>
             </td>
           </template>
           <template #item.name="{ item }">
@@ -429,6 +442,12 @@
           </template>
           <template #item.isEmailVerified="{ item }">
             <span v-html="`${getEmailVerified(item.isEmailVerified)}`" />
+          </template>
+          <template #item.canDoKulucka="{ item }">
+            <span v-html="`${getEmailVerified(item.canDoKulucka)}`" />
+          </template>
+          <template #item.canDoKuluckaModerate="{ item }">
+            <span v-html="`${getEmailVerified(item.canDoKuluckaModerate)}`" />
           </template>
           <template #item.isActive="{ item }">
             <span v-html="`${getActive(item.isActive)}`" />
@@ -509,6 +528,8 @@ export default {
         { text: 'ROL', value: 'role', align: 'center' },
         { text: 'PAKET', value: 'packetId', align: 'center' },
         { text: 'EPOSTA ONAYLI', value: 'isEmailVerified', align: 'center' },
+        { text: 'KULUCKA', value: 'canDoKulucka', align: 'center' },
+        { text: 'K.MOD.', value: 'canDoKuluckaModerate', align: 'center' },
         { text: 'AKTİF', value: 'isActive', align: 'center' },
         { text: 'İŞLEMLER', value: 'actions', sortable: false },
       ],
@@ -523,6 +544,7 @@ export default {
         googleId: '',
         paketBegin: '',
         paketEnd: '',
+        assignedSet: '',
         isActive: false,
         canDoKulucka: false,
         canDoKuluckaModerate: false,
@@ -539,6 +561,7 @@ export default {
         googleId: '',
         paketBegin: '',
         paketEnd: '',
+        assignedSet: '',
         password: null,
         canDoKulucka: false,
         canDoKuluckaModerate: false,
@@ -552,6 +575,7 @@ export default {
         { key: 'kurum', label: 'Kurumu:' },
         { key: 'packetbegin', label: 'Paket Başlangıç:', formatter: value => (value ? format(parseISO(value), 'dd MMMM yyyy', { locale: turkish }) : '') },
         { key: 'packetend', label: 'Paket Sonu:', formatter: value => (value ? format(parseISO(value), 'dd MMMM yyyy', { locale: turkish }) : '') },
+        { key: 'assignedSet', label: 'Atanan Set:', formatter: value => (value ? `${value.dictId.name} ${value.name} (Setteki Kuluçkacı: ${value.userAssigned.email} Setteki Moderatör:${value.controlAssigned.email}` : '') },
       ],
     };
   },
@@ -658,6 +682,13 @@ export default {
         this.editedItem.picture = response[0].url;
       }
     },
+    async deleteAssignment(item) {
+      this.confirmMessage('Sadece kullanıcıya atanan set\'in id\'si kullanıcı kaydından kaldırılacak.', async () => {
+        console.log('DELETE ASSIGNMENT:', item.id);
+        await this.deleteData('users/setikaldir', item.id);
+        window.location.reload();
+      });
+    },
     fileDeleted(file, response) {
       console.log('FILE deleted SONUC:', file, response);
       this.editedItem.picture = '';
@@ -712,15 +743,14 @@ export default {
     },
     getRole(role) {
       console.log('ROLE is ', role);
+      const roletemplate = {
+        guest: { class: 'label-light-warning' },
+        user: { class: 'label-light-primary' },
+        admin: { class: ' label-light-danger' },
+        moderater: { class: ' label-light-info' },
+        '': { class: ' label-light-info' },
+      };
       if (role && typeof role !== 'undefined') {
-        const roletemplate = {
-          guest: { class: 'label-light-warning' },
-          user: { class: 'label-light-primary' },
-          admin: { class: ' label-light-danger' },
-          moderater: { class: ' label-light-info' },
-          '': { class: ' label-light-info' },
-        };
-
         return (
           `<span class="label ${
             roletemplate[role].class
@@ -733,7 +763,7 @@ export default {
     getEmailVerified(isEmailVerified) {
       if (typeof isEmailVerified !== 'undefined') {
         return isEmailVerified
-          ? '<i class="la la-check"></i>'
+          ? '<i class="la la-check" style="color:green;"></i>'
           : '<i class="la la-times"></i>';
       }
     },
@@ -764,6 +794,7 @@ export default {
           kurum: item.kurumId ? item.kurumId.institution_name : '',
           packetbegin: item.paketBegin,
           packetend: item.paketEnd,
+          assignedSet: item.assignedSet ? item.assignedSet : '',
         },
       ];
     },
