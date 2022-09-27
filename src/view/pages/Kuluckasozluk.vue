@@ -786,8 +786,8 @@ export default {
       let message = '';
       let totalItems = null;
       if (uncompleted && uncompleted.length) {
-        // const names = uncompleted.map(i => i.name).join(', ');
-        // message = `Tamamlanmamış setler var. ${names}`;
+        const names = uncompleted.map(i => i.name).join(', ');
+        message = `Tamamlanmamış setler var. ${names}`;
       }
       const dictexist = await this.checkDictionary(item.id);
       if (dictexist) {
