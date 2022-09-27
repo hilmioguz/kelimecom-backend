@@ -311,6 +311,11 @@
               >
                 <v-card>
                   <v-card-title
+                    class="text-h4"
+                  >
+                    Sistemde bu sözlüğe ait toplam <br> {{ toplamMaddeBasi }} maddebaşı var.
+                  </v-card-title>
+                  <v-card-title
                     class="text-h5"
                   >
                     Silmek istediğinizden emin
@@ -430,6 +435,7 @@ export default {
       expanded: [],
       filter: { name: '', lang: null },
       timerId: null,
+      toplamMaddeBasi: 0,
       dialog: false,
       dialogDelete: false,
       totalDicts: 0,
@@ -580,9 +586,14 @@ export default {
       this.dialog = true;
     },
 
-    deleteItem(item) {
+    async deleteItem(item) {
+      this.toplamMaddeBasi = 0;
       this.editedIndex = this.dictionaries.indexOf(item);
       this.editedItem = Object.assign({}, item);
+      const stat = await this.getStatsFromApi(item.id);
+      if (stat && stat.count) {
+        this.toplamMaddeBasi = stat.count.toLocaleString('tr-TR');
+      }
       this.dialogDelete = true;
     },
 
@@ -646,6 +657,24 @@ export default {
       this.close();
     },
 
+    getStatsFromApi(id) {
+      this.loading = true;
+      return new Promise((resolve, reject) => {
+        ApiService.setHeader();
+        // eslint-disable-next-line prefer-template
+        ApiService.get('dictionary/stat/' + id)
+          .then(({ data }) => {
+            this.loading = false;
+            resolve(data);
+          })
+          .catch((error) => {
+            this.errorMessage(error);
+            this.loading = false;
+            reject(error);
+          });
+      });
+    },
+
     getDataFromApi() {
       this.loading = true;
       console.log('this.options:', this.options);
@@ -663,10 +692,10 @@ export default {
             this.loading = false;
             resolve(data);
           })
-          .catch(({ message }) => {
-            console.log(message);
+          .catch((error) => {
+            this.errorMessage(error);
             this.loading = false;
-            reject(message);
+            reject(error);
           });
       });
     },

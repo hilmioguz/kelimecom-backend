@@ -758,10 +758,9 @@ export default {
             this.loading = false;
             resolve(data);
           })
-          .catch(({ message }) => {
-            console.log(message);
-            this.loading = false;
-            reject(message);
+          .catch((error) => {
+            this.errorMessage(error);
+            reject(error);
           });
       });
     },

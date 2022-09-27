@@ -3,12 +3,12 @@
   "self": {
     "layout": "default",
     "body": {
-      "background-image": "/media/bg/bgdesen.png",
+      "background-image": "media/bg/bgdesen.png",
       "background": "initial"
     },
     "logo": {
-      "default": "/media/logos/kelimecomlogo.png",
-      "sticky": "/media/logos/kelimelogo.png"
+      "default": "media/logos/kelimecomlogo.png",
+      "sticky": "media/logos/kelimelogo.png"
     }
   },
   "loader": {

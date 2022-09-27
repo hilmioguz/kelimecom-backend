@@ -36,7 +36,6 @@ const ApiService = {
      */
   get(resource, slug = '') {
     return Vue.axios.get(`${resource}/${slug}`).catch((error) => {
-      // console.log(error);
       throw new Error(`ApiService ${error}`);
     });
   },
@@ -48,7 +47,9 @@ const ApiService = {
      * @returns {*}
      */
   post(resource, params) {
-    return Vue.axios.post(`${resource}`, params);
+    return Vue.axios.post(`${resource}`, params).catch((error) => {
+      throw new Error(`ApiService ${error}`);
+    });
   },
 
   /**
@@ -59,7 +60,9 @@ const ApiService = {
      * @returns {IDBRequest<IDBValidKey> | Promise<void>}
      */
   update(resource, slug, params) {
-    return Vue.axios.put(`${resource}/${slug}`, params);
+    return Vue.axios.put(`${resource}/${slug}`, params).catch((error) => {
+      throw new Error(`ApiService ${error}`);
+    });
   },
   /**
      * Send the PATCH HTTP request
@@ -69,7 +72,9 @@ const ApiService = {
      * @returns {IDBRequest<IDBValidKey> | Promise<void>}
      */
   patch(resource, slug, params) {
-    return Vue.axios.patch(`${resource}/${slug}`, params);
+    return Vue.axios.patch(`${resource}/${slug}`, params).catch((error) => {
+      throw new Error(`ApiService ${error}`);
+    });
   },
   /**
      * Send the PUT HTTP request
@@ -78,7 +83,9 @@ const ApiService = {
      * @returns {IDBRequest<IDBValidKey> | Promise<void>}
      */
   put(resource, params) {
-    return Vue.axios.put(`${resource}`, params);
+    return Vue.axios.put(`${resource}`, params).catch((error) => {
+      throw new Error(`ApiService ${error}`);
+    });
   },
 
   /**

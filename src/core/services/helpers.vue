@@ -211,9 +211,9 @@ export default {
             }
             resolve(data);
           })
-          .catch(({ message }) => {
-            console.log(message);
-            reject(message);
+          .catch((error) => {
+            this.errorMessage(error);
+            reject(error);
           });
       });
     },
@@ -227,9 +227,9 @@ export default {
             }
             resolve(data);
           })
-          .catch(({ message }) => {
-            console.log(message);
-            reject(message);
+          .catch((error) => {
+            this.errorMessage(error);
+            reject(error);
           });
       });
     },
@@ -243,9 +243,9 @@ export default {
             }
             resolve(data);
           })
-          .catch(({ message }) => {
-            console.log(message);
-            reject(message);
+          .catch((error) => {
+            this.errorMessage(error);
+            reject(error);
           });
       });
     },
@@ -259,9 +259,9 @@ export default {
             }
             resolve(data);
           })
-          .catch(({ message }) => {
-            console.log(message);
-            reject(message);
+          .catch((error) => {
+            this.errorMessage(error);
+            reject(error);
           });
       });
     },
@@ -279,9 +279,9 @@ export default {
             }
             resolve(data);
           })
-          .catch(({ message }) => {
-            console.log(message);
-            reject(message);
+          .catch((error) => {
+            this.errorMessage(error);
+            reject(error);
           });
       });
     },
@@ -296,9 +296,9 @@ export default {
             }
             resolve(data);
           })
-          .catch(({ message }) => {
-            console.log(message);
-            reject(message);
+          .catch((error) => {
+            this.errorMessage(error);
+            reject(error);
           });
       });
     },
@@ -309,8 +309,9 @@ export default {
           .then(({ data }) => {
             resolve(data);
           })
-          .catch(({ message }) => {
-            reject(message);
+          .catch((error) => {
+            this.errorMessage(error);
+            reject(error);
           });
       });
     },
@@ -323,9 +324,9 @@ export default {
             this.successMessage();
             resolve(data);
           })
-          .catch(({ message }) => {
-            this.errorMessage(message);
-            reject(message);
+          .catch((error) => {
+            this.errorMessage(error);
+            reject(error);
           });
       });
     },
@@ -364,9 +365,9 @@ export default {
             this.successMessage();
             resolve(data);
           })
-          .catch(({ message }) => {
-            this.errorMessage(message);
-            reject(message);
+          .catch((error) => {
+            this.errorMessage(error);
+            reject(error);
           });
       });
     },
@@ -379,9 +380,9 @@ export default {
             this.successMessage();
             resolve(data);
           })
-          .catch(({ message }) => {
-            this.errorMessage(message);
-            reject(message);
+          .catch((error) => {
+            this.errorMessage(error);
+            reject(error);
           });
       });
     },
@@ -393,9 +394,9 @@ export default {
             this.successMessage();
             resolve(data);
           })
-          .catch(({ message }) => {
-            this.errorMessage(message);
-            reject(message);
+          .catch((error) => {
+            this.errorMessage(error);
+            reject(error);
           });
       });
     },
@@ -408,9 +409,9 @@ export default {
         timer: 4000,
       });
     },
-    successMessage() {
+    successMessage(msg = null) {
       Swal.fire({
-        text: 'Ok! İşlem başarılı.',
+        text: msg || 'Ok! İşlem başarılı.',
         icon: 'success',
         toast: true,
         position: 'top-end',

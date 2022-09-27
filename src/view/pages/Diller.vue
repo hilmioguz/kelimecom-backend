@@ -469,10 +469,10 @@ export default {
             this.loading = false;
             resolve(data);
           })
-          .catch(({ message }) => {
-            console.log(message);
+          .catch((error) => {
+            this.errorMessage(error);
             this.loading = false;
-            reject(message);
+            reject(error);
           });
       });
     },

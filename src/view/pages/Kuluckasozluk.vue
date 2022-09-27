@@ -1,8 +1,32 @@
 <!-- eslint-disable max-len -->
 <template>
-  <div>
-    <!--begin::Card-->
-    <div class="card card-custom">
+  <!--begin::Card-->
+  <b-overlay
+    :show="loaderEnabled"
+    variant="info"
+    :opacity="0.80"
+    :blur="'2px'"
+    rounded="sm"
+  >
+    <template #overlay>
+      <div class="text-center text-white">
+        <b-icon
+          icon="stopwatch"
+          font-scale="3"
+          animation="cylon"
+        />
+        <p
+          id="cancel-label"
+          class="font-weight-bold"
+        >
+          Lütfen bekleyiniz! <br> <br>Birleştiriliyor...
+        </p>
+      </div>
+    </template>
+
+    <div
+      class="card card-custom"
+    >
       <div class="card-header flex-wrap border-0 pt-6 pb-0">
         <div class="card-title">
           <h3 class="card-label">
@@ -494,6 +518,11 @@
               >
                 <v-card>
                   <v-card-title
+                    class="text-h4"
+                  >
+                    Kuluçka sistemde bu sözlüğe ait <br>toplam {{ toplamMaddeBasi }} maddebaşı var.
+                  </v-card-title>
+                  <v-card-title
                     class="text-h5"
                   >
                     Silmek istediğinizden emin
@@ -546,7 +575,17 @@
               @click="gotoSet(item)"
               class="mx-4"
             >
-              Setleri Gör
+              Setler
+            </v-btn>
+            <v-btn
+              depressed
+              small
+              :disabled="item.isCombined"
+              color="purple lighten-1 text-white"
+              @click="combine(item)"
+              class="mx-4"
+            >
+              {{ item.isCombined ? 'Birleştirilmiş': 'Birleştir' }}
             </v-btn>
             <v-icon
               class="mr-2"
@@ -565,7 +604,7 @@
       </div>
     </div>
     <!--end::Card-->
-  </div>
+  </b-overlay>
 </template>
 
 <script>
@@ -587,7 +626,9 @@ export default {
       filter: { name: '', lang: null },
       timerId: null,
       panel: false,
+      loaderEnabled: false,
       dialog: false,
+      toplamMaddeBasi: 0,
       dialogDelete: false,
       totalDicts: 0,
       dictionaries: [],
@@ -604,7 +645,7 @@ export default {
         { text: 'DİL', value: 'lang', align: 'center' },
         { text: 'KOD', value: 'code', align: 'center' },
         { text: 'CİLT', value: 'cilt', align: 'center' },
-        { text: 'SET BAŞINA SAYFA', value: 'sectionedBy', align: 'center' },
+        { text: 'SET SAYFA', value: 'sectionedBy', align: 'center' },
         { text: 'AKTİF', value: 'isActive', align: 'center' },
         { text: 'İŞLEMLER', value: 'actions', sortable: false },
       ],
@@ -639,6 +680,7 @@ export default {
         coverImage: '',
         hangiAsama: 1,
         isSectionCreated: false,
+        isCombined: false,
         hakkindaBlogUrl: '',
         kisaltmalarUrl: '',
       },
@@ -672,6 +714,7 @@ export default {
         coverImage: '',
         hangiAsama: 1,
         isSectionCreated: false,
+        isCombined: false,
         hakkindaBlogUrl: '',
         kisaltmalarUrl: '',
       },
@@ -737,6 +780,64 @@ export default {
       }
     },
 
+    async combine(item) {
+      const uncompleted = await this.getUncompletedSectionsApi(item.id);
+      console.log(uncompleted);
+      let message = '';
+      let totalItems = null;
+      if (uncompleted && uncompleted.length) {
+        // const names = uncompleted.map(i => i.name).join(', ');
+        // message = `Tamamlanmamış setler var. ${names}`;
+      }
+      const dictexist = await this.checkDictionary(item.id);
+      if (dictexist) {
+        console.log('dictexist:', dictexist);
+      }
+      const stat = await this.getStatsFromApi(item.id);
+      if (stat && stat.count) {
+        totalItems = stat.count.toLocaleString('tr-TR');
+      }
+      if (!totalItems) {
+        message = 'Birleştirme yapılacak kuluçka madde yok.';
+      }
+
+      if (message) {
+        this.warningMessage(message);
+      } else {
+        const result = await this.combineFromApi(item.id);
+        console.log('processing', result);
+        if (result && result.ok) {
+          this.updateData('kuluckadictionary', item.id, { isCombined: true }).then(() => {
+            this.successMessage(`Toplam ${result.nMatched || result.nInserted || result.nUpserted || result.nModified} kayıt başarılı bir şekilde birleştirildi.`);
+            this.getDataFromApi();
+          });
+        }
+      }
+    },
+
+    async getUncompletedSectionsApi(dictId) {
+      this.loading = true;
+      const payload = {
+        searchTerm: dictId,
+        searchField: 'dictId',
+        isDelivered: false,
+        isControlled: false,
+      };
+      // const { sortBy, sortDesc, page, itemsPerPage } = this.options;
+      return new Promise((resolve, reject) => {
+        ApiService.setHeader();
+        ApiService.get('kuluckasection', this.stringify(payload))
+          .then(({ data }) => {
+            this.loading = false;
+            resolve(data.data);
+          })
+          .catch((error) => {
+            this.errorMessage(error);
+            this.loading = false;
+            reject(error);
+          });
+      });
+    },
     getActive(isActive) {
       if (typeof isActive !== 'undefined') {
         const status = {
@@ -780,9 +881,14 @@ export default {
       this.dialog = true;
     },
 
-    deleteItem(item) {
+    async deleteItem(item) {
+      this.toplamMaddeBasi = 0;
       this.editedIndex = this.dictionaries.indexOf(item);
       this.editedItem = Object.assign({}, item);
+      const stat = await this.getStatsFromApi(item.id);
+      if (stat && stat.count) {
+        this.toplamMaddeBasi = stat.count.toLocaleString('tr-TR');
+      }
       this.dialogDelete = true;
     },
 
@@ -790,6 +896,59 @@ export default {
       this.dictionaries.splice(this.editedIndex, 1);
       this.deleteData('kuluckadictionary', this.editedItem.id);
       this.closeDelete();
+    },
+
+    combineFromApi(id) {
+      this.loaderEnabled = true;
+      return new Promise((resolve, reject) => {
+        ApiService.setHeader();
+        // eslint-disable-next-line prefer-template
+        ApiService.get('kuluckadictionary/combine/' + id)
+          .then(({ data }) => {
+            this.loaderEnabled = false;
+            resolve(data);
+          })
+          .catch((error) => {
+            this.errorMessage(error);
+            this.loaderEnabled = false;
+            reject(error);
+          });
+      });
+    },
+    checkDictionary(id) {
+      this.loading = true;
+      return new Promise((resolve, reject) => {
+        ApiService.setHeader();
+        // eslint-disable-next-line prefer-template
+        ApiService.get('kuluckadictionary/checkexistance/' + id)
+          .then(({ data }) => {
+            this.loading = false;
+            resolve(data);
+          })
+          .catch((error) => {
+            this.errorMessage(error);
+            this.loading = false;
+            reject(error);
+          });
+      });
+    },
+
+    getStatsFromApi(id) {
+      this.loading = true;
+      return new Promise((resolve, reject) => {
+        ApiService.setHeader();
+        // eslint-disable-next-line prefer-template
+        ApiService.get('kuluckadictionary/stat/' + id)
+          .then(({ data }) => {
+            this.loading = false;
+            resolve(data);
+          })
+          .catch((error) => {
+            this.errorMessage(error);
+            this.loading = false;
+            reject(error);
+          });
+      });
     },
 
     close() {
@@ -840,6 +999,7 @@ export default {
         karsiLang: this.editedItem.karsiLang,
         kisaltmalarUrl: this.editedItem.kisaltmalarUrl,
         isSectionCreated: this.editedItem.isSectionCreated,
+        isCombined: this.editedItem.isCombined,
       };
       if (this.editedItem.coverImage !== '' && this.editedItem.coverImage != null) {
         payload.coverImage = this.editedItem.coverImage;
@@ -878,10 +1038,10 @@ export default {
             this.loading = false;
             resolve(data);
           })
-          .catch(({ message }) => {
-            console.log(message);
+          .catch((error) => {
+            this.errorMessage(error);
             this.loading = false;
-            reject(message);
+            reject(error);
           });
       });
     },

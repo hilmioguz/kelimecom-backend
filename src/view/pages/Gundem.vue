@@ -220,62 +220,38 @@
                           />
                         </v-col>
                         <v-col cols="3">
-                          <v-autocomplete
-                            v-model="editedSubItem.digerMaddeId"
-                            :items="searchDigerItems"
-                            :loading="isDigerItemLoading"
-                            :search-input.sync="searchDigerMadde"
-                            deletable-chips
-                            small-chips
-                            hide-details
-                            hide-selected
-                            @change="digerChanged"
-                            item-text="madde"
-                            item-value="id"
-                            label="Diğer Yazım Gundembaşı"
-                          >
-                            <template #no-data>
-                              <v-list-item>
-                                <v-list-item-title>
-                                  Gundembaşı ara
-                                </v-list-item-title>
-                              </v-list-item>
-                            </template>
-                            <template #item="{ item }">
-                              <v-list-item-content>
-                                <v-list-item-title v-text="item.madde" />
-                              </v-list-item-content>
-                            </template>
-                          </v-autocomplete>
+                          <h5>Diğer yazım</h5>
+                          <multiselect
+                            tag-placeholder="Yeni olarak ekle"
+                            placeholder="Yeni bir diger yazım ekle"
+                            :multiple="true"
+                            :options="[]"
+                            :taggable="true"
+                            :max-height="150"
+                            :allow-empty="true"
+                            :hide-selected="true"
+                            :show-labels="false"
+                            @select="onSelect"
+                            @tag="(event) => addDigerTag(event)"
+                            v-model="editedItem.digeryazim"
+                          />
                         </v-col>
                         <v-col cols="3">
-                          <v-autocomplete
-                            v-model="editedSubItem.karsiMaddeId"
-                            :items="searchKarsiItems"
-                            :loading="isKarsiItemLoading"
-                            :search-input.sync="searchKarsiMadde"
-                            deletable-chips
-                            small-chips
-                            hide-details
-                            hide-selected
-                            @change="karsiChanged"
-                            item-text="madde"
-                            item-value="id"
-                            label="Karşı Gundembaşı"
-                          >
-                            <template #no-data>
-                              <v-list-item>
-                                <v-list-item-title>
-                                  Gundembaşı ara
-                                </v-list-item-title>
-                              </v-list-item>
-                            </template>
-                            <template #item="{ item }">
-                              <v-list-item-content>
-                                <v-list-item-title v-text="item.madde" />
-                              </v-list-item-content>
-                            </template>
-                          </v-autocomplete>
+                          <label class="typo__label">Tip</label>
+                          <multiselect
+                            tag-placeholder="Yeni olarak ekle"
+                            placeholder="Yeni bir tür ekle"
+                            :multiple="true"
+                            :options="tipListesi"
+                            :taggable="true"
+                            :max-height="150"
+                            :hide-selected="true"
+                            :show-labels="false"
+                            :allow-empty="true"
+                            @select="onSelect"
+                            @tag="(event) => addTag('tip', event)"
+                            v-model="editedSubItem.tip"
+                          />
                         </v-col>
                         <v-col cols="12">
                           <h6>Gundem Anlamı</h6>
@@ -325,27 +301,10 @@
                           />
                         </v-col>
                         <v-col cols="3">
-                          <label class="typo__label">Tip</label>
+                          <label class="typo__label">Kökleri</label>
                           <multiselect
                             tag-placeholder="Yeni olarak ekle"
-                            placeholder="Yeni bir tür ekle"
-                            :multiple="true"
-                            :options="tipListesi"
-                            :taggable="true"
-                            :max-height="150"
-                            :hide-selected="true"
-                            :show-labels="false"
-                            :allow-empty="true"
-                            @select="onSelect"
-                            @tag="(event) => addTag('tip', event)"
-                            v-model="editedSubItem.tip"
-                          />
-                        </v-col>
-                        <v-col cols="3">
-                          <label class="typo__label">Köken</label>
-                          <multiselect
-                            tag-placeholder="Yeni olarak ekle"
-                            placeholder="Yeni bir köken ekle"
+                            placeholder="Yeni bir kök ekle"
                             :multiple="true"
                             :options="kokenListesi"
                             :taggable="true"
@@ -353,8 +312,8 @@
                             :allow-empty="true"
                             :hide-selected="true"
                             :show-labels="false"
-                            @tag="(event) => addTag('koken', event)"
-                            v-model="editedSubItem.koken"
+                            @tag="(event) => addTag('kokleri', event)"
+                            v-model="editedSubItem.kokleri"
                           />
                         </v-col>
                         <v-col cols="3">
@@ -500,6 +459,192 @@
                             @tag="(event) => addTag('telaffuz', event)"
                             v-model="editedSubItem.telaffuz"
                           />
+                        </v-col>
+                        <v-col cols="3">
+                          <v-text-field
+                            v-model="editedSubItem.eserindili"
+                            label="Eserin dili"
+                          />
+                        </v-col>
+                        <v-col cols="3">
+                          <v-text-field
+                            v-model="editedSubItem.eserindonemi"
+                            label="Eserin dönemi"
+                          />
+                        </v-col>
+                        <v-col cols="3">
+                          <v-text-field
+                            v-model="editedSubItem.eserinyili"
+                            label="Eserin yılı"
+                          />
+                        </v-col>
+                        <v-col cols="3">
+                          <v-text-field
+                            v-model="editedSubItem.eserinyazari"
+                            label="Eserin yazarı"
+                          />
+                        </v-col>
+                        <v-col cols="3">
+                          <v-text-field
+                            v-model="editedSubItem.dili"
+                            label="Dili"
+                          />
+                        </v-col>
+                        <v-col cols="3">
+                          <v-text-field
+                            v-model="editedSubItem.kokendili"
+                            label="Köken Dili"
+                          />
+                        </v-col>
+                        <v-col cols="3">
+                          <v-text-field
+                            v-model="editedSubItem.kokeni"
+                            label="Kökeni"
+                          />
+                        </v-col>
+                        <v-col cols="3">
+                          <v-text-field
+                            v-model="editedSubItem.sozusoyleyen"
+                            label="Sözü söyleyen"
+                          />
+                        </v-col>
+                        <v-col cols="3">
+                          <v-textarea
+                            auto-grow
+                            rows="4"
+                            v-model="editedSubItem.bulunduguSayfalar"
+                            label="Bulunduğu Sayfalar"
+                          />
+                        </v-col>
+                        <v-col
+                          cols="3"
+                        >
+                          <label class="typo__label">Etimolojik seyri</label>
+                          <template v-for="(tarihce, ti) in editedSubItem.tarihcesi">
+                            <div :key="ti">
+                              {{ ti + 1 }}
+                              <v-text-field
+                                v-model="tarihce.baslangic"
+                                label="Başlangıç"
+                              />
+                              <v-text-field
+                                v-model="tarihce.bitis"
+                                label="Başlangıç"
+                              />
+                              <v-text-field
+                                v-model="tarihce.hakimiyet"
+                                label="Hakimiyet"
+                              />
+                              <v-text-field
+                                v-model="tarihce.adi"
+                                label="Adı"
+                              />
+                              <v-btn
+                                color="secondary blue--text"
+                                class="mb-2"
+                                @click="editedSubItem.tarihcesi.splice(ti, 1)"
+                              >
+                                Sil
+                              </v-btn>
+                            </div>
+                          </template>
+                          <v-btn
+                            color="danger"
+                            dark
+                            class="mb-2 d-block"
+                            @click="editedSubItem.tarihcesi.push({baslangic: '', bitis:'', adi:'', hakimiyet:''})"
+                          >
+                            Yeni ekle
+                          </v-btn>
+                        </v-col>
+                        <v-col
+                          cols="3"
+                        >
+                          <label class="typo__label">Karşı Maddeler</label>
+                          <template v-for="(karsi, ki) in editedSubItem.karsi">
+                            <div :key="ki">
+                              {{ ki + 1 }}
+                              <v-text-field
+                                v-model="karsi.dili"
+                                label="Dili"
+                              />
+                              <v-text-field
+                                v-model="karsi.madde"
+                                label="Madde"
+                              />
+                              <v-text-field
+                                v-model="karsi.anlam"
+                                label="Anlam"
+                              />
+                              <v-text-field
+                                v-model="karsi.digeryazım"
+                                label="Diger yazım"
+                              />
+                              <v-btn
+                                color="secondary blue--text"
+                                class="mb-2"
+                                @click="editedSubItem.karsi.splice(ki, 1)"
+                              >
+                                Sil
+                              </v-btn>
+                            </div>
+                          </template>
+                          <v-btn
+                            color="danger"
+                            dark
+                            class="mb-2 d-block"
+                            @click="editedSubItem.karsi.push({dili: '', madde:'', anlam:'', digeryazım:[]})"
+                          >
+                            Yeni ekle
+                          </v-btn>
+                        </v-col>
+                        <v-col
+                          cols="3"
+                        >
+                          <label class="typo__label">Şekiller</label>
+                          <template v-for="(sekil, se) in editedSubItem.sekil">
+                            <div :key="se">
+                              {{ se + 1 }}
+                              <v-text-field
+                                v-model="sekil.url"
+                                label="Url"
+                              />
+                              <v-text-field
+                                v-model="sekil.aciklama"
+                                label="Açıklama"
+                              />
+                              <v-btn
+                                color="secondary blue--text"
+                                class="mb-2"
+                                @click="editedSubItem.sekil.splice(se, 1)"
+                              >
+                                Sil
+                              </v-btn>
+                            </div>
+                          </template>
+                          <v-btn
+                            color="danger"
+                            dark
+                            class="mb-2 d-block"
+                            @click="editedSubItem.sekil.push({url: '', aciklama:''})"
+                          >
+                            Yeni ekle
+                          </v-btn>
+                        </v-col>
+                        <v-col
+                          cols="3"
+                        >
+                          <label class="typo__label">Lokasyon</label>
+                          <div>
+                            <v-text-field
+                              v-model="editedSubItem.location[0]"
+                              label="Latitude"
+                            />
+                            <v-text-field
+                              v-model="editedSubItem.location[1]"
+                              label="Longitude"
+                            />
+                          </div>
                         </v-col>
                         <v-col cols="3">
                           <v-switch
@@ -794,12 +939,6 @@ export default {
       subDialog: false,
       dialogSubDelete: false,
       totalGundemler: 0,
-      isKarsiItemLoading: false,
-      isDigerItemLoading: false,
-      searchDigerItems: [],
-      searchKarsiItems: [],
-      searchDigerMadde: null,
-      searchKarsiMadde: null,
       gundemler: [],
       loading: true,
       menu1: false,
@@ -813,6 +952,12 @@ export default {
           align: 'start',
           sortable: true,
           value: 'madde',
+        },
+        {
+          text: 'DIĞER YAZIM',
+          align: 'start',
+          sortable: false,
+          value: 'digeryazim',
         },
         {
           text: 'TOPLAM KAYIT SAYISI',
@@ -839,21 +984,35 @@ export default {
       exportColumn: ['madde', 'whichtDict.anlam', 'whichtDict.dictId.name', 'whichtDict.karsiMaddeId.madde', 'whichtDict.digerMaddeId.madde', 'whichtDict.tur', 'whichtDict.alttur'],
       editedIndex: -1,
       editedItem: {
-        id: '', madde: '',
+        id: '', madde: '', digeryazim: [],
       },
       defaultItem: {
-        madde: '',
+        madde: '', digeryazim: [],
       },
       editedSubIndex: -1,
       editedSubItem: {
         id: '',
         anlam: '',
-        digerMaddeId: '',
-        karsiMaddeId: '',
         dictId: '',
         tur: [],
         alttur: [],
         tip: [],
+        kokleri: [],
+        kokeni: '',
+        sesDosyasi: '',
+        location: [],
+        eserindili: '',
+        eserindonemi: '',
+        eserinyili: '',
+        eserinyazari: '',
+        esertxt: '',
+        dili: '',
+        kokendili: '',
+        karsi: [],
+        sozusoyleyen: '',
+        sekil: [],
+        tarihcesi: [],
+        bulunduguSayfalar: '',
         koken: [],
         cinsiyet: [],
         bicim: [],
@@ -872,13 +1031,26 @@ export default {
       defaultSubItem: {
         id: null,
         anlam: '',
-        digerMaddeId: '',
-        karsiMaddeId: '',
         dictId: '',
         tur: [],
         alttur: [],
         tip: [],
-        koken: [],
+        kokleri: [],
+        kokeni: '',
+        sesDosyasi: '',
+        location: [],
+        eserindili: '',
+        eserindonemi: '',
+        eserinyili: '',
+        eserinyazari: '',
+        esertxt: '',
+        dili: '',
+        kokendili: '',
+        karsi: [],
+        sozusoyleyen: '',
+        sekil: [],
+        tarihcesi: [],
+        bulunduguSayfalar: '',
         cinsiyet: [],
         bicim: [],
         sinif: [],
@@ -906,8 +1078,7 @@ export default {
         { key: 'tur', label: 'Tür:', formatter: value => (value ? value.join(', ') : '') },
         { key: 'alttur', label: 'Alt Tür:', formatter: value => (value ? value.join(', ') : '') },
         { key: 'tip', label: 'Tip:', formatter: value => (value ? value.join(', ') : '') },
-        { key: 'digerMaddeId', label: 'Diğer Maddebaşı:', formatter: value => (value && value.madde ? value.madde : '') },
-        { key: 'karsiMaddeId', label: 'Karşı Maddebaşı:', formatter: value => (value && value.madde ? value.madde : '') },
+        { key: 'karsi', label: 'Karşı Maddeler:', formatter: value => (value && value.length ? value.map(k => k.madde).join(', ') : '') },
       ],
       digerDetaySubFields: [
         'indeks',
@@ -952,52 +1123,29 @@ export default {
       deep: true,
     },
 
-    searchDigerMadde(val) {
-      if (val == null) return;
-      const options = {
-        searchTerm: val,
-        itemsPerPage: 1000,
-        searchField: 'madde',
-      };
-      clearTimeout(this.timerId);
-      // delay new call 500ms
-      this.timerId = setTimeout(() => {
-        this.isDigerItemLoading = true;
-        ApiService.setHeader();
-        ApiService.get('gundem', this.stringify(options))
-          .then(async ({ data }) => {
-            this.searchDigerItems = data.data;
-            this.isDigerItemLoading = false;
-          })
-          .catch(({ message }) => {
-            console.log(message);
-            this.isDigerItemLoading = false;
-          });
-      }, 500);
-    },
-    searchKarsiMadde(val) {
-      if (val == null) return;
-      const options = {
-        searchTerm: val,
-        itemsPerPage: 1000,
-        searchField: 'madde',
-      };
-      clearTimeout(this.timerId);
-      // delay new call 500ms
-      this.timerId = setTimeout(() => {
-        this.isKarsiItemLoading = true;
-        ApiService.setHeader();
-        ApiService.get('gundem', this.stringify(options))
-          .then(async ({ data }) => {
-            this.searchKarsiItems = data.data;
-            this.isKarsiItemLoading = false;
-          })
-          .catch(({ message }) => {
-            console.log(message);
-            this.isKarsiItemLoading = false;
-          });
-      }, 500);
-    },
+    // searchKarsiMadde(val) {
+    //   if (val == null) return;
+    //   const options = {
+    //     searchTerm: val,
+    //     itemsPerPage: 1000,
+    //     searchField: 'madde',
+    //   };
+    //   clearTimeout(this.timerId);
+    //   // delay new call 500ms
+    //   this.timerId = setTimeout(() => {
+    //     this.isKarsiItemLoading = true;
+    //     ApiService.setHeader();
+    //     ApiService.get('gundem', this.stringify(options))
+    //       .then(async ({ data }) => {
+    //         this.searchKarsiItems = data.data;
+    //         this.isKarsiItemLoading = false;
+    //       })
+    //       .catch(({ message }) => {
+    //         console.log(message);
+    //         this.isKarsiItemLoading = false;
+    //       });
+    //   }, 500);
+    // },
     dialog(val) {
       val || this.close();
     },
@@ -1024,7 +1172,6 @@ export default {
       this.editedIndex = this.gundemler.indexOf(item);
       this.editedItem = Object.assign({}, item);
     },
-
     getChecked(item) {
       return this.getFormatter(item, 'Yapılmadı', 'Yapıldı');
     },
@@ -1054,17 +1201,17 @@ export default {
         );
       }
     },
-    karsiChanged(val) {
-      if (val == null) {
-        this.searchKarsiItems = [];
-      }
-    },
+    // karsiChanged(val) {
+    //   if (val == null) {
+    //     this.searchKarsiItems = [];
+    //   }
+    // },
 
-    digerChanged(val) {
-      if (val == null) {
-        this.searchDigerItems = [];
-      }
-    },
+    // digerChanged(val) {
+    //   if (val == null) {
+    //     this.searchDigerItems = [];
+    //   }
+    // },
 
     customLabel(item) {
       if (typeof (item) === 'object') {
@@ -1072,7 +1219,9 @@ export default {
       }
       return `${item}`;
     },
-
+    addDigerTag(newTag) {
+      this.editedItem.digeryazim.unshift(newTag);
+    },
     addTag(place, newTag) {
       let newp = newTag;
       if (typeof (newTag) === 'object') {
@@ -1239,6 +1388,22 @@ export default {
         esanlam: this.editedSubItem.esanlam,
         telaffuz: this.editedSubItem.telaffuz,
         isActive: this.editedSubItem.isActive,
+        kokeni: this.editedSubItem.kokeni,
+        kokleri: this.editedSubItem.kokleri,
+        sesDosyasi: this.editedSubItem.sesDosyasi,
+        location: this.editedSubItem.location,
+        eserindili: this.editedSubItem.eserindili,
+        eserindonemi: this.editedSubItem.eserindonemi,
+        eserinyili: this.editedSubItem.eserinyili,
+        eserinyazari: this.editedSubItem.eserinyazari,
+        esertxt: this.editedSubItem.esertxt,
+        dili: this.editedSubItem.dili,
+        kokendili: this.editedSubItem.kokendili,
+        karsi: this.editedSubItem.karsi,
+        sozusoyleyen: this.editedSubItem.sozusoyleyen,
+        sekil: this.editedSubItem.sekil,
+        tarihcesi: this.editedSubItem.tarihcesi,
+        bulunduguSayfalar: this.editedSubItem.bulunduguSayfalar,
         // userConfirmed: this.editedSubItem.userConfirmed,
         // userSubmitted: this.editedSubItem.userSubmitted,
       };
@@ -1252,13 +1417,13 @@ export default {
         console.log('update sub.');
         payload.id = this.editedSubItem.id;
 
-        if (this.editedSubItem.digerMaddeId && this.editedSubItem.digerMaddeId.id) {
-          payload.digerMaddeId = this.editedSubItem.digerMaddeId.id;
-        }
+        // if (this.editedSubItem.digerMaddeId && this.editedSubItem.digerMaddeId.id) {
+        //   payload.digerMaddeId = this.editedSubItem.digerMaddeId.id;
+        // }
 
-        if (this.editedSubItem.karsiMaddeId && this.editedSubItem.karsiMaddeId.id) {
-          payload.karsiMaddeId = this.editedSubItem.karsiMaddeId.id;
-        }
+        // if (this.editedSubItem.karsiMaddeId && this.editedSubItem.karsiMaddeId.id) {
+        //   payload.karsiMaddeId = this.editedSubItem.karsiMaddeId.id;
+        // }
 
         if (this.editedSubItem.userConfirmed && this.editedSubItem.userConfirmed.id) {
           payload.userConfirmed = this.currentUser.id; // overwrite user confirmations
@@ -1277,12 +1442,12 @@ export default {
         this.updateData('gundem/submadde', this.editedItem.id, payload);
       } else {
         console.log('save sub.');
-        if (this.editedSubItem.digerMaddeId) {
-          payload.digerMaddeId = this.editedSubItem.digerMaddeId;
-        }
-        if (this.editedSubItem.karsiMaddeId) {
-          payload.karsiMaddeId = this.editedSubItem.karsiMaddeId;
-        }
+        // if (this.editedSubItem.digerMaddeId) {
+        //   payload.digerMaddeId = this.editedSubItem.digerMaddeId;
+        // }
+        // if (this.editedSubItem.karsiMaddeId) {
+        //   payload.karsiMaddeId = this.editedSubItem.karsiMaddeId;
+        // }
         if (this.editedSubItem.userConfirmed && this.editedSubItem.userConfirmed.id) {
           payload.userConfirmed = this.currentUser.id; // overwrite user confirmations
         } else if (!this.editedSubItem.userConfirmed) {
@@ -1294,12 +1459,13 @@ export default {
         payload.dictId = (this.editedSubItem.dictId) ? this.editedSubItem.dictId : '';
         let newpayload;
         // this.gundemler.push(this.editedItem);
-        let url = 'gundem/submadde';
+        let url = 'gundem';
         if (this.editedItem.id) {
+          payload.digeryazim = this.editedItem.digeryazim;
           newpayload = payload;
-          url = `${url}/${this.editedItem.id}`;
+          url = `${url}/submadde/${this.editedItem.id}`;
         } else {
-          newpayload = { madde: this.editedItem.madde, whichDict: [payload] };
+          newpayload = { madde: this.editedItem.madde, digeryazim: this.editedItem.digeryazim, whichDict: [payload] };
         }
         this.saveData(url, newpayload);
       }
@@ -1328,9 +1494,10 @@ export default {
               reject(error.message);
             }
           })
-          .catch(({ message }) => {
+          .catch((error) => {
+            this.errorMessage(error);
             that.loading = false;
-            reject(message);
+            reject(error);
           });
       });
     },

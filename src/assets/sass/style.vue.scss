@@ -13,7 +13,8 @@
 // 2: Bootstrap framework includes
 @import "~bootstrap/scss/bootstrap";
 @import "vendors/vue/include";
-
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
+@import 'node_modules/bootstrap-vue/src/index.scss';
 // 3: Components
 @import
     "components/utilities",
