@@ -22,6 +22,11 @@ export default new Router({
           component: () => import('@/view/pages/Maddeler.vue'),
         },
         {
+          path: '/previewmaddeler',
+          name: 'previewmaddeler',
+          component: () => import('@/view/pages/PreviewMaddeler.vue'),
+        },
+        {
           path: '/gundemler',
           name: 'gundemler',
           component: () => import('@/view/pages/Gundem.vue'),

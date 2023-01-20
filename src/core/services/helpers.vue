@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { format, parseISO } from 'date-fns';
 import turkish from 'date-fns/locale/tr';
 import ApiService from '@/core/services/api.service';
+import JwtService from '@/core/services/jwt.service';
 
 import {
   dilListesi, turListesi, tipListesi, roleList, statusList, altturListesi, kokenListesi, cinsiyetListesi, bicimListesi, sinifListesi, transkripsiyonListesi, fonetikListesi, heceliyazimListesi, zitanlamListesi, esanlamListesi, telaffuzListesi,
@@ -53,6 +54,14 @@ export default {
         acceptedFiles: 'image/*',
         thumbnailWidth: 150,
         addRemoveLinks: true,
+        headers: { Authorization: `Bearer ${JwtService.getToken().access.token}` },
+        maxFilesize: 0.9,
+      },
+      excellUploadOptions: {
+        url: `${process.env.VUE_APP_APIEND_BASE_URL}/excel/upload`,
+        acceptedFiles: 'application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        addRemoveLinks: true,
+        headers: { Authorization: `Bearer ${JwtService.getToken().access.token}` },
         maxFilesize: 0.9,
       },
     };

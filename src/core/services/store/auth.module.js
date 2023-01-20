@@ -35,7 +35,7 @@ const getters = {
 
 const actions = {
   [LOGIN](context, credentials) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       ApiService.post('auth/login', credentials)
         .then(({ data }) => {
           if (data.user.role === 'admin' || data.user.role === 'moderater') {
@@ -46,8 +46,9 @@ const actions = {
             resolve('Admin Bölümüne Girişte Yetkili Değilsiniz!');
           }
         })
-        .catch(({ message }) => {
-          context.commit(SET_ERROR, message);
+        .catch((err) => {
+          reject(err);
+          // context.commit(SET_ERROR, err);
         });
     });
   },
@@ -55,25 +56,27 @@ const actions = {
     context.commit(PURGE_AUTH);
   },
   [REGISTER](context, credentials) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       ApiService.post('auth/register', credentials)
         .then(({ data }) => {
           context.commit(SET_AUTH, data);
           resolve(data);
         })
-        .catch(({ message }) => {
-          context.commit(SET_ERROR, message);
+        .catch((error) => {
+          reject(error);
+          // context.commit(SET_ERROR, message);
         });
     });
   },
   [FORGOT](context, credentials) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       ApiService.post('auth/forgot-password', credentials)
         .then(({ data }) => {
           resolve(data);
         })
-        .catch(({ message }) => {
-          context.commit(SET_ERROR, message);
+        .catch((error) => {
+          reject(error);
+          // context.commit(SET_ERROR, message);
         });
     });
   },

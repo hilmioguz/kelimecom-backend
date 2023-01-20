@@ -150,7 +150,7 @@
                             label="Kodu"
                           />
                         </v-col>
-                        <v-col cols="6">
+                        <v-col cols="4">
                           <v-select
                             v-model="
                               editedItem.lang
@@ -160,7 +160,7 @@
                             label="Dil"
                           />
                         </v-col>
-                        <v-col cols="6">
+                        <v-col cols="4">
                           <v-select
                             v-model="
                               editedItem.anlamLang
@@ -168,6 +168,16 @@
                             :return-object="false"
                             :items="dilListesi"
                             label="Anlam Dili"
+                          />
+                        </v-col>
+                        <v-col cols="4">
+                          <v-select
+                            v-model="
+                              editedItem.karsidil
+                            "
+                            :return-object="false"
+                            :items="dilListesi"
+                            label="Karsi Dili"
                           />
                         </v-col>
                         <v-col cols="12">
@@ -410,26 +420,122 @@
             >
               mdi-delete
             </v-icon>
+
+            <v-btn
+              depressed
+              small
+              v-if="!isUploadingInProgress"
+              color="purple lighten-1 text-white"
+              @click="uploadFile(item)"
+              class="mx-4"
+            >
+              <v-icon
+                small
+              >
+                mdi-upload
+              </v-icon> Upload Excel
+            </v-btn>
+            <v-btn
+              v-if="item.isUploading && item.uploadPath"
+              depressed
+              small
+              color="red lighten-1 text-white"
+              to="/previewmaddeler"
+              class="mx-4"
+            >
+              <v-icon
+                small
+              >
+                mdi-search
+              </v-icon> Preview Excel
+            </v-btn>
+            <v-btn
+              v-if="item.isUploading && item.uploadPath"
+              depressed
+              small
+              color="green lighten-1 text-white"
+              @click="completePreview(item)"
+              class="mx-4"
+            >
+              <v-icon
+                small
+              >
+                mdi-check
+              </v-icon> Yüklemeyi Onayla
+            </v-btn>
           </template>
         </v-data-table>
         <!--end: Datatable-->
       </div>
     </div>
     <!--end::Card-->
+    <v-dialog
+      v-model="uploadDialog"
+      max-width="500px"
+    >
+      <v-card>
+        <v-card-title
+          class="text-h4"
+        >
+          {{ uploadItem.name }} sözlüğene madde başı eklenecek
+        </v-card-title>
+        <vue-dropzone
+          ref="excelFileDrop"
+          id="dropzone"
+          :options="excellUploadOptions"
+          :use-custom-slot="true"
+          @vdropzone-removed-file="fileDeleted"
+          @vdropzone-success="fileUploaded"
+          @vdropzone-error="fileUploadedError"
+        >
+          <div class="dropzone-custom-content">
+            <div
+              class="dz-image"
+              v-if="uploadedExcel"
+            >
+              Sunucuya yüklendi: {{ uploadedExcel }}
+            </div>
+            <h5 class="ma-2 dropzone-custom-title">
+              Excel Dosyası - Sürükle Bırak ya da tıklayın
+            </h5>
+          </div>
+        </vue-dropzone>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="closeUpload"
+          >
+            İptal
+          </v-btn>
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="excelFileProcess"
+          >
+            Tamam
+          </v-btn>
+          <v-spacer />
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script>
+import vue2Dropzone from 'vue2-dropzone';
 import ApiService from '@/core/services/api.service';
 import DropdownExport from '@/view/layout/extras/dropdown/DropdownExport';
 import { SET_BREADCRUMB } from '@/core/services/store/breadcrumbs.module';
 /* eslint-disable max-len */
 import helpers from '../../core/services/helpers.vue';
+import 'vue2-dropzone/dist/vue2Dropzone.min.css';
 
 export default {
   name: 'Dictionary',
   mixins: [helpers],
-  components: { DropdownExport },
+  components: { DropdownExport, vueDropzone: vue2Dropzone },
   data() {
     return {
       expanded: [],
@@ -442,6 +548,10 @@ export default {
       dictionaries: [],
       loading: true,
       options: {},
+      uploadItem: {},
+      uploadDialog: false,
+      uploadedExcel: '',
+      isUploadingInProgress: false,
       page: 1,
       headers: [
         { text: '', value: 'data-table-expand' },
@@ -476,6 +586,7 @@ export default {
         mla_sozluk_ismi: '',
         mla_tarih_siteadi: '',
         mla_yazar: '',
+        karsidil: '',
         isActive: false,
       },
       defaultItem: {
@@ -483,6 +594,7 @@ export default {
         desc: '',
         code: '',
         lang: '',
+        karsidil: '',
         anlamLang: '',
         apa_cevirmen: '',
         apa_sozluk_ismi: '',
@@ -541,6 +653,7 @@ export default {
   },
   created() {
     this.$store.dispatch(SET_BREADCRUMB, [{ title: 'Sözlükler' }]);
+    this.checkDataFromApi();
     this.getDataFromApi();
   },
 
@@ -585,7 +698,39 @@ export default {
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
-
+    uploadFile(item) {
+      this.uploadItem = Object.assign({}, item);
+      this.uploadDialog = true;
+    },
+    fileUploaded(file, response) {
+      if (response && response.url) {
+        this.uploadedExcel = response.url;
+      }
+    },
+    fileDeleted() {
+      this.uploadedExcel = '';
+    },
+    fileUploadedError(file, message) {
+      this.errorMessage(message.message);
+    },
+    excelFileProcess() {
+      const payload = {
+        isUploading: true,
+        uploadPath: this.uploadedExcel,
+      };
+      this.updateData('dictionary', this.uploadItem.id, payload).then(() => {
+        try {
+          this.getDataFromApi();
+          this.generateTemplateFromExcel(this.uploadItem.id);
+        } catch (err) {
+          this.errorMessage(err.message);
+        }
+      }).finally(() => this.closeUpload());
+    },
+    closeUpload() {
+      this.uploadDialog = false;
+      this.uploadedExcel = '';
+    },
     async deleteItem(item) {
       this.toplamMaddeBasi = 0;
       this.editedIndex = this.dictionaries.indexOf(item);
@@ -625,6 +770,7 @@ export default {
         desc: this.editedItem.desc,
         code: this.editedItem.code,
         lang: this.editedItem.lang,
+        karsidil: this.editedItem.karsidil,
         anlamLang: this.editedItem.anlamLang,
         apa_cevirmen: this.editedItem.apa_cevirmen,
         apa_sozluk_ismi: this.editedItem.apa_sozluk_ismi,
@@ -675,6 +821,48 @@ export default {
       });
     },
 
+    generateTemplateFromExcel(id) {
+      this.loading = true;
+      ApiService.setHeader();
+      // eslint-disable-next-line prefer-template
+      ApiService.get('dictionary/generateTemplate/' + id)
+        .then(() => {
+          this.loading = false;
+          window.location.reload();
+        })
+        .catch((error) => {
+          this.errorMessage(error);
+          this.loading = false;
+        });
+    },
+
+    completePreview(item) {
+      ApiService.setHeader();
+      // eslint-disable-next-line prefer-template
+      ApiService.get('dictionary/completePreview/' + item.id)
+        .then(() => {
+          this.loading = false;
+          window.location.reload();
+        })
+        .catch((error) => {
+          this.errorMessage(error);
+          this.loading = false;
+        });
+    },
+
+    checkDataFromApi() {
+      ApiService.setHeader();
+      ApiService.get('dictionary', this.stringify({ isUploading: true }))
+        .then(({ data }) => {
+          if (data && data.meta.total > 0) {
+            console.log('Cheki,ing... data:', data.meta.total);
+            this.isUploadingInProgress = true;
+          }
+        })
+        .catch((error) => {
+          this.errorMessage(error);
+        });
+    },
     getDataFromApi() {
       this.loading = true;
       console.log('this.options:', this.options);
