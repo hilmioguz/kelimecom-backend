@@ -10,7 +10,7 @@ COPY . .
 RUN yarn build
 
 # production stage
-FROM node:lts-alpine as production-stage
+FROM nginx:alpine as production-stage
 COPY --from=build-stage /usr/src/backend/dist /usr/share/nginx/html
 # RUN rm /etc/nginx/conf.d/default.conf
 COPY default.conf /etc/nginx/conf.d
