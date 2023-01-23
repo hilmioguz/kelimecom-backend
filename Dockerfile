@@ -4,6 +4,9 @@ WORKDIR /usr/src/backend
 COPY package*.json ./
 # install git
 RUN apk update && apk add --no-cache git
+RUN rm -rf node_modules
+RUN rm package-lock.json
+RUN rm yarn.lock
 RUN yarn install
 COPY . .
 RUN yarn build
