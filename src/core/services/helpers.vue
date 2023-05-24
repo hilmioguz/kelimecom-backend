@@ -55,14 +55,14 @@ export default {
         thumbnailWidth: 150,
         addRemoveLinks: true,
         headers: { Authorization: `Bearer ${JwtService.getToken().access.token}` },
-        maxFilesize: 0.9,
+        maxFilesize: 10,
       },
       excellUploadOptions: {
         url: `${process.env.VUE_APP_APIEND_BASE_URL}/excel/upload`,
         acceptedFiles: 'application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         addRemoveLinks: true,
         headers: { Authorization: `Bearer ${JwtService.getToken().access.token}` },
-        maxFilesize: 0.9,
+        maxFilesize: 500,
       },
     };
   },
