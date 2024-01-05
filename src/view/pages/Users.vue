@@ -386,7 +386,7 @@
                   />
                 </div>
                 <div class="col-auto my-2 my-md-0">
-                  <v-select
+                  <v-autocomplete
                     v-model="filter.kurumId"
                     :return-object="false"
                     :items="kurumlarListAll"

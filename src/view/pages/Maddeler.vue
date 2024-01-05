@@ -75,6 +75,44 @@
                             label="Arama"
                             single-line
                             hide-details
+                            clearable
+                          />
+                        </div>
+                        <div class="col-md-4 my-2 my-md-0">
+                          <v-autocomplete
+                            v-model="filter.dictId"
+                            :return-object="false"
+                            :items="dictListFilter"
+                            clearable
+                            label="Sözlük"
+                          />
+                        </div>
+                        <div class="col-md-4 my-2 my-md-0">
+                          <v-autocomplete
+                            v-model="filter.tur"
+                            :items="turListesi"
+                            small-chips
+                            multiple
+                            clearable
+                            label="Tür"
+                          />
+                        </div>
+                        <div class="col-md-4 my-2 my-md-0">
+                          <v-autocomplete
+                            v-model="filter.tip"
+                            :items="tipListesi"
+                            small-chips
+                            multiple
+                            clearable
+                            label="Tip"
+                          />
+                        </div>
+                        <div class="col-md-4 my-2 my-md-0">
+                          <v-autocomplete
+                            v-model="filter.dili"
+                            :items="dilListesi"
+                            clearable
+                            label="Dil"
                           />
                         </div>
                       </div>
@@ -1008,14 +1046,14 @@ export default {
     filter: {
       handler(newval) {
         console.log('filter', newval);
-        if (newval) {
-          if (newval.madde) {
-            this.options = {
-              searchTerm: newval.madde,
-              searchField: 'madde',
-            };
-          }
-        }
+        this.options = {
+          dictId: newval.dictId,
+          tur: newval.tur ? newval.tur.join(',') : '',
+          tip: newval.tip ? newval.tip.join(',') : '',
+          dili: newval.dili,
+          searchTerm: newval.madde,
+          searchField: newval.madde ? 'madde' : '',
+        };
       },
       deep: true,
     },
@@ -1348,19 +1386,17 @@ export default {
 
     getDataFromApi() {
       this.loading = true;
-      console.log('this.options:', this.options);
+      console.log('getDataFromApi:', this.options);
       // const { sortBy, sortDesc, page, itemsPerPage } = this.options;
-
+      const payload = this.removeEmpty(this.options);
       return new Promise((resolve, reject) => {
         ApiService.setHeader();
-        ApiService.get('madde', this.stringify(this.options))
+        ApiService.get('madde', this.stringify(payload))
           .then(async ({ data }) => {
-            console.log('Data:', data);
             try {
               this.maddeler = data.data;
               this.totalMaddeler = data.meta.total;
               this.loading = false;
-              console.log('maddeler:', this.maddeler);
               resolve(this.maddeler);
             } catch (error) {
               reject(error);

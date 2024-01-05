@@ -93,6 +93,22 @@ export default {
       }
       return liste;
     },
+    dictListFilter() {
+      if (this.dictionaries.length === 0) {
+        this.getDictsFromApi();
+      }
+      const a = this.dictionaries.map(
+        (dict => ({
+          text: dict.name,
+          value: dict.id,
+        })),
+      );
+      a.unshift({
+        text: 'Tümü',
+        value: '',
+      });
+      return a;
+    },
     dictList() {
       if (this.dictionaries.length === 0) {
         this.getDictsFromApi();
