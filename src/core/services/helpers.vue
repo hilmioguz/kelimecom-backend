@@ -361,8 +361,10 @@ export default {
         h.whichDict.forEach((w) => {
           const a = {};
           a.madde = h.madde;
+          a.digeryazim = h.digeryazim;
           a.anlam = w.anlam;
           a.sozluk = w.dictId.name;
+          a.karsi = w.karsi && w.karsi.length ? w.karsi.map(k => k.madde).join(',') : '';
           a.tip = w.tip;
           a.tur = w.tur;
           a.alttur = w.alttur;

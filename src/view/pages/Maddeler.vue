@@ -56,6 +56,10 @@
             :page="page"
             show-expand
             @click:row="(item, slot) => slot.expand(!slot.isExpanded)"
+            :footer-props="{
+              'items-per-page-options': [10, 50, 100, 1000, 2000, 2500, 5000, 7500, 10000, 15000, 20000, -1],
+
+            }"
             class="elevation-0"
           >
             <!-- eslint-disable vue/valid-v-slot -->
@@ -902,6 +906,7 @@ export default {
   mixins: [helpers],
   data() {
     return {
+      page: 1,
       expanded: [],
       filter: { madde: '' },
       timerId: null,
@@ -915,7 +920,6 @@ export default {
       loading: true,
       menu1: false,
       menu2: false,
-      page: 1,
       headers: [
         { text: '', value: 'data-table-expand' },
         {
