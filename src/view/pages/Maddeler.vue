@@ -31,9 +31,10 @@
                 tag="div"
                 class="min-w-md-175px"
               >
-                <DropdownExport
-                  :json-data="flattenMaddeData(maddeler)"
-                />
+                <span
+                  style="cursor:pointer"
+                  @click="downloadToExcel"
+                >Excel -> </span>
               </b-dropdown-text>
             </b-dropdown>
             <!--end::Dropdown-->
@@ -893,7 +894,7 @@ import Multiselect from 'vue-multiselect';
 import store from '@/core/services/store'; // vuex is required in perfect-markdown
 import ApiService from '@/core/services/api.service';
 import 'vue-multiselect/dist/vue-multiselect.min.css';
-import DropdownExport from '@/view/layout/extras/dropdown/DropdownExport';
+// import DropdownExport from '@/view/layout/extras/dropdown/DropdownExport';
 import { SET_BREADCRUMB } from '@/core/services/store/breadcrumbs.module';
 import helpers from '../../core/services/helpers.vue';
 
@@ -1045,7 +1046,10 @@ export default {
       ],
     };
   },
-  components: { DropdownExport, Multiselect },
+  components: {
+    // DropdownExport,
+    Multiselect,
+  },
   watch: {
     filter: {
       handler(newval) {
@@ -1388,6 +1392,37 @@ export default {
       this.close();
     },
 
+    downloadToExcel() {
+      this.loading = true;
+      // const { sortBy, sortDesc, page, itemsPerPage } = this.options;
+      const payload = this.removeEmpty(this.options);
+      ApiService.setHeader();
+      ApiService.download('madde/export/excel', this.stringify(payload))
+        .then((response) => {
+          // console.log('response.headers', response);
+          try {
+            this.loading = false;
+            const url = URL.createObjectURL(new Blob([response.data]));
+            const disposition = response.headers['content-disposition'];
+            const filename = disposition.split('filename=');
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute(
+              'download',
+              filename[1],
+            );
+            document.body.appendChild(link);
+            link.click();
+          } catch (error) {
+            console.log(error);
+          }
+        })
+        .catch((error) => {
+          this.errorMessage(error);
+          this.loading = false;
+          console.log(error);
+        });
+    },
     getDataFromApi() {
       this.loading = true;
       console.log('getDataFromApi:', this.options);

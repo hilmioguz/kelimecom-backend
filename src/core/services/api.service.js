@@ -39,7 +39,17 @@ const ApiService = {
       throw new Error(`ApiService ${error}`);
     });
   },
-
+  /**
+     * Send the GET HTTP request
+     * @param resource
+     * @param slug
+     * @returns {*}
+     */
+  download(resource, slug = '') {
+    return Vue.axios.get(`${resource}/${slug}`, { responseType: 'blob' }).catch((error) => {
+      throw new Error(`ApiService ${error}`);
+    });
+  },
   /**
      * Set the POST HTTP request
      * @param resource
