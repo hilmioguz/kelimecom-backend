@@ -5,7 +5,7 @@ COPY package*.json ./
 # install git
 RUN apk update && apk add --no-cache git
 RUN rm -rf node_modules
-RUN yarn install
+RUN yarn install --ignore-engines
 COPY . .
 RUN yarn build
 
