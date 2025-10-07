@@ -1,5 +1,5 @@
 # build stage
-FROM node:lts-alpine as build-stage
+FROM node:20-alpine as build-stage
 WORKDIR /usr/src/backend
 COPY package*.json ./
 # install git
